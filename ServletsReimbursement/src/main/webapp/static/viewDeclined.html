@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <link rel="icon" href="../../favicon.ico">
+
+   <title>Welcome Manager!!!</title>
+
+
+
+   <!-- Custom styles for this template -->
+<link href="/ReimbursementTool/static/dist/css/bootstrap.min.css" rel="stylesheet">
+ <link href="signin.css" rel="stylesheet">
+ 
+</head>
+
+
+ <body style="background-color:lightgray;"">
+    <center> <h2 class form-signin-heading>View All Declined Tickets </h2>
+    <div class="container">
+        <table class="table table-bordered" ">
+            <thead>
+             <tr>
+                <th>ReimbId</th>
+                <th>Amount</th> 
+                <th>TimeSubmitted</th>
+                <th>Description</th>
+                <th>Author</th>
+                <th>Resolver</th>
+                <th>StatusId</th>
+              </tr>
+              </thead>
+               <tbody class ="hi" id="reimb-container">
+              </tbody>
+              </table>
+   
+   </div> <!-- /container -->
+   <form>
+  <input type="button" value="Go back!" onclick="history.back()">
+  </input>
+</form>
+
+    <script src="./viewDeclined.js"></script>
+ </body>
+</html>

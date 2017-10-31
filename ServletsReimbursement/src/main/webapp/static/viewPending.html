@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta charset="utf-8">
+  
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+<meta name="description" content="">
+  
+<meta name="author" content="">
+  
+<link rel="icon" href="../../favicon.ico">
+
+  
+<title>Welcome Manager!!!</title>   
+<!-- Custom styles for this template -->
+ 
+<link href="/ReimbursementTool/static/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+ 
+<link href="/ReimbursementTool/static/signin.css" rel="stylesheet">
+ 
+</head>
+
+
+ 
+<body style="background-color: lightgray;"">
+	   
+	<center>
+		<h2 class form-signin-heading>All Pending Tickets</h2>
+		    <a style="color:black;" href="login.html"  class="close">Logout</a>
+		<div class="container">
+			       
+			<table class="table table-bordered">
+				           
+				<thead>
+					            
+					<tr>
+						            
+						<th>select</th>                
+					 <th>ReimbId</th>
+                <th>Amount</th> 
+                <th>TimeSubmitted</th>
+                <th>Description</th>
+                <th>Author</th>
+                <th>Resolver</th>
+                <th>StatusId</th>            
+					</tr>
+					             
+				</thead>
+				               
+				<tbody class="hi" id="reimb-container">             
+				</tbody>
+				             
+			</table>
+			      
+		</div>
+		<!-- /container -->
+
+
+		<center>
+			<br>
+
+			<button align=center style="background-color: #4CAF50"
+				onclick="getReimbID();">ACCEPT</button>
+
+		</center>
+<br>
+		<center>
+			<button align=center style="background-color: #f44336"
+				onclick="getReimbIDForDeny();">DENY</button>
+		</center>
+
+
+<br>
+		<p>
+			<input type="button" value="Go back!" onclick="history.back()">
+		</p>
+		    </input>
+		</form>
+
+		   
+		<script src="./viewPending.js"></script>
+		  
+		<script src="./accept.js"></script>
+		<script src="./deny.js"></script>
+		         
+</body>
+</html>

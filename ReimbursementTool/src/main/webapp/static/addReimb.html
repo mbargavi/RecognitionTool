@@ -1,0 +1,52 @@
+<!-- <!DOCTYPE html>
+<head>
+<title>ERS Signin</title>
+ 
+    <!-- Bootstrap core CSS -->
+    <link href="/ReimbursementTool/static/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/ReimbursementTool/static/dist/css/signin.css" rel="stylesheet">
+</head>
+ <body>
+    <div class="jumbotron">
+      <div class="container">
+<h2>Reimbursement Form</h2>
+  <a style="color:black;" href="login.html"  class="close">Logout</a>
+ <div class="row">
+  <div class="small-10 columns">
+
+  </div></div>
+<!-- 
+ <div class="row">
+  <div class="small-10 columns">
+    <div class="range-slider" data-slider data-options="display_selector: #days-off-count; initial: 28;">
+      <span class="range-slider-handle" role="slider" tabindex="0"></span>
+      <span class="range-slider-active-segment"></span>
+    </div>
+  </div> -->
+ 
+<div id="envelope">
+<form action="/ReimbursementTool/employee/add" method="post">
+<h3>Fill out to get your money back!</h3>
+<label>Select Reimbursement Type</label>
+  <select name="ReimbursementType">
+    <option value="LODGING">LODGING</option>
+    <option value="TRAVEL">TRAVEL</option>
+    <option value="FOOD">FOOD</option>
+    <option value="OTHER">OTHER</option>
+  </select><br>
+<label>Amount</label>
+<input name="amount" placeholder="100" type="text" required><br>
+<label>Description</label>
+<input cols="15" name="message" placeholder="Description" required rows="5"> 
+</input><br>
+<input class="btn btn-primary btn-lg" id="submit" type="submit" value="Submit">
+
+  <input class="btn btn-primary btn-lg" type="button" value="Go back!" onclick="history.back()">
+</form>
+</div>
+</div>
+</body>
+ 
+ 
+</html>
+ 
