@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="RecognitionTestSuite">
+	<parameter name="homepage" value="[Our home page title]"></parameter>
+	<parameter name="url" value="[our home page url]"></parameter>
+	<parameter name="username" value="[username]"></parameter>
+	<parameter name="password" value="[password]"></parameter>
+	<parameter name="findRecognitionPage" value="[Our main page title]"></parameter>
+	<test verbose="2" name="RecognitionLoginTest">
+		<classes>
+			<class name = "com.capital.one.testsuites.RecognitionTestSuite"/>
+		</classes>
+	</test>
+</suite>
