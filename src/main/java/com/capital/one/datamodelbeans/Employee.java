@@ -9,6 +9,7 @@ public class Employee {
 	private int employeeId;		// Primary Key
 	private String userName;
 	private String password;
+	private String email;
 	private String firstName;
 	private String lastName;
 	private int teamId;			// Foreign Key
@@ -40,6 +41,12 @@ public class Employee {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -93,6 +100,7 @@ public class Employee {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + employeeId;
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -115,6 +123,11 @@ public class Employee {
 		if (getClass() != obj.getClass())
 			return false;
 		Employee other = (Employee) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
 		if (employeeId != other.employeeId)
 			return false;
 		if (firstName == null) {
@@ -162,11 +175,11 @@ public class Employee {
 	}
 	@Override
 	public String toString() {
-		return "Employee [employeeId=" + employeeId + ", userName=" + userName + ", password=" + password
-				+ ", firstName=" + firstName + ", lastName=" + lastName + ", teamId=" + teamId + ", roleId=" + roleId
-				+ ", titleId=" + titleId + ", role=" + role + ", title=" + title + ", team=" + team + "]";
+		return "Employee [employeeId=" + employeeId + ", userName=" + userName + ", password=" + password + ", email="
+				+ email + ", firstName=" + firstName + ", lastName=" + lastName + ", teamId=" + teamId + ", roleId="
+				+ roleId + ", titleId=" + titleId + ", role=" + role + ", title=" + title + ", team=" + team + "]";
 	}
-
+	
 	
 	
 	
