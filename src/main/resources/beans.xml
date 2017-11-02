@@ -8,5 +8,8 @@
 	
 	<!-- Will need the below line for annotations -->
 	<context:component-scan base-package="com.capital.one.datamodelbeans"></context:component-scan>
+	
+		<!-- Setting up AOP Proxy -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
 </beans>
