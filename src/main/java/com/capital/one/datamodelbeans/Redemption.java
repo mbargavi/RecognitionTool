@@ -1,7 +1,11 @@
 package com.capital.one.datamodelbeans;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Arrays;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class Redemption {
 	
 	private int redemptionId;		// Primary key
@@ -16,7 +20,7 @@ public class Redemption {
 	@Autowired
 	private Credit redemptionCredit;
 	@Autowired
-	private Award redemptionAward;
+	private Award[] redemptionAwardList;
 	@Autowired
 	private Employee empRedeemer;
 	@Autowired
@@ -65,11 +69,11 @@ public class Redemption {
 	public void setRedemptionCredit(Credit redemptionCredit) {
 		this.redemptionCredit = redemptionCredit;
 	}
-	public Award getRedemptionAward() {
-		return redemptionAward;
+	public Award[] getRedemptionAwardList() {
+		return redemptionAwardList;
 	}
-	public void setRedemptionAward(Award redemptionAward) {
-		this.redemptionAward = redemptionAward;
+	public void setRedemptionAwardList(Award[] redemptionAwardList) {
+		this.redemptionAwardList = redemptionAwardList;
 	}
 	public Employee getEmpRedeemer() {
 		return empRedeemer;
@@ -92,7 +96,7 @@ public class Redemption {
 		result = prime * result + creditsUsed;
 		result = prime * result + ((empRedeemer == null) ? 0 : empRedeemer.hashCode());
 		result = prime * result + empRedeemerId;
-		result = prime * result + ((redemptionAward == null) ? 0 : redemptionAward.hashCode());
+		result = prime * result + Arrays.hashCode(redemptionAwardList);
 		result = prime * result + ((redemptionCredit == null) ? 0 : redemptionCredit.hashCode());
 		result = prime * result + redemptionId;
 		result = prime * result + ((teamRedeemed == null) ? 0 : teamRedeemed.hashCode());
@@ -121,10 +125,7 @@ public class Redemption {
 			return false;
 		if (empRedeemerId != other.empRedeemerId)
 			return false;
-		if (redemptionAward == null) {
-			if (other.redemptionAward != null)
-				return false;
-		} else if (!redemptionAward.equals(other.redemptionAward))
+		if (!Arrays.equals(redemptionAwardList, other.redemptionAwardList))
 			return false;
 		if (redemptionCredit == null) {
 			if (other.redemptionCredit != null)
@@ -146,9 +147,11 @@ public class Redemption {
 	public String toString() {
 		return "Redemption [redemptionId=" + redemptionId + ", empRedeemerId=" + empRedeemerId + ", creditsUsed="
 				+ creditsUsed + ", teamRedemptionId=" + teamRedemptionId + ", creditTypeId=" + creditTypeId
-				+ ", awardTypeId=" + awardTypeId + ", redemptionCredit=" + redemptionCredit + ", redemptionAward="
-				+ redemptionAward + ", empRedeemer=" + empRedeemer + ", teamRedeemed=" + teamRedeemed + "]";
+				+ ", awardTypeId=" + awardTypeId + ", redemptionCredit=" + redemptionCredit + ", redemptionAwardList="
+				+ Arrays.toString(redemptionAwardList) + ", empRedeemer=" + empRedeemer + ", teamRedeemed="
+				+ teamRedeemed + "]";
 	}
+	
 	
 	
 

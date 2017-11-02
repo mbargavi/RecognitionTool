@@ -1,10 +1,17 @@
 package com.capital.one.datamodelbeans;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Award {
 	
 	private int awardId;
 	private int awardType;
 	private String awardName;
+	private int creditCost;
+	// NOTE: I am not assigning a specific creditTypeId here...it will be a business decision what credit types can be used to purchase
+	// a given awardType
+	
 	public int getAwardId() {
 		return awardId;
 	}
@@ -23,6 +30,12 @@ public class Award {
 	public void setAwardName(String awardName) {
 		this.awardName = awardName;
 	}
+	public int getCreditCost() {
+		return creditCost;
+	}
+	public void setCreditCost(int creditCost) {
+		this.creditCost = creditCost;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -30,6 +43,7 @@ public class Award {
 		result = prime * result + awardId;
 		result = prime * result + ((awardName == null) ? 0 : awardName.hashCode());
 		result = prime * result + awardType;
+		result = prime * result + creditCost;
 		return result;
 	}
 	@Override
@@ -50,12 +64,18 @@ public class Award {
 			return false;
 		if (awardType != other.awardType)
 			return false;
+		if (creditCost != other.creditCost)
+			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Award [awardId=" + awardId + ", awardType=" + awardType + ", awardName=" + awardName + "]";
+		return "Award [awardId=" + awardId + ", awardType=" + awardType + ", awardName=" + awardName + ", creditCost="
+				+ creditCost + "]";
 	}
+	
+	
+	
 
 	
 
