@@ -36,7 +36,8 @@
           <h3>...an expression of gratitude </h3>
           <hr class="intro-divider">
           <ul class="list-inline intro-social-buttons">
-              <form (submit)="loginUser($event)">
+          
+            <form (submit)="loginUser($event)">
           <input type="text" id="UserId" name="UserId" class="btn btn-secondary btn-lg" placeholder="Username" required autofocus >
           <input type="password" id="Password" name="Password" class="btn btn-secondary btn-lg" placeholder="Password" required>
           <button class="btn btn-secondary btn-lg"  id="coolbutton" >Sign in</button> 
@@ -45,9 +46,5 @@
         </div>
       </div>
     </header>
-    <button type="button" routerLink="/history">History</button>
-    <button type="button" routerLink="/main">Main</button>
-    <button type="button" routerLink="/redeem">Redemption</button>
-    <button type="button" routerLink="/search">Search</button>
   </body>
 </html>
