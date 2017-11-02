@@ -5,7 +5,6 @@ import {MainComponent} from './main/main.component';
 import {RedemptionComponent} from './redemption/redemption.component';
 import {SearchComponent} from './search/search.component';
 
-
 export const appRoutes: Routes = [
     {
       path: 'login',
@@ -27,10 +26,6 @@ export const appRoutes: Routes = [
       path: 'search',
       component: SearchComponent
     },
-    // {
-    //   path: '',
-    //   redirectTo: '/history',
-    //   pathMatch: 'full'
-    // },
-    // { path: '**', component: HistoryComponent}
+
+  // { path: '**', component: MainComponent }
 ];
