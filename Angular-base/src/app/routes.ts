@@ -5,7 +5,6 @@ import {MainComponent} from './main/main.component';
 import {RedemptionComponent} from './redemption/redemption.component';
 import {SearchComponent} from './search/search.component';
 
-
 export const appRoutes: Routes = [
     {
       path: 'login',
