@@ -7,7 +7,7 @@ import {SearchComponent} from './search/search.component';
 
 export const appRoutes: Routes = [
     {
-      path: 'login',
+      path: '',
       component: LoginComponent
     },
     {
