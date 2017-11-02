@@ -26,6 +26,10 @@ export const appRoutes: Routes = [
       path: 'search',
       component: SearchComponent
     },
-
-  // { path: '**', component: MainComponent }
+    // {
+    //   path: '',
+    //   redirectTo: '/history',
+    //   pathMatch: 'full'
+    // },
+    // { path: '**', component: HistoryComponent}
 ];
