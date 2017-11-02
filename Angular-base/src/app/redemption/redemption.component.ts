@@ -6,6 +6,6 @@ import { FormBuilder, Validators } from '@angular/forms';
     templateUrl: './redemption.component.html',
     styleUrls: ['./redemption.component.css']
   })
-  export class RedemptionComponent{
-      
+  export class RedemptionComponent {
+
   }

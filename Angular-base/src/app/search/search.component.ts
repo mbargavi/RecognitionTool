@@ -6,6 +6,6 @@ import { FormBuilder, Validators } from '@angular/forms';
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.css']
   })
-  export class SearchComponent{
-      
+  export class SearchComponent {
+
   }
