@@ -111,7 +111,14 @@ public class DAOUtilities implements ServletContextAware {
                 // FOUND A WAY TO FIND RELATIVE PATH FOR TOMCAT SERVER TO FIND PROPERTIES FILE I THINK
                 // NEED TO DO THE BELOW (plus I had to have this class implement ServletContextAware, override setServletContext,
                 // and autowire a ServletContext variable); also, to make work had to move the database.properties to WEB-INF
-                String dbPropertiesPath = context.getRealPath("") + "WEB-INF/database.properties";
+                String dbTempPath = context.getRealPath("");
+                String dbPropertiesPath = null;
+                if (dbTempPath.endsWith("/")){
+                	dbPropertiesPath = context.getRealPath("") + "WEB-INF/database.properties";
+                }else{
+                	dbPropertiesPath = context.getRealPath("") + "/WEB-INF/database.properties";
+                }
+                
                 System.out.println("dbPropertiesPath = " + dbPropertiesPath);
                 
                 dbProps.load(new FileInputStream(dbPropertiesPath));
