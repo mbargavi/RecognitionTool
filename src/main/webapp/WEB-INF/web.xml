@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>RecognitionTool</display-name>
-  <context-param>
-	  <param-name>param1</param-name>
-	  <param-value>PointToTempDistributor</param-value>
-  </context-param>
-  <!-- NOTE: HTTP requests should be going to Angular for pages -->
-  <!-- WE will only be going to the DISTRIBUTOR FOR DATA REQUEST URLS FROM THE ANGULAR CODE -->
-  <servlet>
-  	<servlet-name>TempDistributor</servlet-name>
-  	<servlet-class>com.capital.one.tempdistributor.TempDistributor</servlet-class>
+   <servlet>
+  	<servlet-name>springDispatcherServlet</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
   	<init-param>
-	  	<param-name>param1</param-name>
-	  	<param-value>TempDistributor</param-value>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>/WEB-INF/beans.xml</param-value>
   	</init-param>
-    <load-on-startup>1</load-on-startup>
+  	<load-on-startup>1</load-on-startup>
   </servlet>
-    <servlet-mapping>
-		<servlet-name>TempDistributor</servlet-name>
-		<url-pattern>/</url-pattern>
+  <servlet-mapping>
+  	<servlet-name>springDispatcherServlet</servlet-name>
+  	<url-pattern>/</url-pattern>
   </servlet-mapping>
 </web-app>
