@@ -1,2 +1,68 @@
-<p>This is from redemption component</p>
-<router-outlet></router-outlet>
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Appreciation Tool</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Appreciation is an art!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="intro-header">
+      <div class="container">
+        <div class="intro-message">
+          <ul class="list-inline intro-social-buttons">
+          
+         <form (submit)="redeemCredits($event)">
+                <label class="" for="textinput">Credits that you want to Redeem</label> <br/>
+                <select id="selectbasic" required name="reimbType">
+                        <option value="">Select an Option</option>
+                          <option value="1">Team Credits</option>
+                          <option value="2">Personal Credits</option>
+                </select> <br/> <br/>
+                <label class="" for="textinput">What you like to get today</label> <br/>
+                <select id="selectbasic" required name="reimbType">
+                        <option value="">Select an Option</option>
+                          <option value="1">Macys</option>
+                          <option value="2">Star Bucks</option>
+                          <option value="3">Cup</option>
+                          <option value="4">Charger</option>
+                          <option value="5">Lawn Mover</option>
+                          <option value="6">Bracelet</option>
+                          <option value="7">WC-Lunch Ticket</option>
+                          <option value="8">WC-Bakery Coupon</option>
+                          <option value="9">WC-Drink Ticket</option>
+                </select> <br/> <br/>
+                <button class="btn btn-success btn-lg"  id="coolbutton" >Submit</button> 
+                <button class="btn btn-secondary btn-lg"  id="coolbutton" >Cancel</button> 
+          <!-- <input type="text" id="UserId" name="UserId" class="btn btn-secondary btn-lg" placeholder="Username" required autofocus >
+          <input type="password" id="Password" name="Password" class="btn btn-secondary btn-lg" placeholder="Password" required>
+          <button class="btn btn-secondary btn-lg"  id="coolbutton" >Sign in</button>  --> 
+        </form>
+        </ul>
+        </div>
+      </div>
+    </header>
+  </body>
+</html>
