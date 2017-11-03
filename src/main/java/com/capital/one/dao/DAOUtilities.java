@@ -1,5 +1,6 @@
 package com.capital.one.dao;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,9 +9,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.context.ServletContextAware;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +27,8 @@ import com.fasterxml.jackson.databind.ObjectWriter;
  * @author David Crites
  *
  */
-public class DAOUtilities {
+@Repository
+public class DAOUtilities implements ServletContextAware {
 
     
     private static EmployeeDaoImpl employeeDaoImpl;
@@ -41,6 +47,9 @@ public class DAOUtilities {
 	private static String connectionURL = "";
     
     private static Logger log = Logger.getLogger("DAOUtilities");
+    
+    @Autowired
+    static ServletContext context; 
 /*
  * First set of functions below will return a DAOimplementation but return it as an Interface, and manage this
  * so that if we already have one defined we return the same one.  This will allow the services to call DAO implementation
@@ -99,9 +108,21 @@ public class DAOUtilities {
             try {
                 Class.forName("org.postgresql.Driver");
                 log.trace("getting initial pull of connection parameters from database.properties and storing");
-                // TODO: FIND RELATIVE PATH FOR TOMCAT SERVER TO FIND PROPERTIES FILE
-                dbProps.load(new FileInputStream(
-                        "/Users/den421/RecognitionTool/src/main/resources/database.properties"));
+                // FOUND A WAY TO FIND RELATIVE PATH FOR TOMCAT SERVER TO FIND PROPERTIES FILE I THINK
+                // NEED TO DO THE BELOW (plus I had to have this class implement ServletContextAware, override setServletContext,
+                // and autowire a ServletContext variable); also, to make work had to move the database.properties to WEB-INF
+                String dbTempPath = context.getRealPath("");
+                String dbPropertiesPath = null;
+                if (dbTempPath.endsWith("/")){
+                	dbPropertiesPath = context.getRealPath("") + "WEB-INF/database.properties";
+                }else{
+                	dbPropertiesPath = context.getRealPath("") + "/WEB-INF/database.properties";
+                }
+                
+                System.out.println("dbPropertiesPath = " + dbPropertiesPath);
+                
+                dbProps.load(new FileInputStream(dbPropertiesPath));
+
                 
                 connectionUsername = dbProps.getProperty("username");
                 connectionPassword = dbProps.getProperty("password");
@@ -163,5 +184,11 @@ public class DAOUtilities {
 			e.printStackTrace();
 		}
     }
+	@Override
+	public void setServletContext(ServletContext servletContext) {
+		// TODO Auto-generated method stub
+		DAOUtilities.context = servletContext;
+		
+	}
 
 }
