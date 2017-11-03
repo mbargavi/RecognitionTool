@@ -25,33 +25,64 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 public class DAOUtilities {
 
     
-//    private static EmployeeDAOImpl employeeDaoImpl;
-//    private static FinanceManagerDao fianceManagerDaoImpl;
+    private static EmployeeDaoImpl employeeDaoImpl;
+    private static AwardDaoImpl awardDaoImpl;
+    private static RecognitionDaoImpl recognitionDaoImpl;
+    private static RedemptionDaoImpl redemptionDaoImpl;
+    private static EmployeeCreditDaoImpl employeeCreditDaoImpl;
+    private static TeamCreditDaoImpl teamCreditDaoImpl;
+
 
     private static Connection connection;
     private static Properties dbProps = new Properties();
-//	private static String connectionUsername = "";
-//	private static String connectionPassword = "";
+    // Below two Strings are not being used for the Connection because using the option to just pass in Properties to the connection.
+	private static String connectionUsername = "";
+	private static String connectionPassword = "";
 	private static String connectionURL = "";
     
     private static Logger log = Logger.getLogger("DAOUtilities");
 /*
- * We can write some functions below that will return a DAOimplementation but return it as an Interface, and manage this
- * so that if we already have one defined we return the same one.
+ * First set of functions below will return a DAOimplementation but return it as an Interface, and manage this
+ * so that if we already have one defined we return the same one.  This will allow the services to call DAO implementation
+ * methods.
  */
-//    public static synchronized EmployeeDAO getEmployeeDao() {
-//        if (employeeDaoImpl == null) {
-//            employeeDaoImpl = new EmployeeDAOImpl();
-//        }
-//        return employeeDaoImpl;
-//    }
-//
-//    public static synchronized FinanceManagerDao getFinanceManagerDao() {
-//        if (fianceManagerDaoImpl == null) {
-//            fianceManagerDaoImpl = new FinanceManagerDaoImpl();
-//        }
-//        return fianceManagerDaoImpl;
-//    }
+    public static synchronized EmployeeDao getEmployeeDao() {
+        if (employeeDaoImpl == null) {
+            employeeDaoImpl = new EmployeeDaoImpl();
+        }
+        return employeeDaoImpl;
+    }
+    public static synchronized AwardDao getAwardDao() {
+        if (awardDaoImpl == null) {
+            awardDaoImpl = new AwardDaoImpl();
+        }
+        return awardDaoImpl;
+    }
+    public static synchronized RecognitionDao getRecognitionDao() {
+        if (recognitionDaoImpl == null) {
+            recognitionDaoImpl = new RecognitionDaoImpl();
+        }
+        return recognitionDaoImpl;
+    }
+    public static synchronized RedemptionDao getRedemptionDao() {
+        if (redemptionDaoImpl == null) {
+            redemptionDaoImpl = new RedemptionDaoImpl();
+        }
+        return redemptionDaoImpl;
+    }
+    public static synchronized EmployeeCreditDao getEmployeeCreditDao() {
+        if (employeeCreditDaoImpl == null) {
+            employeeCreditDaoImpl = new EmployeeCreditDaoImpl();
+        }
+        return employeeCreditDaoImpl;
+    }
+    public static synchronized TeamCreditDao getTeamCreditDao() {
+        if (teamCreditDaoImpl == null) {
+            teamCreditDaoImpl = new TeamCreditDaoImpl();
+        }
+        return teamCreditDaoImpl;
+    }
+
 
     /***
      * This function is managing connections by returning the same connection for use if we still have it
@@ -72,8 +103,8 @@ public class DAOUtilities {
                 dbProps.load(new FileInputStream(
                         "/Users/den421/RecognitionTool/src/main/resources/database.properties"));
                 
-//                connectionUsername = dbProps.getProperty("username");
-//                connectionPassword = dbProps.getProperty("password");
+                connectionUsername = dbProps.getProperty("username");
+                connectionPassword = dbProps.getProperty("password");
                 connectionURL = dbProps.getProperty("url");
                 //Setting the below properties and changing the format of the Driver call to (URL,dbProps)
                 //to try to prevent socket connections from closing
@@ -95,14 +126,14 @@ public class DAOUtilities {
 				e.printStackTrace();
 			}
             log.trace("getting first connection from data source");
-            //connection = DriverManager.getConnection(connectionURL, connectionUsername, connectionPassword);
-            connection = DriverManager.getConnection(connectionURL, dbProps);
+            connection = DriverManager.getConnection(connectionURL, connectionUsername, connectionPassword);
+            //connection = DriverManager.getConnection(connectionURL, dbProps);
             log.trace("retreived connection from data source");
         }
         if (connection.isClosed()) {
 	            	log.trace("Connection was closed: getting new connection from data source");
-	            //connection = DriverManager.getConnection(connectionURL, connectionUsername, connectionPassword);
-	            	connection = DriverManager.getConnection(connectionURL, dbProps);
+	            connection = DriverManager.getConnection(connectionURL, connectionUsername, connectionPassword);
+	            	//connection = DriverManager.getConnection(connectionURL, dbProps);
 	            	log.trace("retreived connection from data source");
 	    }
 	    return connection;
