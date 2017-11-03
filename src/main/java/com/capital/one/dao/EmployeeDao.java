@@ -26,7 +26,7 @@ public interface EmployeeDao {
 	 * where we declare as a "Team" or an "Employee" with the first String, and then include ID, username/name, firstname [null for team],
 	 * lastname [null for team], and email.  It will be this list that the search result box will search on in the Angular page.
 	 * @return will be a custom list of Employee and Team information
-	 * in the form ["(Team/Emloyee)", "(ID)", "(username/name)", "(firstname/null)", "(lastname/null)", "(email)"]
+	 * in the form ["(Team/Employee)", "(ID)", "(username/name)", "(firstname/null)", "(lastname/null)", "(email)"]
 	 */
 	List<String[]> getEmployeesAndTeams();
 	
