@@ -29,16 +29,18 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		PreparedStatement preparedStmt = null;
 		Connection conn = null;
 		ResultSet prs;
+		Employee employee = new Employee();
 
 			try {
 				conn = DAOUtilities.getConnection();
 				
 
-				String sql = ("SELECT * FROM employee WHERE (username = ? AND password = ?);");
+				String sql = ("SELECT * FROM employee WHERE username = ? AND password = ?;");
 				
 				// set up the prepared statement
 				preparedStmt = conn.prepareStatement(sql);
 				
+				System.out.println(sql);
 				// add the parameters to replace the question marks
 				preparedStmt.setString(1, username);
 				preparedStmt.setString(2, password);

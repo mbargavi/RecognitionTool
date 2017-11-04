@@ -16,6 +16,7 @@ import {RedemptionComponent} from './redemption/redemption.component';
 import {SearchComponent} from './search/search.component';
 
 import {appRoutes} from './routes';
+import {LoginService} from './services/login.service';
 
 
 
@@ -38,7 +39,7 @@ import {appRoutes} from './routes';
     SearchComponent,
    ],
   providers: [
-
+    LoginService
    ],
   bootstrap: [AppComponent]
 })
