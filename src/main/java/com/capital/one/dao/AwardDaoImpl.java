@@ -2,8 +2,11 @@ package com.capital.one.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.capital.one.datamodelbeans.Award;
 
+@Repository
 public class AwardDaoImpl implements AwardDao {
 
 	@Override

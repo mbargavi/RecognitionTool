@@ -1,5 +1,8 @@
 package com.capital.one.dao;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class TeamCreditDaoImpl implements TeamCreditDao {
 
 	@Override
