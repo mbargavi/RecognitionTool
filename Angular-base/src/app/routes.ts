@@ -11,16 +11,18 @@ export const appRoutes: Routes = [
       component: LoginComponent
     },
     {
-      path: 'history',
-      component: HistoryComponent
-    },
-    {
       path: 'main',
-      component: MainComponent
-    },
-    {
-      path: 'redeem',
-      component: RedemptionComponent
+      component: MainComponent,
+      children: [
+        {
+          path: 'history',
+          component: HistoryComponent
+        },
+        {
+          path: 'redeem',
+          component: RedemptionComponent
+        },
+      ]
     },
     {
       path: 'search',
@@ -32,4 +34,9 @@ export const appRoutes: Routes = [
     //   pathMatch: 'full'
     // },
     // { path: '**', component: HistoryComponent}
+    {
+      path: 'login',
+      component: LoginComponent
+  },
+
 ];

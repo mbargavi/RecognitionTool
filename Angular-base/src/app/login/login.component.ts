@@ -11,14 +11,14 @@ import { Router } from '@angular/router';
 
     constructor(private router: Router) { }
 
-   
+
    loginUser(e) {
             e.preventDefault();
             console.log(e);
-            var username = e.target.elements[0].value;
-            var password = e.target.elements[1].value;
-            if(username == 'admin' && password == 'admin') {
+            const username = e.target.elements[0].value;
+            const password = e.target.elements[1].value;
+            if (username === 'admin' && password === 'admin') {
              // this.router.navigateByUrl('/main');}
-            this.router.navigate(['main']);}
+            this.router.navigate(['main']); }
   }
 }
