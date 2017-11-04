@@ -8,4 +8,8 @@ import { FormBuilder, Validators } from '@angular/forms';
   })
   export class RedemptionComponent {
 
+    redeemCredits(e) {
+      // do something with this event
+    }
+
   }
