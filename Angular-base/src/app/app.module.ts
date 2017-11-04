@@ -27,7 +27,7 @@ import {SearchListService} from './services/search_list.service';
     HttpModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {useHash: true}),
     FormsModule
   ],
   declarations: [
