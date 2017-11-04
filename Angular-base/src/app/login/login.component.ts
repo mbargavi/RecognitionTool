@@ -33,7 +33,7 @@ import { HttpParams, HttpClient } from '@angular/common/http';
       if (username === 'admin' && password === 'admin') {
        // this.router.navigateByUrl('/main');}
        this.fetch();
-      this.router.navigate(['main']);}
+      this.router.navigate(['main']); }
     }
 
     getConnection(): Observable<any> {
