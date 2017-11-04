@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +26,7 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService es;
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "/getSearchList", method=RequestMethod.GET)
 	public @ResponseBody List<String[]> getListToSearch(){
 		List<String[]> myList =  es.getSearchList();
@@ -37,9 +39,10 @@ public class EmployeeController {
 //		myList.add(listTwo);
 		return myList;
 	}
-	
-	  @RequestMapping(value="/login/", method=RequestMethod.GET)
-	    public @ResponseBody ResponseEntity<Object> getUsernamepassword(@RequestParam String username,@RequestParam String password){
+	  @CrossOrigin(origins = "http://localhost:4200")
+	  @RequestMapping(value="/login", method=RequestMethod.GET)
+	  public @ResponseBody ResponseEntity<Object> getUsernamepassword(@RequestParam(value="UserId") String username,@RequestParam(value="Password") String password){
+	    //public @ResponseBody ResponseEntity<Object> getUsernamepassword(@RequestParam String username,@RequestParam String password){
 		System.out.println("here!!");
 		  ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");		
 		  Employee employee = (Employee) context.getBean("employee");
