@@ -17,6 +17,7 @@ import { HttpParams, HttpClient } from '@angular/common/http';
   @Injectable()
   export class LoginComponent {
 
+
     public userDetails = [];
     public username;
     public password;
@@ -27,9 +28,9 @@ import { HttpParams, HttpClient } from '@angular/common/http';
     loginUser(e) {
       e.preventDefault();
       console.log(e);
-      var username = e.target.elements[0].value;
-      var password = e.target.elements[1].value;
-      if(username == 'admin' && password == 'admin') {
+      const username = e.target.elements[0].value;
+      const password = e.target.elements[1].value;
+      if (username === 'admin' && password === 'admin') {
        // this.router.navigateByUrl('/main');}
        this.fetch();
       this.router.navigate(['main']);}
@@ -44,4 +45,5 @@ import { HttpParams, HttpClient } from '@angular/common/http';
           this.userDetails = resp.json();
         });
         }
-} 
+}
+
