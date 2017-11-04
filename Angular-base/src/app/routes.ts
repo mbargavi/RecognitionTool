@@ -3,7 +3,6 @@ import {LoginComponent} from './login/login.component';
 import {HistoryComponent} from './history/history.component';
 import {MainComponent} from './main/main.component';
 import {RedemptionComponent} from './redemption/redemption.component';
-import {SearchComponent} from './search/search.component';
 
 export const appRoutes: Routes = [
     {
@@ -23,10 +22,6 @@ export const appRoutes: Routes = [
           component: RedemptionComponent
         },
       ]
-    },
-    {
-      path: 'search',
-      component: SearchComponent
     },
     // {
     //   path: '',

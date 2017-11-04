@@ -1,2 +1,32 @@
-<p> search component</p>
-<router-outlet></router-outlet>
+<div>
+<label for="filter">Filter</label>
+<input type="text" name="search" id="search" [(ngModel)]="searchValue" placeholder="Search for text.."/>
+<!--  table starts -->
+<table class="table table-striped" data-toggle="" id="reimbursementHistory" >
+  <thead>
+    <tr>
+      <th>Entity</th>
+      <th>ID</th>
+      <th>Username</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody *ngFor = "let row of combinedList">
+      <tr *ngIf="(row[0]=== searchValue) ||
+                 (row[1]=== searchValue) ||
+                 (row[2]=== searchValue) ||
+                 (row[3]=== searchValue) ||
+                 (row[4]=== searchValue) ||
+                 (row[5]=== searchValue)">
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td>
+        <td>{{row[5]}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

@@ -17,6 +17,7 @@ import {SearchComponent} from './search/search.component';
 
 import {appRoutes} from './routes';
 import {LoginService} from './services/login.service';
+import {SearchListService} from './services/search_list.service';
 
 
 
@@ -39,6 +40,7 @@ import {LoginService} from './services/login.service';
     SearchComponent,
    ],
   providers: [
+    SearchListService,
     LoginService
    ],
   bootstrap: [AppComponent]
