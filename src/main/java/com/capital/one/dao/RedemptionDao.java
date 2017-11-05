@@ -2,6 +2,8 @@ package com.capital.one.dao;
 
 import java.util.List;
 
+import com.capital.one.datamodelbeans.Award;
+import com.capital.one.datamodelbeans.Credit;
 import com.capital.one.datamodelbeans.Redemption;
 
 public interface RedemptionDao {
@@ -22,5 +24,10 @@ public interface RedemptionDao {
 	 * @return - a List of all recognitions
 	 */
 	List<Redemption> getRedemptionHistory();
+	
+	
+	List<Credit> getCreditType();
+	
+	List<Award> getAwardsList();
 
 }
