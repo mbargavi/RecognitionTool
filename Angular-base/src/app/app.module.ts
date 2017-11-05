@@ -17,6 +17,7 @@ import {SearchComponent} from './search/search.component';
 
 import {appRoutes} from './routes';
 import {LoginService} from './services/login.service';
+import {SearchListService} from './services/search_list.service';
 
 
 
@@ -26,7 +27,7 @@ import {LoginService} from './services/login.service';
     HttpModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {useHash: true}),
     FormsModule
   ],
   declarations: [
@@ -39,6 +40,7 @@ import {LoginService} from './services/login.service';
     SearchComponent,
    ],
   providers: [
+    SearchListService,
     LoginService
    ],
   bootstrap: [AppComponent]
