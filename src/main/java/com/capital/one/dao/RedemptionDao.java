@@ -2,11 +2,17 @@ package com.capital.one.dao;
 
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+
 import com.capital.one.datamodelbeans.Award;
 import com.capital.one.datamodelbeans.Credit;
 import com.capital.one.datamodelbeans.Redemption;
 
 public interface RedemptionDao {
+	
+	
 	
 	/***
 	 * This function is used to request a redemption, using some of an employee or teams credits to get a gift/service

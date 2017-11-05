@@ -16,7 +16,7 @@
 	<mvc:annotation-driven />
 	
 	<!-- Serving Static Content -->
-	<!-- <mvc:resources location="/html" mapping="/**" /> -->
+	 <mvc:resources location="/html" mapping="/**" /> 
 	
 	<!-- If need AOP, include AOP tag here also -->
     <aop:aspectj-autoproxy></aop:aspectj-autoproxy>

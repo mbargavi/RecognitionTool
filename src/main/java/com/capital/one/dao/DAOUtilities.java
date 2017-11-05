@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,9 @@ public class DAOUtilities implements ServletContextAware {
 	private static EmployeeDaoImpl employeeDaoImpl;
 	private static AwardDaoImpl awardDaoImpl;
 	private static RecognitionDaoImpl recognitionDaoImpl;
-	private static RedemptionDaoImpl redemptionDaoImpl;
 	private static EmployeeCreditDaoImpl employeeCreditDaoImpl;
 	private static TeamCreditDaoImpl teamCreditDaoImpl;
+	private static RedemptionDaoImpl redemptionDaoImpl;
 
 	private static Connection connection;
 	private static Properties dbProps = new Properties();
@@ -50,6 +51,9 @@ public class DAOUtilities implements ServletContextAware {
 
 	@Autowired
 	static ServletContext context;
+	
+	@Autowired
+	static JDBCConfig con;
 
 	/*
 	 * First set of functions below will return a DAOimplementation but return it as
@@ -80,7 +84,8 @@ public class DAOUtilities implements ServletContextAware {
 
 	public static synchronized RedemptionDao getRedemptionDao() {
 		if (redemptionDaoImpl == null) {
-			redemptionDaoImpl = new RedemptionDaoImpl(null);
+			redemptionDaoImpl = new RedemptionDaoImpl();
+			//redemptionDaoImpl = new RedemptionDaoImpl(con.getDataSource());
 		}
 		return redemptionDaoImpl;
 	}
