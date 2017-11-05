@@ -99,6 +99,12 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
          </dependency>
+               <!-- JSR 303 validator annotations -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>4.3.9.RELEASE</version>
+        </dependency>
 	</dependencies>
   <build>
     <pluginManagement>
