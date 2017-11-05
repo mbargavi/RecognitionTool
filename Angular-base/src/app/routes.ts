@@ -33,5 +33,9 @@ export const appRoutes: Routes = [
       path: 'login',
       component: LoginComponent
   },
+  {
+    path: 'redeem',
+    component: RedemptionComponent
+  }
 
 ];

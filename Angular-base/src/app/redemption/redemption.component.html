@@ -35,27 +35,17 @@
           <ul class="list-inline intro-social-buttons">
           
          <form (submit)="redeemCredits($event)">
-                <label class="" for="textinput">Credits that you want to Redeem</label> <br/>
-                <select id="selectbasic" required name="reimbType">
-                        <option value="">Select an Option</option>
-                          <option value="1">Team Credits</option>
-                          <option value="2">Personal Credits</option>
-                </select> <br/> <br/>
-                <label class="" for="textinput">What you like to get today</label> <br/>
-                <select id="selectbasic" required name="reimbType">
-                        <option value="">Select an Option</option>
-                          <option value="1">Macys</option>
-                          <option value="2">Star Bucks</option>
-                          <option value="3">Cup</option>
-                          <option value="4">Charger</option>
-                          <option value="5">Lawn Mover</option>
-                          <option value="6">Bracelet</option>
-                          <option value="7">WC-Lunch Ticket</option>
-                          <option value="8">WC-Bakery Coupon</option>
-                          <option value="9">WC-Drink Ticket</option>
-                </select> <br/> <br/>
-                <button class="btn btn-success btn-lg"  id="coolbutton" >Submit</button> 
-                <button class="btn btn-secondary btn-lg"  id="coolbutton" >Cancel</button> 
+            <label class="" for="textinput">Credits that you want to Redeem</label> <br/>
+            <select id="selectbasic" required name="creditType" >
+              
+              <option *ngFor="let item of creditList" placeholder="Select an Option">{{item.creditName}}</option>
+            </select> <br/> <br/>
+            <label class="" for="textinput">What you like to get today</label> <br/>
+            <select id="selectbasic" required name="awardType">
+              <option *ngFor="let award of awardsList">{{award.awardName}}</option>
+            </select> <br/> <br/>
+            <button class="btn btn-success btn-lg"  id="coolbutton" >Submit</button> 
+            <button class="btn btn-secondary btn-lg"  id="coolbutton" >Cancel</button> 
           <!-- <input type="text" id="UserId" name="UserId" class="btn btn-secondary btn-lg" placeholder="Username" required autofocus >
           <input type="password" id="Password" name="Password" class="btn btn-secondary btn-lg" placeholder="Password" required>
           <button class="btn btn-secondary btn-lg"  id="coolbutton" >Sign in</button>  --> 
