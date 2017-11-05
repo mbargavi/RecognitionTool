@@ -12,7 +12,7 @@ public class SPAController {
 	@RequestMapping
 	public String getSPA() {
 		System.out.println("Got to getSPA() method");
-		return "forward:/RecognitionTool/static/dist/index.html";
+		return "forward:/static/dist/index.html";
 	}
 	
 }
