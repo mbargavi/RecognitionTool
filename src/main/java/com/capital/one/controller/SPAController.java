@@ -11,6 +11,7 @@ public class SPAController {
 	
 	@RequestMapping
 	public String getSPA() {
+		System.out.println("Got to getSPA() method");
 		return "forward:/static/index.html";
 	}
 	
