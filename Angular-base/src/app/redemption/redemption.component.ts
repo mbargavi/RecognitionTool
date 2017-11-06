@@ -14,6 +14,10 @@ export class RedemptionComponent implements OnInit {
   public awardsList;
   constructor(private http: Http) {}
 
+  redeemCredits(e) {
+    // do something here
+  }
+
   public ngOnInit() {
 
     this.http.get('http://localhost:8080/RecognitionTool/creditType').subscribe((resp) => {

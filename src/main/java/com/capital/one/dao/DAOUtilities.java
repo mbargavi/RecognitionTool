@@ -164,12 +164,14 @@ public class DAOUtilities implements ServletContextAware {
 			}
 			log.trace("getting first connection from data source");
 			connection = DriverManager.getConnection(connectionURL, connectionUsername, connectionPassword);
+			//connection = DriverManager.getConnection("jdbc:postgresql://postgres.c4upqzkkv1a8.us-east-1.rds.amazonaws.com:5432/postgres", "postgres", "postgres");
 			// connection = DriverManager.getConnection(connectionURL, dbProps);
 			log.trace("retreived connection from data source");
 		}
 		if (connection.isClosed()) {
 			log.trace("Connection was closed: getting new connection from data source");
 			connection = DriverManager.getConnection(connectionURL, connectionUsername, connectionPassword);
+			//connection = DriverManager.getConnection("jdbc:postgresql://postgres.c4upqzkkv1a8.us-east-1.rds.amazonaws.com:5432/postgres", "postgres", "postgres");
 			// connection = DriverManager.getConnection(connectionURL, dbProps);
 			log.trace("retreived connection from data source");
 		}
