@@ -14,23 +14,19 @@ import com.capital.one.service.RedeemService;
 @Controller
 public class RedemptionController {
 	
-//	@Autowired
-//	RedeemService rs;
-//	
-//	
-//	  
-//	  @RequestMapping("/creditType")
-//	  public @ResponseBody List<Credit> validate() {
-//			List<Credit> creditTypes = rs.creditType();
-//			return creditTypes;
-//		}
-//	  
-//	  @RequestMapping("/awardsList")
-//	  public @ResponseBody List<Award> awardsList() {
-//			List<Award> awardsList = rs.awardsList();
-//			System.out.println("awards" + awardsList);
-//			return awardsList;
-//		}
-//	  
-
+	@Autowired
+	RedeemService rs;
+	
+	  @RequestMapping("/creditType")
+	  public @ResponseBody List<Credit> validate() {
+			List<Credit> creditTypes = rs.creditType();
+			return creditTypes;
+		}
+	  
+	  @RequestMapping("/awardsList")
+	  public @ResponseBody List<Award> awardsList() {
+			List<Award> awardsList = rs.awardsList();
+			System.out.println("awards" + awardsList);
+			return awardsList;
+		}
 }
