@@ -100,7 +100,8 @@ body, h1, h2, h3, h4, h5, h6 {
 .banner {
   padding: 100px 0;
   color: #f8f8f8;
-  background: url(images/banner-bg.jpg) no-repeat center center;
+  /*!background: url(../../assets/images/banner-bg.jpg) no-repeat center center;*/
+  background: url(/assets/images/banner-bg.jpg) no-repeat center center;
   background-size: cover;
 }
 
