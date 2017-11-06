@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:mvc="http://www.springframework.org/schema/mvc"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
-<!-- Scanning components -->
-    <context:component-scan base-package="com.capital.one"></context:component-scan>
-<!-- Scanning or controller classes -->    
-    <mvc:annotation-driven/>
-</beans>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 
+	<!-- Component scan for Spring Core -->
+	<context:component-scan base-package="com.capital.one"/>
 	
+	<!-- Scanning for Controller Classes -->
+	<mvc:annotation-driven />
+	
+	<!-- Serving Static Content -->
+	 <mvc:resources location="/static" mapping="/**"></mvc:resources>
+	
+	<!-- If need AOP, include AOP tag here also -->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+</beans>

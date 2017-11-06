@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --env=prod --base-href=/RecognitionTool/page --deploy-url=/RecognitionTool/static/dist", 
+    "build": "ng build --prod --env=prod --base-href=/RecognitionTool/page --deploy-url=/RecognitionTool/static/dist/", 
    "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
