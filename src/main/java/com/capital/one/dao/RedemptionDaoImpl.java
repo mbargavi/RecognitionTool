@@ -22,6 +22,13 @@ public class RedemptionDaoImpl implements RedemptionDao {
 	JDBCConfig con;
 
 	private JdbcTemplate jdbcTemplate;
+	
+	
+
+	public RedemptionDaoImpl() {
+		super();
+		// Default Constructor
+	}
 
 	public RedemptionDaoImpl(DataSource con) {
 		System.out.println("Test");

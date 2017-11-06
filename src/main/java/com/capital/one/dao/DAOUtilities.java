@@ -82,13 +82,13 @@ public class DAOUtilities implements ServletContextAware {
 		return recognitionDaoImpl;
 	}
 
-	public static synchronized RedemptionDao getRedemptionDao() {
-		if (redemptionDaoImpl == null) {
-			redemptionDaoImpl = new RedemptionDaoImpl();
-			//redemptionDaoImpl = new RedemptionDaoImpl(con.getDataSource());
-		}
-		return redemptionDaoImpl;
-	}
+//	public static synchronized RedemptionDao getRedemptionDao() {
+//		if (redemptionDaoImpl == null) {
+//			redemptionDaoImpl = new RedemptionDaoImpl();
+//			//redemptionDaoImpl = new RedemptionDaoImpl(con.getDataSource());
+//		}
+//		return redemptionDaoImpl;
+//	}
 
 	public static synchronized EmployeeCreditDao getEmployeeCreditDao() {
 		if (employeeCreditDaoImpl == null) {
