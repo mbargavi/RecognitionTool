@@ -41,7 +41,8 @@ import {SearchListService} from './services/search_list.service';
    ],
   providers: [
     SearchListService,
-    LoginService
+    LoginService,
+    LoginComponent,
    ],
   bootstrap: [AppComponent]
 })
