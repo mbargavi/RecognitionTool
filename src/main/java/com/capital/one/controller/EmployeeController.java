@@ -12,6 +12,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -55,7 +56,12 @@ public class EmployeeController {
 	    employee.setPassword(password);
 	       
         employee = loginService.authenticateUser(employee.getUserName(), employee.getPassword());
-		return ResponseEntity.ok(employee);
+        if(employee==null) {
+	        	System.out.println("Setting Status code of 500");
+	        	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }else {
+        		return ResponseEntity.ok(employee);
+        }
 			
 	    }	
 	  
