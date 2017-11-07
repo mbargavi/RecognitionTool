@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.capital.one.dao.AwardDaoImpl;
 import com.capital.one.datamodelbeans.Award;
 import com.capital.one.datamodelbeans.Credit;
 import com.capital.one.service.RedeemService;
@@ -17,6 +19,7 @@ public class RedemptionController {
 	@Autowired
 	RedeemService rs;
 	
+	
 	  @RequestMapping("/creditType")
 	  public @ResponseBody List<Credit> validate() {
 			List<Credit> creditTypes = rs.creditType();
@@ -25,7 +28,7 @@ public class RedemptionController {
 	  
 	  @RequestMapping("/awardsList")
 	  public @ResponseBody List<Award> awardsList() {
-			List<Award> awardsList = rs.awardsList();
+		    List<Award> awardsList = rs.awardsList();
 			System.out.println("awards" + awardsList);
 			return awardsList;
 		}
