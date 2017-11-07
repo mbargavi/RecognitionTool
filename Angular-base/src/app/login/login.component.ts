@@ -23,6 +23,8 @@ import { HttpParams, HttpClient } from '@angular/common/http';
     public username;
     public password;
     public myParams = new URLSearchParams();
+    public show = false;
+    public message = '';
 
     constructor(private router: Router, @Inject(Http) private http: Http, private loginservice: LoginService) {
     }
@@ -52,13 +54,25 @@ import { HttpParams, HttpClient } from '@angular/common/http';
 
     fetch(): void {
         this.getConnection().subscribe((resp) => {
-          this.userDetails = resp.json();
-          console.log(this.userDetails);
+          if ((resp.status === 200)) {
+            this.userDetails = resp.json();
+            console.log(this.userDetails);
+          }
           if ( !(this.userDetails === undefined)) {
             this.router.navigate(['main']);
           }else {
             // Could run a modal here to say invalid
+            console.log('turning "show" to true');
+            this.message = 'Those credentials were invalid!';
+            this.show = true;
           }
+        }, (error) => {
+               if (error.status === 400) {
+                  // Could run a modal here to say invalid
+                  console.log('turning "show" to true');
+                  this.message = 'Those credentials were invalid!';
+                  this.show = true;
+               }
         });
 
     }
