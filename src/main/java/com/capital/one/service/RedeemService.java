@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.capital.one.dao.RedemptionDao;
 import com.capital.one.dao.RedemptionDaoImpl;
 import com.capital.one.datamodelbeans.Award;
 import com.capital.one.datamodelbeans.Credit;
@@ -13,7 +15,7 @@ import com.capital.one.datamodelbeans.Credit;
 public class RedeemService {
 	
 	@Autowired
-	RedemptionDaoImpl redeemDao;
+	RedemptionDao redeemDao;
 	private static Logger log = Logger.getRootLogger();
 	
 	public List<Credit> creditType() {		
