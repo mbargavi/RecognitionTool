@@ -19,7 +19,7 @@
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    /* background: url(images/intro-bg.jpg) no-repeat center center; */
+    background: url(images/intro-bg.jpg) no-repeat center center;
     background-size: cover;
   }
   
@@ -100,7 +100,7 @@
   .banner {
     padding: 100px 0;
     color: #f8f8f8;
-    /* background: url(images/banner-bg.jpg) no-repeat center center; */
+    background: url(images/banner-bg.jpg) no-repeat center center;
     background-size: cover;
   }
   
