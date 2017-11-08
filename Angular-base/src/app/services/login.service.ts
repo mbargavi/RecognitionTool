@@ -9,7 +9,6 @@ import {LoginComponent} from '../login/login.component';
 export class LoginService {
   public userDetails;
   public myParams = new URLSearchParams();
-  public show = false;
   public message = '';
   constructor( @Inject(Http) private http: Http, private router: Router) {
 
@@ -25,20 +24,10 @@ export class LoginService {
       if ((resp.status === 200 && this.userDetails === undefined)) {
         this.userDetails = resp.json();
         this.router.navigate(['main']);
-        console.log(this.userDetails);
-      }
-       else {
-        // Could run a modal here to say invalid
-        console.log('turning "show" to true');
-        this.message = 'Those credentials were invalid!';
-        this.show = true;
-      }
-    }, (error) => {
+        console.log(this.userDetails); }}, 
+        (error) => {
            if (error.status === 400) {
-              // Could run a modal here to say invalid
-              console.log('turning "show" to true');
               this.message = 'Those credentials were invalid!';
-              this.show = true;
            }
     });
 
