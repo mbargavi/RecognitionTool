@@ -5,8 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --env=prod --base-href=/RecognitionTool/page --deploy-url=/RecognitionTool/static/dist/", 
-   "test": "ng test",
+    "build": "ng build --prod --env=prod --base-href=/RecognitionTool/page --deploy-url=/RecognitionTool/static/dist/",
+    "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -24,6 +24,7 @@
     "@angular/router": "^4.4.0-RC.0",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.3",
     "@uirouter/angular": "^1.0.0-beta.7",
+    "bootstrap": "^4.0.0-beta.2",
     "core-js": "^2.4.1",
     "rxjs": "^5.4.1",
     "typescript": "^2.2.1",
