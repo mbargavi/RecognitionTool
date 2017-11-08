@@ -16,16 +16,14 @@ import { HttpParams, HttpClient } from '@angular/common/http';
 
   @Injectable()
   export class LoginComponent {
-
-    public userDetails;
-    @Input() username;
-    @Input() password;
-    public myParams = new URLSearchParams();
-    public show = false;
-    public message = '';
-
     constructor(private router: Router, @Inject(Http) private http: Http, private loginservice: LoginService) {
     }
+    public userDetails;
+    public username;
+    public password;
+    public myParams = new URLSearchParams();
+    public show = false;
+    public message = this.loginservice.message;
 
     loginUser(e) {
       e.preventDefault();
