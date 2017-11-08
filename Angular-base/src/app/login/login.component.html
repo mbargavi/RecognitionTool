@@ -43,8 +43,9 @@
           <button class="btn btn-secondary btn-lg"  id="coolbutton" >Sign in</button> 
           </form>
         </ul>
+        <div *ngIf=true>{{loginservice.message}}</div>
         </div>
-        <div *ngIf="show" >{{message}}</div>
+       
       </div>
     </header>
 
