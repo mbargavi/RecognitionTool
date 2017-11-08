@@ -1,8 +1,173 @@
-<p>Authentication Success</p>
-<p>You are authenticated  {{userDetails.userName}}<p>
-</p>
 
-<app-search></app-search>
+<!DOCTYPE html>
+<html lang="en">
 
-<button type="button" routerLink="/history">History</button>
-<button type="button" routerLink="/redeem">Redemption</button>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Appreciation Tool</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  </head>
+  <body class="banner">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Appreciation is an art!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+      <div class="container">
+          <div class="row">
+              <div class="col-md-4">
+                  <img class="img-circle btn-circle" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" />
+              </div>
+              <div class="col-md-4">
+                  <h1>[Title]</h1>
+              </div>
+              <div class="col-md-4">
+                  <h1>{{userDetails.firstName}} {{userDetails.lastName}}</h1>
+              </div>
+          </div>
+     </div>
+   </header>
+   <div class="container">
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-md-11">
+                                <app-search></app-search>
+                          </div>
+                          <div class="col-md-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Copy My Manager
+                                    </label>
+                                </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="container">
+                                  <div class="row">
+                                      <div class="col-md-2 checkbox">
+                                          <input type="checkbox">
+                                      </div>
+                                      <div class="col-md-2 checkbox">
+                                            <input type="checkbox">
+                                      </div>
+                                      <div class="col-md-2 checkbox">
+                                        <input type="checkbox">
+                                      </div>
+                                      <div class="col-md-2 checkbox">
+                                            <input type="checkbox">
+                                      </div>
+                                      <div class="col-md-2 checkbox">
+                                            <input type="checkbox">
+                                      </div>
+                                      <div class="col-md-2 checkbox">
+                                            <input type="checkbox">
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-2">
+                                            <label>Competency</label>
+                                      </div>
+                                      <div class="col-md-2">
+                                            <label>Competency</label>
+                                      </div>
+                                      <div class="col-md-2">
+                                            <label>Competency</label>
+                                      </div>
+                                      <div class="col-md-2">
+                                            <label>Competency</label>
+                                      </div>
+                                      <div class="col-md-2">
+                                            <label>Competency</label>
+                                      </div>
+                                      <div class="col-md-2">
+                                            <label>Competency</label>
+                                      </div>
+                                  </div>
+                              </div> <!--end competency container-->
+                          </div> <!--end md 12-->
+                      </div> <!--end row-->
+                      <div class="row">
+                            <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label>Feedback for Nominee</label>
+                                      <textarea class="form-control" placeholder="Recognition Feedback"></textarea>
+                                  </div>
+                            </div>
+                      </div>
+                  </div> <!--end md-6 container-->
+              </div><!--end md6-->
+              <div class="col-md-3">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-md-12">
+                                <button type="button" class="btn btn-primary btn-circle btn-lg">Current To Give</button>
+                          </div>
+                      </div>
+                      <div class="row">
+                            <div class="col-md-12">
+                                  <button type="button" class="btn btn-primary btn-circle btn-lg">Current Earned</button>
+                            </div>
+                      </div>
+                  </div><!--end current year button container -->
+              </div> <!--end m3 -->
+              <div class="col-md-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                                <button type="button" class="btn btn-primary btn-circle btn-lg" routerLink="/history">Historical Given</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-primary btn-circle btn-lg" routerLink="/history">Historical Earned</button>
+                            </div>
+                    </div>
+                </div><!--end cumulative button container -->
+              </div> <!-- end m3 -->
+          </div> <!--end row-->
+          <div class = "row">
+              <div class="col-md-3">
+                <div class="form-group">
+                    <label>Additional Feedback to Nominee's Manager</label>
+                    <textarea class="form-control" placeholder="Additional Feedback"></textarea>
+                </div>
+              </div>
+              <div class="col-md-3">
+                    <button class="btn btn-primary">Give Recognition</button>
+              </div>
+              <div class="col-md-3">
+                    <span></span>
+              </div>
+              <div class="col-md-3">
+                    <button class="btn btn-success" routerLink="/redeem">Redeem My Credits</button>
+              </div>
+          </div><!--end last row-->
+      </div><!--end final conatainer -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+  </body>
+</html>
