@@ -1,11 +1,11 @@
 package com.capital.one.datamodelbeans;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class Recognition {
 	
 	private int recognitionId;
@@ -15,7 +15,7 @@ public class Recognition {
 	private int teamNomineeId;
 	private int creditAmount;
 	private int creditTypeId;
-	private LocalDateTime date;
+	private LocalDate date;
 	
 	@Autowired
 	private Credit credit;
@@ -63,10 +63,10 @@ public class Recognition {
 	public void setCreditTypeId(int creditTypeId) {
 		this.creditTypeId = creditTypeId;
 	}
-	public LocalDateTime getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
-	public void setDate(LocalDateTime date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 	public Credit getCredit() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,7 @@ import com.capital.one.datamodelbeans.Recognition;
 import com.capital.one.service.HistoryService;
 
 @Controller
+@CrossOrigin(origins="*")
 public class HistoryController {
 
 	@Autowired
@@ -20,17 +22,14 @@ public class HistoryController {
 
 	@RequestMapping(value = "/HistoricalGiven/{empId}", method = RequestMethod.GET)
 	public @ResponseBody List<Recognition> getRecognitionsgivenhistory(@PathVariable("empId") int empID) {
-		System.out.println(" im in historucalGiven");
 		List<Recognition> myrecog = hs.getRecognitionsGiven(empID);
 		return myrecog;
 
 	}
 
 	@RequestMapping(value = "/HistoricalEarned", method = RequestMethod.GET)
-	// public @ResponseBody List<Recognition> getRecognitionshistory(int empid)
-	// {
-	public @ResponseBody List<Recognition> getRecognitionshistory(int empId, int teamId) {
-		System.out.println("In History controller");
+	public @ResponseBody List<Recognition> getRecognitionsEarnedhistory(int empId, int teamId) {
+		System.out.println("In History controller" + empId + teamId);
 		List<Recognition> myrecog = hs.getRecognitionsEarned(empId, teamId);
 		return myrecog;
 	}
