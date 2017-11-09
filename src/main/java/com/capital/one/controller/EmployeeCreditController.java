@@ -27,8 +27,17 @@ public class EmployeeCreditController {
 	
 	@RequestMapping("/creditsToGive/{empId}")
 	  public @ResponseBody int creditsToGive(@PathVariable("empId") int empId) {
+		System.out.println("!!!+ empId");
 		  int credits=  employeeCreditService.getCreditsToGive(empId);
 		  return credits;
 		}
+	
+	@RequestMapping("/creditsEarned/{empId}")
+	  public @ResponseBody int creditsEarned(@PathVariable("empId") int empId) {
+		System.out.println("!!!+ empId");
+		  int credits=  employeeCreditService.getCreditsEarned(empId);
+		  return credits;
+		}
+	
 	
 }

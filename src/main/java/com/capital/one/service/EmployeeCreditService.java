@@ -15,4 +15,9 @@ public class EmployeeCreditService {
 		  int credits=  employeeCreditDaoImpl.retrieveEmpCreditToGiveBalance(empId);
 		  return credits;
 		}
+
+	public int getCreditsEarned(int empId) {
+		 int credits=  employeeCreditDaoImpl.retrieveEmpCreditEarnedBalance(empId);
+		  return credits;
+	}
 }

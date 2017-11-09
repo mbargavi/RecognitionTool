@@ -37,9 +37,10 @@ public class EmployeeCreditDaoImpl implements EmployeeCreditDao{
 	}
 
 	@Override
-	public int retrieveEmpCreditEarnedBalance(int empId, int credTypeId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int retrieveEmpCreditEarnedBalance(int empId) {
+		String sql = "SELECT SUM(credit_earned_balance) FROM employee_credit WHERE emp_id="+ empId; ;
+		int creditsToGive = jdbcTemplate.queryForObject(sql,Integer.class);
+		return creditsToGive;
 	}
 
 	@Override

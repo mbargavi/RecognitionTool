@@ -24,7 +24,7 @@ public interface EmployeeCreditDao {
 	 * @param credTypeId
 	 * @return
 	 */
-	int retrieveEmpCreditEarnedBalance(int empId, int credTypeId);
+	int retrieveEmpCreditEarnedBalance(int empId);
 	
 	/***
 	 * Once an employee redemption is made, this needs to be called with the amount of credits used to decrease the credits earned balance.
