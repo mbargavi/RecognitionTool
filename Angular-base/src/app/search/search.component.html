@@ -1,11 +1,13 @@
 
 <div>
 <label for="filter">Nominee</label>
-<input type="text" name="search" id="search" [(ngModel)]="searchValue" placeholder="Search person/team.."/>
-<label id="selection" type="text" class="border float-right" style="padding:5px;" >{{yourSelection}}</label>
-<span class="float-right">Your Selection--> </span>
+<input class="optional-border" type="text" name="search" id="search" [(ngModel)]="searchValue" placeholder="Search person/team.."/>
+<span>Your Selection--> </span>
+
+  <label id="selection" type="text" style="padding:5px;" >{{yourSelection}}</label>
+
 <!--  table starts -->
-<table class="table table-striped" data-toggle="" id="reimbursementHistory" >
+<table *ngIf= "!(searchValue==='')" class="table table-striped" data-toggle="" id="reimbursementHistory" >
   <thead>
     <tr>
       <th>Entity</th>

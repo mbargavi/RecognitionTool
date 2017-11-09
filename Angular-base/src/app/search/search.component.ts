@@ -14,7 +14,7 @@ import { SearchListService } from '../services/search_list.service';
     // public fieldFromService;
 
     public searchValue= '';
-    public match = false;  // not using this yet
+    public selected = false;
     public yourSelection= '[Your Selection]';
     public selectionId = 0;
     public selectionEntityType = ''; // this will be a 'Team' or an 'Employee' so we know which type of selectionID we have
@@ -32,6 +32,9 @@ import { SearchListService } from '../services/search_list.service';
       this.selectionId = event.currentTarget.cells[1].childNodes[0].innerText;
       this.selectionEntityType = event.currentTarget.cells[0].childNodes[0].innerText;
       this.searchValue = '';
+      this.selected = true;
+      document.getElementById('selection').setAttribute('class', 'optional-border');
+      document.getElementById('search').removeAttribute('class');
 
     }
 

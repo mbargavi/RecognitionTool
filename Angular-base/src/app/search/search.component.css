@@ -9,6 +9,22 @@
     font-weight: 700;
   }
 
+  .vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.vbottom{
+  position: relative;
+  top: 100%;
+  transform: translateY(-100%); 
+}
+
+.optional-border{
+  border:3px solid #c8f30b;
+}
+
   .sub-container {
     padding: 20px;
     background-color: rgb(68, 66, 66);
