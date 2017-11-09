@@ -33,8 +33,10 @@ public class HistoryService {
 	}
 
 	public List<Recognition> getRecognitionsEarned(int empId, int teamId) {
+		System.out.println("recognition earned!!!! serviice" + empId + teamId);
 		List<Recognition> earnedList = new ArrayList<Recognition>();
-		earnedList = recDao.getRecognitionHistory().stream()
+		
+		earnedList = recDao.getHistoricalEarned(empId, teamId).stream()
 				.filter(element -> (element.getEmpNomineeId()==empId || element.getTeamNomineeId()==teamId))
 				.collect(Collectors.toList());
 		

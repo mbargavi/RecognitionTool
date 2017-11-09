@@ -36,6 +36,10 @@ export const appRoutes: Routes = [
   {
     path: 'redeem',
     component: RedemptionComponent
+  },
+  {
+    path: 'history',
+    component: HistoryComponent
   }
 
 ];
