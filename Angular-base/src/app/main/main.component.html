@@ -114,7 +114,7 @@
                             <div class="col-md-12">
                                   <div class="form-group">
                                       <label>Feedback for Nominee</label>
-                                      <textarea class="form-control" placeholder="Recognition Feedback"></textarea>
+                                      <textarea class="form-control" style="height:134px" placeholder="Recognition Feedback"></textarea>
                                   </div>
                             </div>
                       </div>
@@ -123,73 +123,89 @@
               <div class="col-md-3">
                   <div class="container sub-container">
                       <div class="row">
-                            <div class="col-md-1"></div>
-                          <div class="col-md-10">
-                                <button type="button" class="btn btn-primary round-button btn-lg">Current<br>To Give<br><h1>25</h1></button>
+                            <div class="col-md-2"></div>
+                          <div class="col-md-8">
+                                <button type="button" class="btn btn-primary round-button btn-lg">Current<br>To Give<br><h2>25</h2></button>
                           </div>
-                          <div class="col-md-1"></div>
+                          <div class="col-md-2"></div>
                       </div>
                       <br>
                       <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-10">
-                                  <button type="button" class="btn btn-primary round-button btn-lg">Current<br>To Spend<br><h1>25</h1></button>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                  <button type="button" class="btn btn-primary round-button btn-lg">Current<br>To Spend<br><h2>25</h2></button>
                             </div>
-                            <div class="col-md-1"></div>
+                            <div class="col-md-2"></div>
                       </div>
                   </div><!--end current year button container -->
               </div> <!--end m3 -->
               <div class="col-md-3">
                 <div class="container sub-container">
                     <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-10">
-                                <button type="button" class="btn btn-primary round-button btn-lg" routerLink="/history">Historical<br>Given<br><h1>25</h1></button>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                                <button type="button" class="btn btn-primary round-button btn-lg" routerLink="/history">Historical<br>Given<br><h2>25</h2></button>
                         </div>
-                        <div class="col-md-1"></div>
+                        <div class="col-md-2"></div>
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-md-1"></div>
-                            <div class="col-md-10">
-                                <button type="button" class="btn btn-primary round-button btn-lg" routerLink="/history">Historical<br>Earned<br><h1>25</h1></button>
+                        <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                <button type="button" class="btn btn-primary round-button btn-lg" routerLink="/history">Historical<br>Earned<br><h2>25</h2></button>
                             </div>
-                        <div class="col-md-1"></div>
+                        <div class="col-md-2"></div>
                     </div>
                 </div><!--end cumulative button container -->
               </div> <!-- end m3 -->
           </div> <!--end row-->
-          <br>
+          
           <div class = "row">
-              <div class="col-md-3">
-                <div class="form-group vbottom">
-                    <label>Additional Feedback to Nominee's Manager</label>
-                    <textarea class="form-control" placeholder="Additional Feedback"></textarea>
-                </div>
-              </div>
-              <div class="col-md-3">
+              <div class="col-md-6">
+                    <div class="container sub-container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Additional Feedback to Nominee's Manager</label>
+                                    <textarea class="form-control" style="height:79px" placeholder="Additional Feedback"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div style="border:1px solid #869dce;">
+                                    <div class="radio">
+                                        <label style="padding-left:7px;"><input type="radio" name="recognitionType"> 1 Credit</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label style="padding-left:7px;"><input type="radio" name="recognitionType"> 5 CapOne Bucks</label>
+                                    </div>
+                                    <!-- <div class="radio disabled">
+                                        <label><input type="radio" name="optradio" disabled>Option 3</label>
+                                    </div> -->
+                                </div>
+                                <div class="checkbox">
+                                    <label style="padding-left:7px;">
+                                        <input type="checkbox"> Copy My Manager
+                                    </label>
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary btn-block">Give Recognition</button>
+                                </div>
+                            </div>
+                        </div> <!-- end of sub-container row -->
+                    </div> <!-- end of sub-container -->
+              </div> <!-- end of column md-6 -->
+              <div class="col-md-6">
                   <br>
                   <br>
                   <br>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"> Copy My Manager
-                    </label>
-                </div>
-                <div>
-                    <button class="btn btn-primary">Give Recognition</button>
-                </div>
-              </div>
-              <div class="col-md-3">
-                  <br>
-                  <br>
-                  <br>
-                    <div class="container" style="padding:30px;">
-                         <button class="btn btn-success align-center float-bottom" routerLink="/redeem">Redeem My Credits</button>
-                    </div>
-              </div>
-              <div class="col-md-3">
-                    <span></span>
+                  
+                  <div class="row">
+                      <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <button class="btn btn-block btn-lg btn-success" routerLink="/redeem">Spend My Credits</button>
+                        </div>
+                      <div class="col-md-3"></div>
+                  </div>
               </div>
           </div><!--end last row-->
       </div><!--end final conatainer -->
