@@ -77,7 +77,7 @@ public class DAOUtilities implements ServletContextAware {
 
 	public static synchronized RecognitionDao getRecognitionDao() {
 		if (recognitionDaoImpl == null) {
-			recognitionDaoImpl = new RecognitionDaoImpl();
+		//	recognitionDaoImpl = new RecognitionDaoImpl();
 		}
 		return recognitionDaoImpl;
 	}
