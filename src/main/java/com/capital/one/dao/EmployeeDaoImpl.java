@@ -35,9 +35,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				conn = DAOUtilities.getConnection();
 				
 
-				String sql = ("SELECT * FROM employee WHERE username = ? AND password = ?;");
-				
-				// set up the prepared statement
+				//String sql = ("SELECT * FROM employee WHERE username = ? AND password = ?;");
+				String sql = ("SELECT * FROM employee LEFT JOIN title ON employee.titleid = title.title_id where username=? AND password=?;");				// set up the prepared statement
 				preparedStmt = conn.prepareStatement(sql);
 				
 				System.out.println(sql);
