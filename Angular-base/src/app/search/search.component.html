@@ -1,8 +1,9 @@
 
 <div>
-<label for="filter">Filter</label>
-<input type="text" name="search" id="search" [(ngModel)]="searchValue" placeholder="Search for text.."/>
-
+<label for="filter">Nominee</label>
+<input type="text" name="search" id="search" [(ngModel)]="searchValue" placeholder="Search person/team.."/>
+<label id="selection" type="text" class="border float-right" style="padding:5px;" >{{yourSelection}}</label>
+<span class="float-right">Your Selection--> </span>
 <!--  table starts -->
 <table class="table table-striped" data-toggle="" id="reimbursementHistory" >
   <thead>
@@ -16,18 +17,19 @@
     </tr>
   </thead>
   <tbody *ngFor = "let row of combinedList">
-      <tr *ngIf="(row[0]=== searchValue) ||
-                 (row[1]=== searchValue) ||
-                 (row[2]=== searchValue) ||
-                 (row[3]=== searchValue) ||
-                 (row[4]=== searchValue) ||
-                 (row[5]=== searchValue)">
-        <td>{{row[0]}}</td>
-        <td>{{row[1]}}</td>
-        <td>{{row[2]}}</td>
-        <td>{{row[3]}}</td>
-        <td>{{row[4]}}</td>
-        <td>{{row[5]}}</td>
+      <tr (click)="makeSelection($event)"
+                          *ngIf="(row[0]=== searchValue) ||
+                                (row[1]=== searchValue) ||
+                                (row[2]=== searchValue) ||
+                                (row[3]=== searchValue) ||
+                                (row[4]=== searchValue) ||
+                                (row[5]=== searchValue)">
+        <td><a href="javascript:void(0)" style="color:aqua">{{row[0]}}</a></td>
+        <td><a href="javascript:void(0)" style="color:aqua">{{row[1]}}</a></td>
+        <td><a href="javascript:void(0)" style="color:aqua">{{row[2]}}</a></td>
+        <td><a href="javascript:void(0)" style="color:aqua">{{row[3]}}</a></td>
+        <td><a href="javascript:void(0)" style="color:aqua">{{row[4]}}</a></td>
+        <td><a href="javascript:void(0)" style="color:aqua">{{row[5]}}</a></td>
     </tr>
   </tbody>
 </table>

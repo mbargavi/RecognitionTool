@@ -15,11 +15,24 @@ import { SearchListService } from '../services/search_list.service';
 
     public searchValue= '';
     public match = false;  // not using this yet
+    public yourSelection= '[Your Selection]';
+    public selectionId = 0;
+    public selectionEntityType = ''; // this will be a 'Team' or an 'Employee' so we know which type of selectionID we have
 
 
     constructor(private sls: SearchListService) {
       // nothing to do here I think, but a SearchComponent
       // will have a SearchListService available to it
+    }
+
+    makeSelection(event) {
+      console.log(event.currentTarget.cells[1].childNodes[0].innerText);
+      console.log(event.currentTarget.cells[0].childNodes[0].innerText);
+      this.yourSelection = event.currentTarget.cells[2].childNodes[0].innerText;
+      this.selectionId = event.currentTarget.cells[1].childNodes[0].innerText;
+      this.selectionEntityType = event.currentTarget.cells[0].childNodes[0].innerText;
+      this.searchValue = '';
+
     }
 
     ngOnInit() {

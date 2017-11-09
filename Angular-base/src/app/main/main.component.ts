@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {LoginComponent} from '../login/login.component';
 import {LoginService} from '../services/login.service';
 
@@ -7,14 +7,17 @@ import {LoginService} from '../services/login.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit {
- 
+export class MainComponent {
+
   public userDetails;
+  public Fname = localStorage.getItem('Fname');
+  public Lname = localStorage.getItem('Lname');
+  public Title = localStorage.getItem('Title');
 
-  constructor(private loginService: LoginService) { }
+  // constructor(private loginService: LoginService) { }
 
-  public ngOnInit() {
-    this.userDetails = this.loginService.userDetails;
-  }
+  // public ngOnInit() {
+  //   this.userDetails = this.loginService.userDetails;
+  // }
 
 }
