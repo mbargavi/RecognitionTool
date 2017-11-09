@@ -90,12 +90,12 @@ public class DAOUtilities implements ServletContextAware {
 //		return redemptionDaoImpl;
 //	}
 
-	public static synchronized EmployeeCreditDao getEmployeeCreditDao() {
-		if (employeeCreditDaoImpl == null) {
-			employeeCreditDaoImpl = new EmployeeCreditDaoImpl();
-		}
-		return employeeCreditDaoImpl;
-	}
+//	public static synchronized EmployeeCreditDao getEmployeeCreditDao() {
+//		if (employeeCreditDaoImpl == null) {
+//			employeeCreditDaoImpl = new EmployeeCreditDaoImpl();
+//		}
+//		return employeeCreditDaoImpl;
+//	}
 
 	public static synchronized TeamCreditDao getTeamCreditDao() {
 		if (teamCreditDaoImpl == null) {

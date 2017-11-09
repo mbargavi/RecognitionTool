@@ -77,5 +77,10 @@ public class JDBCConfig implements ServletContextAware {
 	public RedemptionDao getRedemptionDao() {
 		return new RedemptionDaoImpl(getDataSource());
 	}
+	
+	@Bean
+	public EmployeeCreditDao getEmployeeDao() {
+		return new EmployeeCreditDaoImpl(getDataSource());
+	}
 
 }
