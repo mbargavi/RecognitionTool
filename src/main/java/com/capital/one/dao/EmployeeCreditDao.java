@@ -8,7 +8,7 @@ public interface EmployeeCreditDao {
 	 * @param credTypeId
 	 * @return
 	 */
-	int retrieveEmpCreditToGiveBalance(int empId, int credTypeId);
+	int retrieveEmpCreditToGiveBalance(int empId);
 	
 	/***
 	 * Once an employee recognition is made, this needs to be called with the amount of credits given to decrease the credits to give balance.
