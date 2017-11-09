@@ -34,32 +34,34 @@
     <header>
       <div class="container">
           <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-2">
+                  <!--<input type="file" class="img-circle btn-circle" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" />-->
                   <img class="img-circle btn-circle" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" />
               </div>
-              <div class="col-md-4">
-                  <h1>[Title]</h1>
-              </div>
-              <div class="col-md-4">
-                  <h1>{{userDetails.firstName}} {{userDetails.lastName}}</h1>
+              <div class = "col-md-10">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h1>Welcome {{Title}} {{Fname}} {{Lname}}!</h1>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="font-italic text-center">Who will you appreciate today?</h1>
+                    </div>
+                </div>
               </div>
           </div>
+          <br>
      </div>
    </header>
    <div class="container">
           <div class="row">
               <div class="col-md-6">
-                  <div class="container">
+                  <div class="container sub-container">
                       <div class="row">
-                          <div class="col-md-11">
+                          <div class="col-md-12">
                                 <app-search></app-search>
-                          </div>
-                          <div class="col-md-1">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Copy My Manager
-                                    </label>
-                                </div>
                           </div>
                       </div>
                       <div class="row">
@@ -85,24 +87,24 @@
                                             <input type="checkbox">
                                       </div>
                                   </div>
-                                  <div class="row">
+                                  <div class="row" style="font-size:10px">
                                       <div class="col-md-2">
-                                            <label>Competency</label>
+                                            <label>Communication</label>
                                       </div>
                                       <div class="col-md-2">
-                                            <label>Competency</label>
+                                            <label>Customer Focus</label>
                                       </div>
                                       <div class="col-md-2">
-                                            <label>Competency</label>
+                                            <label>Judgment</label>
                                       </div>
                                       <div class="col-md-2">
-                                            <label>Competency</label>
+                                            <label>Job Specific Skills</label>
                                       </div>
                                       <div class="col-md-2">
-                                            <label>Competency</label>
+                                            <label>Lives the Values</label>
                                       </div>
                                       <div class="col-md-2">
-                                            <label>Competency</label>
+                                            <label>Teamwork</label>
                                       </div>
                                   </div>
                               </div> <!--end competency container-->
@@ -119,49 +121,75 @@
                   </div> <!--end md-6 container-->
               </div><!--end md6-->
               <div class="col-md-3">
-                  <div class="container">
+                  <div class="container sub-container">
                       <div class="row">
-                          <div class="col-md-12">
-                                <button type="button" class="btn btn-primary btn-circle btn-lg">Current To Give</button>
+                            <div class="col-md-1"></div>
+                          <div class="col-md-10">
+                                <button type="button" class="btn btn-primary round-button btn-lg">Current<br>To Give<br><h1>25</h1></button>
                           </div>
+                          <div class="col-md-1"></div>
                       </div>
+                      <br>
                       <div class="row">
-                            <div class="col-md-12">
-                                  <button type="button" class="btn btn-primary btn-circle btn-lg">Current Earned</button>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                  <button type="button" class="btn btn-primary round-button btn-lg">Current<br>To Spend<br><h1>25</h1></button>
                             </div>
+                            <div class="col-md-1"></div>
                       </div>
                   </div><!--end current year button container -->
               </div> <!--end m3 -->
               <div class="col-md-3">
-                <div class="container">
+                <div class="container sub-container">
                     <div class="row">
-                        <div class="col-md-12">
-                                <button type="button" class="btn btn-primary btn-circle btn-lg" routerLink="/history">Historical Given</button>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                                <button type="button" class="btn btn-primary round-button btn-lg" routerLink="/history">Historical<br>Given<br><h1>25</h1></button>
                         </div>
+                        <div class="col-md-1"></div>
                     </div>
+                    <br>
                     <div class="row">
-                            <div class="col-md-12">
-                                <button type="button" class="btn btn-primary btn-circle btn-lg" routerLink="/history">Historical Earned</button>
+                        <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <button type="button" class="btn btn-primary round-button btn-lg" routerLink="/history">Historical<br>Earned<br><h1>25</h1></button>
                             </div>
+                        <div class="col-md-1"></div>
                     </div>
                 </div><!--end cumulative button container -->
               </div> <!-- end m3 -->
           </div> <!--end row-->
+          <br>
           <div class = "row">
               <div class="col-md-3">
-                <div class="form-group">
+                <div class="form-group vbottom">
                     <label>Additional Feedback to Nominee's Manager</label>
                     <textarea class="form-control" placeholder="Additional Feedback"></textarea>
                 </div>
               </div>
               <div class="col-md-3">
+                  <br>
+                  <br>
+                  <br>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Copy My Manager
+                    </label>
+                </div>
+                <div>
                     <button class="btn btn-primary">Give Recognition</button>
+                </div>
+              </div>
+              <div class="col-md-3">
+                  <br>
+                  <br>
+                  <br>
+                    <div class="container" style="padding:30px;">
+                         <button class="btn btn-success align-center float-bottom" routerLink="/redeem">Redeem My Credits</button>
+                    </div>
               </div>
               <div class="col-md-3">
                     <span></span>
-              </div>
-              <div class="col-md-3">
-                    <button class="btn btn-success" routerLink="/redeem">Redeem My Credits</button>
               </div>
           </div><!--end last row-->
       </div><!--end final conatainer -->

@@ -23,8 +23,11 @@ export class LoginService {
     this.getConnection().subscribe((resp) => {
       if ((resp.status === 200 && this.userDetails === undefined)) {
         this.userDetails = resp.json();
+        localStorage.setItem('Fname', this.userDetails.firstName);
+        localStorage.setItem('Lname', this.userDetails.lastName);
+        localStorage.setItem('Title', this.userDetails.title.titleName);
         this.router.navigate(['main']);
-        console.log(this.userDetails); }}, 
+        console.log(this.userDetails); }},
         (error) => {
            if (error.status === 400) {
               this.message = 'Those credentials were invalid!';
