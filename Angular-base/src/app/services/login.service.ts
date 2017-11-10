@@ -21,7 +21,7 @@ export class LoginService {
   fetch(Params): void {
     this.myParams = Params;
     this.getConnection().subscribe((resp) => {
-      if ((resp.status === 200 && this.userDetails === undefined)) {
+      if ((resp.status === 200 )) {
         this.userDetails = resp.json();
         localStorage.setItem('Fname', this.userDetails.firstName);
         localStorage.setItem('Lname', this.userDetails.lastName);

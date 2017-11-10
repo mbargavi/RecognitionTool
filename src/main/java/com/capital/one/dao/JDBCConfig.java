@@ -15,6 +15,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.web.context.ServletContextAware;
 
+import com.capital.one.controller.SPAController;
+
 @Configuration
 public class JDBCConfig implements ServletContextAware {
 
@@ -72,6 +74,7 @@ public class JDBCConfig implements ServletContextAware {
 		JDBCConfig.context = servletContext;
 		
 	}
+	
 	
 	@Bean
 	public RedemptionDao getRedemptionDao() {
