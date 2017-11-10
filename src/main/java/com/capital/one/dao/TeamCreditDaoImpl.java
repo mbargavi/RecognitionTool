@@ -1,10 +1,18 @@
 package com.capital.one.dao;
 
-import org.springframework.stereotype.Repository;
+import javax.sql.DataSource;
 
-@Repository
+import org.springframework.jdbc.core.JdbcTemplate;
+
+
 public class TeamCreditDaoImpl implements TeamCreditDao {
-
+	
+    private JdbcTemplate jdbcTemplate;
+	
+	public TeamCreditDaoImpl(DataSource datasource) {
+		System.out.println("Test");
+		jdbcTemplate = new JdbcTemplate(datasource);
+	}
 	@Override
 	public int retrieveTeamCreditEarnedBalance(int empId, int credTypeId) {
 		// TODO Auto-generated method stub
@@ -12,9 +20,16 @@ public class TeamCreditDaoImpl implements TeamCreditDao {
 	}
 
 	@Override
-	public void updateTeamCreditsEarnedBalance(int teamId, int credTypeId, int credAmount) {
-		// TODO Auto-generated method stub
+	public void updateTeamCreditsEarnedBalance(int teamId, int creditId) {
 		
-	}
+	if(creditId==1){
+			jdbcTemplate.update(
+					"update team_credit set credit_earned_balance = credit_earned_balance+1 where team_id =? AND credit_id=? ",
+					teamId, creditId);}
+		else {
+			jdbcTemplate.update(
+					"update team_credit set credit_earned_balance = credit_earned_balance+5 where team_id=? AND credit_id=? ",
+					teamId, creditId);}
+		}
 
 }

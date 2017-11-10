@@ -16,6 +16,8 @@ public class Recognition {
 	private int creditAmount;
 	private int creditTypeId;
 	private LocalDate date;
+	private String nominee;
+	private int nomineeId;
 	
 	@Autowired
 	private Credit credit;
@@ -92,6 +94,18 @@ public class Recognition {
 	}
 	public void setTeamNominee(Team teamNominee) {
 		this.teamNominee = teamNominee;
+	}
+	public int getNomineeId() {
+		return nomineeId;
+	}
+	public void setNomineeId(int nomineeId) {
+		this.nomineeId = nomineeId;
+	}
+	public String getNominee() {
+		return nominee;
+	}
+	public void setNominee(String nominee) {
+		this.nominee = nominee;
 	}
 	@Override
 	public int hashCode() {
