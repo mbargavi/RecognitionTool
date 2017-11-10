@@ -19,6 +19,7 @@ import {appRoutes} from './routes';
 import {LoginService} from './services/login.service';
 import {SearchListService} from './services/search_list.service';
 import {CreditsService} from './services/credits.service';
+import {HistMetricsService} from './services/histmetrics.service';
 
 
 
@@ -45,6 +46,7 @@ import {CreditsService} from './services/credits.service';
     LoginService,
     LoginComponent,
     CreditsService,
+    HistMetricsService,
    ],
   bootstrap: [AppComponent]
 })

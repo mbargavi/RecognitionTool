@@ -26,6 +26,7 @@ export class LoginService {
         localStorage.setItem('Fname', this.userDetails.firstName);
         localStorage.setItem('Lname', this.userDetails.lastName);
         localStorage.setItem('Title', this.userDetails.title.titleName);
+        localStorage.setItem('empId', this.userDetails.employeeId);
         this.router.navigate(['main']);
         console.log(this.userDetails); }},
         (error) => {
