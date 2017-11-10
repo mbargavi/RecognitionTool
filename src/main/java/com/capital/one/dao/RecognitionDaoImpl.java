@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.RootLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -20,6 +22,7 @@ public class RecognitionDaoImpl implements RecognitionDao{
 //	JDBCConfig con;
 	
 	private JdbcTemplate jdbcTemplate;
+	Logger log = RootLogger.getLogger("RecognitionDaoImpl");
 	
 //	public RecognitionDaoImpl() {
 //		super();
@@ -105,6 +108,38 @@ public class RecognitionDaoImpl implements RecognitionDao{
 	}, empId, teamId);
 
 	return listRecog;
+	}
+
+	@Override
+	public int getTotalHistoricalGiven(int empId) {
+		String sql = ("SELECT SUM(credit_amount) FROM recognition WHERE emp_nominator_id="+ empId + ";");
+		int totalGiven;
+		try {
+			log.debug("Getting Ready to make SQL cal for totalGiven");
+			totalGiven = jdbcTemplate.queryForObject(sql,Integer.class);
+			log.debug("totalGiven = " + totalGiven);
+		}
+		catch (Exception e) {
+			totalGiven = 0;
+		}
+		return totalGiven;
+	}
+
+	@Override
+	public int getTotalHistoricalEarned(int empId) {
+		String sql = ("SELECT SUM(credit_amount) FROM recognition WHERE emp_nominee_id="+ empId + ";");
+		int totalEarned;
+		
+		try {
+			log.debug("Getting Ready to make SQL cal for totalEarned");
+			totalEarned = jdbcTemplate.queryForObject(sql,Integer.class);
+			log.debug("totalEarned = " + totalEarned);
+		}
+		catch (Exception e) {
+			totalEarned = 0;
+		}
+		
+		return totalEarned;
 	}
 
 

@@ -28,5 +28,9 @@ public interface RecognitionDao {
 
 
 	List<Recognition> getHistoricalEarned(int empId, int teamId);
+	
+	int getTotalHistoricalGiven(int empId);
+	
+	int getTotalHistoricalEarned(int empId);
 
 }
