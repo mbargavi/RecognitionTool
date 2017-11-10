@@ -36,29 +36,29 @@ public class SPAController {
 		System.out.println("Got to getSPA() method");
 		
 		// NOTE: Trying to test DAOUtilities connection to prevent future latency
-		try {
-			con = DAOUtilities.getConnection();
-			String sql1 = "SELECT firstname FROM employee WHERE employee_id=1;";
-			
-			Statement stmt = con.createStatement();
-
-
-			ResultSet rs = stmt.executeQuery(sql1);
-
-			rs.next();
-			String nameEmpOne = rs.getString("firstname");
-			log.info("DAOUtilities says: Employee Name of Employee One is " + nameEmpOne);
-			
-			System.out.println("Database product name = " + con.getMetaData().getDatabaseProductName());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			con = DAOUtilities.getConnection();
+//			String sql1 = "SELECT firstname FROM employee WHERE employee_id=1;";
+//			
+//			Statement stmt = con.createStatement();
+//
+//
+//			ResultSet rs = stmt.executeQuery(sql1);
+//
+//			rs.next();
+//			String nameEmpOne = rs.getString("firstname");
+//			log.info("DAOUtilities says: Employee Name of Employee One is " + nameEmpOne);
+//			
+//			System.out.println("Database product name = " + con.getMetaData().getDatabaseProductName());
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		// NOTE: Trying to test JDBCConfig connection to prevent future latency
 		
-			int creditTotal = employeeCreditDaoImpl.retrieveEmpCreditEarnedBalance(1);
-			log.info("JDBCConfig says: Total Credits of Employee One is " + creditTotal);
+//			int creditTotal = employeeCreditDaoImpl.retrieveEmpCreditEarnedBalance(1);
+//			log.info("JDBCConfig says: Total Credits of Employee One is " + creditTotal);
 		
 		
 		
