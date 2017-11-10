@@ -34,11 +34,32 @@ public class RecognitionDaoImpl implements RecognitionDao{
 		
 	}
 
+	private static java.sql.Date getCurrentDate() {
+		java.util.Date today = new java.util.Date();
+		return new java.sql.Date(today.getTime());
+	}
 	@Override
-	public void insertRecognitionRecord(String TEAMorEMPLOYEE, int nominatorId, int nomineeId, int creditTypeId,
-			int creditAmount) {
-		// TODO Auto-generated method stub
-		
+	public void insertRecognitionRecord(int creditTypeId, int nominatorId, int nomineeId, String nominee) {
+
+		int increment;
+		if (creditTypeId == 1) {
+			increment = 1;
+		} else {
+			increment = 5;
+		}
+		if (nominee == "Employee") {
+
+			jdbcTemplate.update(
+					"INSERT INTO recognition(credit_amount, recognition_date, credit_type_id,emp_nominator_id,emp_nominee_id ) "
+							+ "VALUES(?,?,?,?,?)",
+					increment, getCurrentDate(), creditTypeId, nominatorId, nomineeId);
+		} else {
+
+			jdbcTemplate.update(
+					"INSERT INTO recognition(credit_amount, recognition_date, credit_type_id,emp_nominator_id,team_nominee_id ) "
+							+ "VALUES(?,?,?,?,?)",
+					increment, getCurrentDate(), creditTypeId, nominatorId, nomineeId);
+		}
 	}
 
 	@Override

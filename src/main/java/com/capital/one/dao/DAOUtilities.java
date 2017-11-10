@@ -97,12 +97,12 @@ public class DAOUtilities implements ServletContextAware {
 //		return employeeCreditDaoImpl;
 //	}
 
-	public static synchronized TeamCreditDao getTeamCreditDao() {
-		if (teamCreditDaoImpl == null) {
-			teamCreditDaoImpl = new TeamCreditDaoImpl();
-		}
-		return teamCreditDaoImpl;
-	}
+//	public static synchronized TeamCreditDao getTeamCreditDao() {
+//		if (teamCreditDaoImpl == null) {
+//			teamCreditDaoImpl = new TeamCreditDaoImpl();
+//		}
+//		return teamCreditDaoImpl;
+//	}
 
 	/***
 	 * This function is managing connections by returning the same connection for

@@ -15,8 +15,9 @@ public interface EmployeeCreditDao {
 	 * @param empId - Id of the employee making the recognition
 	 * @param credTypeId - the type of credit that is being given
 	 * @param credAmount - the amount of credits of said type that are being given.
+	 * @throws Exception 
 	 */
-	void updateEmpCreditsToGiveBalance(int empId, int credTypeId, int credAmount);
+	void updateEmpCreditsToGiveBalance(int empId, int credTypeId) throws Exception;
 	
 	/***
 	 * Pass in the Employer Id and the Credit Type Id to determine the Credit balance earned to spend on redemptions
@@ -32,6 +33,6 @@ public interface EmployeeCreditDao {
 	 * @param credTypeId - the type of credit that is being redeemed
 	 * @param credAmount - the amount of credits of said type that are being redeemed.
 	 */
-	void updateEmpCreditsEarnedBalance(int empId, int credTypeId, int credAmount);
+	void updateEmpCreditsEarnedBalance(int empId, int credTypeId);
 
 }

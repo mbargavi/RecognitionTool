@@ -15,7 +15,7 @@ public interface RecognitionDao {
 	 * @param creditTypeId - which type of credit is being given to the nominee (ex. normal Credits or CapitalOneBucks)
 	 * @param creditAmount - the amount of credits given to the nominee
 	 */
-	void insertRecognitionRecord(String TEAMorEMPLOYEE, int nominatorId, int nomineeId, int creditTypeId, int creditAmount);
+	void insertRecognitionRecord(int creditTypeId,int nominatorId, int nomineeId, String nominee);
 	
 	/***
 	 * This method will return the full Recognition List that can be used for Recognition History.  Once retrieved it can be filtered
