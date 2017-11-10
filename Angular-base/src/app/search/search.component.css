@@ -19,6 +19,10 @@
     box-sizing: content-box;
    }
 
+   .optional-border {
+    border:3px solid #e3f11f;
+   }
+
   .round-button {
     display:block;
     width:160px;
