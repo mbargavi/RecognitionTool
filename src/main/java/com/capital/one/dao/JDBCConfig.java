@@ -15,6 +15,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.web.context.ServletContextAware;
 
+import com.capital.one.controller.SPAController;
+
 @Configuration
 public class JDBCConfig implements ServletContextAware {
 
@@ -73,6 +75,7 @@ public class JDBCConfig implements ServletContextAware {
 		
 	}
 	
+	
 	@Bean
 	public RedemptionDao getRedemptionDao() {
 		return new RedemptionDaoImpl(getDataSource());
@@ -87,5 +90,10 @@ public class JDBCConfig implements ServletContextAware {
 	@Bean
 	public RecognitionDao getRecognitionDao() {
 		return new RecognitionDaoImpl(getDataSource());
+	}
+	
+	@Bean
+	public TeamCreditDao getTeamCreditDaoImpl() {
+		return new TeamCreditDaoImpl(getDataSource());
 	}
 }

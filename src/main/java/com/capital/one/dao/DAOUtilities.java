@@ -97,12 +97,12 @@ public class DAOUtilities implements ServletContextAware {
 //		return employeeCreditDaoImpl;
 //	}
 
-	public static synchronized TeamCreditDao getTeamCreditDao() {
-		if (teamCreditDaoImpl == null) {
-			teamCreditDaoImpl = new TeamCreditDaoImpl();
-		}
-		return teamCreditDaoImpl;
-	}
+//	public static synchronized TeamCreditDao getTeamCreditDao() {
+//		if (teamCreditDaoImpl == null) {
+//			teamCreditDaoImpl = new TeamCreditDaoImpl();
+//		}
+//		return teamCreditDaoImpl;
+//	}
 
 	/***
 	 * This function is managing connections by returning the same connection for
@@ -165,14 +165,14 @@ public class DAOUtilities implements ServletContextAware {
 			log.trace("getting first connection from data source");
 			connection = DriverManager.getConnection(connectionURL, connectionUsername, connectionPassword);
 			//connection = DriverManager.getConnection("jdbc:postgresql://postgres.c4upqzkkv1a8.us-east-1.rds.amazonaws.com:5432/postgres", "postgres", "postgres");
-			// connection = DriverManager.getConnection(connectionURL, dbProps);
+			//connection = DriverManager.getConnection(connectionURL, dbProps);
 			log.trace("retreived connection from data source");
 		}
 		if (connection.isClosed()) {
 			log.trace("Connection was closed: getting new connection from data source");
 			connection = DriverManager.getConnection(connectionURL, connectionUsername, connectionPassword);
 			//connection = DriverManager.getConnection("jdbc:postgresql://postgres.c4upqzkkv1a8.us-east-1.rds.amazonaws.com:5432/postgres", "postgres", "postgres");
-			// connection = DriverManager.getConnection(connectionURL, dbProps);
+			//connection = DriverManager.getConnection(connectionURL, dbProps);
 			log.trace("retreived connection from data source");
 		}
 		return connection;

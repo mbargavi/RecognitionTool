@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.capital.one.datamodelbeans.Employee;
+import com.capital.one.datamodelbeans.Title;
 
 
 @Repository
@@ -59,6 +60,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 					employee.setRoleId(prs.getInt("roleid"));
 					employee.setTeamId(prs.getInt("teamid"));
 					employee.setTitleId(prs.getInt("titleid"));
+					employee.setTitle(new Title());
+					employee.getTitle().setTitleId(prs.getInt("titleid"));
+					employee.getTitle().setTitleName(this.getEmployeeTitle(prs.getInt("titleid")));
 					
 					log.info("Finished getting an authenticated user...returning him");
 					

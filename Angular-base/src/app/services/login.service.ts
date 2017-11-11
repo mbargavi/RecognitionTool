@@ -21,14 +21,16 @@ export class LoginService {
   fetch(Params): void {
     this.myParams = Params;
     this.getConnection().subscribe((resp) => {
-      if ((resp.status === 200 && this.userDetails === undefined)) {
+      if ((resp.status === 200 )) {
         this.userDetails = resp.json();
         localStorage.setItem('Fname', this.userDetails.firstName);
         localStorage.setItem('Lname', this.userDetails.lastName);
-       // localStorage.setItem('Title', this.userDetails.title.titleName);
+        localStorage.setItem('Title', this.userDetails.title.titleName);
         localStorage.setItem('user', this.userDetails);
         localStorage.setItem('empId', this.userDetails.employeeId);
         localStorage.setItem('teamId', this.userDetails.teamId);
+        localStorage.setItem('Title', this.userDetails.title.titleName);
+        localStorage.setItem('empId', this.userDetails.employeeId);
         this.router.navigate(['main']);
         console.log(this.userDetails); }},
         (error) => {
