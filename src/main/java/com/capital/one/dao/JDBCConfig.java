@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.web.context.ServletContextAware;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.capital.one.controller.SPAController;
 
@@ -75,6 +76,13 @@ public class JDBCConfig implements ServletContextAware {
 		
 	}
 	
+	@Bean(name = "multipartResolver")
+	public CommonsMultipartResolver commonsMultipartResolver(){
+	    CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+	    commonsMultipartResolver.setDefaultEncoding("utf-8");
+	    commonsMultipartResolver.setMaxUploadSize(50000000);
+	    return commonsMultipartResolver;
+	}
 	
 	@Bean
 	public RedemptionDao getRedemptionDao() {

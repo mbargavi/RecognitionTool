@@ -20,6 +20,7 @@ import {LoginService} from './services/login.service';
 import {SearchListService} from './services/search_list.service';
 import {CreditsService} from './services/credits.service';
 import {HistMetricsService} from './services/histmetrics.service';
+import {ImageService} from './services/image.service';
 
 
 
@@ -47,6 +48,7 @@ import {HistMetricsService} from './services/histmetrics.service';
     LoginComponent,
     CreditsService,
     HistMetricsService,
+    ImageService,
    ],
   bootstrap: [AppComponent]
 })
