@@ -8,7 +8,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.capital.one.datamodelbeans.Award;
 import com.capital.one.datamodelbeans.Credit;
+import com.capital.one.datamodelbeans.EmployeeCredit;
 import com.capital.one.datamodelbeans.Redemption;
+import com.capital.one.datamodelbeans.TeamCredit;
 
 public interface RedemptionDao {
 	
@@ -34,6 +36,10 @@ public interface RedemptionDao {
 	
 	List<Credit> getCreditType();
 	
-	List<Award> getAwardsList();
+	List<Award> getAwardsList(int creditId);
+
+	List<EmployeeCredit> getempCredits(int empId);
+
+	List<TeamCredit> getteamCredits(int teamId);
 
 }
