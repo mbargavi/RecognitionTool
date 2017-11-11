@@ -57,7 +57,7 @@ public class EmployeeController {
 	       
         employee = loginService.authenticateUser(employee.getUserName(), employee.getPassword());
         if(employee==null) {
-	        	System.out.println("Setting Status code of 500");
+	        	System.out.println("Setting Status code of 400");
 	        	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }else {
         		return ResponseEntity.ok(employee);

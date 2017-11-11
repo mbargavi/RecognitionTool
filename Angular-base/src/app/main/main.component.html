@@ -22,22 +22,33 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="#">Logout</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
+    <div id="spinner" class="spinner">
+        <img src="images/spinner.gif"/>
+    </div>
+
     <!-- Header -->
-    <header>
+    <!--<header> -->
       <div class="container">
           <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-1"></div>
+              <div class="col-md-2 grow" >
                   <!--<input type="file" class="img-circle btn-circle" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" />-->
-                  <img class="img-circle btn-circle" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" />
+                  <!-- <img class="img-circle btn-circle" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" /> -->
+                  <img id="profilepic" class="img-circle btn-profile" [src]="profileURL" (mouseover)="inputPic()"/>
               </div>
-              <div class = "col-md-10">
+              <div *ngIf="picShowInput" class="col-md-2">
+                  <input id="selectFile" type="file" (change)="fileSelected=true"/>
+                  <br><br>
+                  <input type="button" class="btn btn-sml btn-default" value="submit" (click)="uploadImage()"/>
+                </div>
+              <div class = "col-md-7">
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <h1>Welcome {{Title}} {{Fname}} {{Lname}}!</h1>
@@ -53,11 +64,11 @@
           </div>
           <br>
      </div>
-   </header>
+   <!-- </header> -->
    <div class="container">
           <div class="row">
               <div class="col-md-6">
-                  <div class="container sub-container">
+                  <div class="container sub-container left-top">
                       <div class="row">
                           <div class="col-md-12">
                                 <app-search></app-search>
@@ -113,14 +124,14 @@
                             <div class="col-md-12">
                                   <div class="form-group">
                                       <label>Feedback for Nominee</label>
-                                      <textarea class="form-control" style="height:138px" placeholder="Recognition Feedback"></textarea>
+                                      <textarea class="form-control" style="height:168px" placeholder="Recognition Feedback"></textarea>
                                   </div>
                             </div>
                       </div>
                   </div> <!--end md-6 container-->
               </div><!--end md6-->
               <div class="col-md-3">
-                  <div class="container sub-container">
+                  <div class="container sub-container right">
                       <div class="row">
                             <div class="col-md-2"></div>
                           <div class="col-md-8">
@@ -139,7 +150,7 @@
                   </div><!--end current year button container -->
               </div> <!--end m3 -->
               <div class="col-md-3">
-                <div class="container sub-container">
+                <div class="container sub-container right">
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-8">
@@ -161,7 +172,7 @@
           
           <div class = "row">
               <div class="col-md-6">
-                    <div class="container sub-container">
+                    <div class="container sub-container left-bottom">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -213,4 +224,25 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!-- <script src="js/bootstrap.min.js"></script> -->
   </body>
+
+    <!-- Show Pic Modal -->
+        <div class="modal fade" id="show-pic" role="dialog">
+            <div class="modal-dialog">
+            
+                <!-- Modal content-->
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Upload Image</h3>
+                </div>
+                <div class="modal-body" id="img-select">
+                    <input type="file" >
+                </div>
+     		    <div class="modal-footer">
+                    <input type="button" class="btn btn-block btn-primary" (click)="uploadImage()" value="Save"/>
+                </div>
+                </div>
+                
+            </div>
+            </div>
 </html>

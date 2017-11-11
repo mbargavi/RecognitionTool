@@ -60,7 +60,7 @@ public class SPAController {
 //			int creditTotal = employeeCreditDaoImpl.retrieveEmpCreditEarnedBalance(1);
 //			log.info("JDBCConfig says: Total Credits of Employee One is " + creditTotal);
 		
-		
+		log.debug(System.getProperty("catalina.home")); //testing what this path is for other uses
 		
 		return "forward:/static/dist/index.html";
 	}
