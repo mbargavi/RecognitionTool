@@ -184,13 +184,13 @@
                                     <textarea class="form-control" style="height:79px" placeholder="Additional Feedback"></textarea>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6"  (change)="onSelectionChange($event)">
                                 <div style="border:1px solid #869dce;">
                                     <div class="radio">
-                                        <label style="padding-left:7px;"><input type="radio" name="recognitionType"> 1 Credit</label>
+                                        <label style="padding-left:7px;"><input type="radio" value=1 name="recognitionType"> 1 Credit</label>
                                     </div>
                                     <div class="radio">
-                                        <label style="padding-left:7px;"><input type="radio" name="recognitionType"> 5 CapOne Bucks</label>
+                                        <label style="padding-left:7px;"><input type="radio" value=2 name="recognitionType"> 5 CapOne Bucks</label>
                                     </div>
                                     <!-- <div class="radio disabled">
                                         <label><input type="radio" name="optradio" disabled>Option 3</label>
@@ -202,8 +202,9 @@
                                     </label>
                                 </div>
                                 <div>
-                                    <button class="btn btn-primary btn-block">Give Recognition</button>
-                                </div>
+                                  <input type="button" class="btn btn-block btn-primary"  (click)="addRecognition()" value="Give Recognition"/>
+                                  <div *ngIf="this.addRecognitionStatus == true"> Failed </div>
+                                  </div>
                             </div>
                         </div> <!-- end of sub-container row -->
                     </div> <!-- end of sub-container -->

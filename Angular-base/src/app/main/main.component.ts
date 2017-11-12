@@ -1,16 +1,21 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, Inject, OnInit} from '@angular/core';
 import {LoginComponent} from '../login/login.component';
 import {LoginService} from '../services/login.service';
 import {CreditsService} from '../services/credits.service';
 import {HistMetricsService} from '../services/histmetrics.service';
 import {ImageService} from '../services/image.service';
 import {DomSanitizer} from '@angular/platform-browser';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import {Headers} from '@angular/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
+
 export class MainComponent implements OnInit {
 
   public userDetails;
@@ -23,16 +28,27 @@ export class MainComponent implements OnInit {
   public histGiven;
   public histEarned;
   public picShowInput = false;
+
+  public addrecog = false;
+  public baseURL= 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
+  public profileURL;
+  // public profileURL = 'http://localhost:8080/RecognitionTool/retrieveImage/1';
+
   // public baseURL= 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
   public baseURL = 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
   public profileURL = this.sanitizer.bypassSecurityTrustUrl(this.baseURL);
+
   public message= '';
   public fileSelected = false;
+  public errorMessage;
+  public addRecognitionStatus = false;
 
    constructor(private loginService: LoginService,
                private creditsService: CreditsService,
                private hms: HistMetricsService,
                private is: ImageService,
+               @Inject(Http) private http: Http,
+               private router: Router,
                private sanitizer: DomSanitizer) {
 
                }
@@ -69,7 +85,59 @@ export class MainComponent implements OnInit {
 
   }
 
+  private dataLoaded(data: any): void {
+    // this.elem.querySelector('#spinner').setAttribute('style', 'visibility:hidden;'); // need to add spinner element first
+  }
 
+  private onSelectionChange(event) {
+    localStorage.setItem('creditsTypeId', event.srcElement.value);
+    console.log(localStorage.getItem('creditsTypeId'));
+  }
+
+  addRecognition() {
+    this.getAddRecognitionResponse();
+  }
+
+  addRecognitionObservable(): Observable<any> {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const body = {	'empNominatorId': this.loginService.userDetails.employeeId,
+                    'nomineeId': localStorage.getItem('nomineeId'),
+                    'creditTypeId': localStorage.getItem('creditsTypeId'),
+                    'nominee': localStorage.getItem('nominee')};
+    return this.http.post('http://localhost:8080/RecognitionTool/addRecognition', body, {headers: headers} );
+  }
+
+  getAddRecognitionResponse(): void {
+    this.addRecognitionObservable().subscribe((resp) => {
+      if ((resp.status === 200)) {
+        console.log('here in success');
+        this.router.navigate(['success']);
+      }if (resp.status === 503) {
+        console.log('here in failed');
+        this.addRecognitionStatus = true;
+        this.message = 'Failed';
+      }
+    });
+  }
+
+
+  // if ((resp.status === 200 )) {
+  //   this.userDetails = resp.json();
+  //   localStorage.setItem('Fname', this.userDetails.firstName);
+  //   localStorage.setItem('Lname', this.userDetails.lastName);
+  //   localStorage.setItem('Title', this.userDetails.title.titleName);
+  //   localStorage.setItem('user', this.userDetails);
+  //   localStorage.setItem('empId', this.userDetails.employeeId);
+  //   localStorage.setItem('teamId', this.userDetails.teamId);
+  //   localStorage.setItem('Title', this.userDetails.title.titleName);
+  //   localStorage.setItem('empId', this.userDetails.employeeId);
+  //   this.router.navigate(['main']);
+  //   console.log(this.userDetails); }},
+  //   (error) => {
+  //      if (error.status === 400) {
+  //         this.message = 'Those credentials were invalid!';
+  //      }
   getValues(): void {
     this.creditsService.getCreditsTogive().subscribe((resp) => {
         this.creditsToGive = resp.json();
