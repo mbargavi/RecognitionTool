@@ -26,16 +26,16 @@ import { HttpParams, HttpClient } from '@angular/common/http';
     public message = this.loginservice.message;
     // public ENVIRONMENT = 'TEST'; // CHANGE TO 'PROD' before "npm run build" to build production "dist" folder
     public ENVIRONMENT = 'PROD';  // CHANGE TO 'TEST' before testing on 4200 or localhost
-    public serverURL;
+
 
     loginUser(e) {
       e.preventDefault();
       if (this.ENVIRONMENT === 'TEST') {
-        localStorage.setItem('serverURL', 'http://localhost:8080/');
+        localStorage.setItem('serverURL', 'http://localhost:8080/RecognitionTool/');
       } else {
-        localStorage.setItem('serverURL', 'http://ec2-54-159-198-200.compute-1.amazonaws.com:8080/');
+        localStorage.setItem('serverURL', 'http://ec2-54-159-198-200.compute-1.amazonaws.com:8080/RecognitionTool/page/');
       }
-      console.log('SERVER URL WE AR USING IS : ' + localStorage.getItem('serverURL'));
+      console.log('SERVER URL WE ARE USING IS : ' + localStorage.getItem('serverURL'));
       const username = e.target.elements[0].value;
       const password = e.target.elements[1].value;
       this.myParams.set('UserId', username);

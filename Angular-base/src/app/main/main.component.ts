@@ -28,7 +28,7 @@ export class MainComponent implements OnInit {
   public histGiven;
   public histEarned;
   public picShowInput = false;
-  public serverURL = localStorage.getItem('serverURL');
+
 
   public addrecog = false;
   public baseURL= 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
@@ -102,7 +102,7 @@ export class MainComponent implements OnInit {
                     'nomineeId': localStorage.getItem('nomineeId'),
                     'creditTypeId': localStorage.getItem('creditsTypeId'),
                     'nominee': localStorage.getItem('nominee')};
-    return this.http.post(this.serverURL + 'RecognitionTool/addRecognition', body, {headers: headers} );
+    return this.http.post(localStorage.getItem('serverURL') + 'addRecognition', body, {headers: headers} );
   }
 
   getAddRecognitionResponse(): void {
