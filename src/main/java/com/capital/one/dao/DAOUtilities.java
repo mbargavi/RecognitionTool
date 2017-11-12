@@ -38,6 +38,7 @@ public class DAOUtilities implements ServletContextAware {
 	private static EmployeeCreditDaoImpl employeeCreditDaoImpl;
 	private static TeamCreditDaoImpl teamCreditDaoImpl;
 	private static RedemptionDaoImpl redemptionDaoImpl;
+	private static ImageDaoImpl imageDaoImpl;
 
 	private static Connection connection;
 	private static Properties dbProps = new Properties();
@@ -66,6 +67,13 @@ public class DAOUtilities implements ServletContextAware {
 			employeeDaoImpl = new EmployeeDaoImpl();
 		}
 		return employeeDaoImpl;
+	}
+	
+	public static synchronized ImageDao getImageDao() {
+		if (imageDaoImpl == null) {
+			imageDaoImpl = new ImageDaoImpl();
+		}
+		return imageDaoImpl;
 	}
 
 	public static synchronized AwardDao getAwardDao() {

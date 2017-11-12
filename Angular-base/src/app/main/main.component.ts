@@ -23,9 +23,9 @@ export class MainComponent implements OnInit {
   public histGiven;
   public histEarned;
   public picShowInput = false;
-  public baseURL= 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
-  public profileURL;
-  // public profileURL = 'http://localhost:8080/RecognitionTool/retrieveImage/1';
+  // public baseURL= 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
+  public baseURL = 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
+  public profileURL = this.sanitizer.bypassSecurityTrustUrl(this.baseURL);
   public message= '';
   public fileSelected = false;
 
@@ -34,7 +34,7 @@ export class MainComponent implements OnInit {
                private hms: HistMetricsService,
                private is: ImageService,
                private sanitizer: DomSanitizer) {
-                  this.profileURL = this.sanitizer.bypassSecurityTrustUrl(this.baseURL);
+
                }
 
   public ngOnInit() {
@@ -43,15 +43,14 @@ export class MainComponent implements OnInit {
   }
 
   inputPic() {
-    // review modal logic
     this.picShowInput = true;
 
   }
 
   uploadImage() {
+    // event.preventDefault();
     if (this.fileSelected) {
       this.picShowInput = false;
-      // this.elem.querySelector('#spinner').setAttribute('style', 'visibility:visible;'); // need to add spinner element first
       const files = (<HTMLInputElement>document.getElementById('selectFile')).files;
       const formData = new FormData();
       const file = files[0];
@@ -59,17 +58,15 @@ export class MainComponent implements OnInit {
       formData.append('file', file, file.name);
       formData.append('empId', this.loginService.userDetails.employeeId);
       this.is.uploadImageObservable(formData).subscribe(resp => {
-                                              this.dataLoaded(resp);
-                                              console.log(resp.json);
-                                              const sanitizedUrl = this.sanitizer.bypassSecurityTrustUrl(resp);
-                                              this.profileURL = sanitizedUrl;
+                                              this.getImage();
+                                            },
+                                            (error) => {
+                                                 this.message = 'Upload failed! Revert to last pic';
+                                                 console.log(this.message);
+                                                 this.getImage();
                                             });
     }
 
-  }
-
-  private dataLoaded(data: any): void {
-    // this.elem.querySelector('#spinner').setAttribute('style', 'visibility:hidden;'); // need to add spinner element first
   }
 
 
@@ -92,18 +89,29 @@ export class MainComponent implements OnInit {
       this.histGiven = this.metrics[0];
       this.histEarned = this.metrics[1];
     });
-    // BELOW STILL NOT WORKING...COMMENTING OUT SO I CAN PUSH WHAT I HAVE SO FAR
-    // this.is.retrieveObservable().subscribe((resp) => {
-    //   this.profileURL = this.sanitizer.bypassSecurityTrustUrl(resp);
-    // },
-    // (error) => {
-    //   if (error.status === 400) {
-    //      this.message = 'File retrieval failed! Probably no profile pic saved'; // not putting this message anywhere yet
-    //      this.profileURL = this.sanitizer.bypassSecurityTrustUrl(this.baseURL);
-    //   }
-    // });
+
+    this.getImage();
 
   }
 
+  getImage(): void {
+    this.is.retrieveObservable().subscribe((resp) => {
+      this.profileURL = this.sanitizer.bypassSecurityTrustUrl(resp.url);
+      console.log(resp.url);
+    },
+    (error) => {
+         this.message = 'File retrieval failed! Probably no profile pic saved';
+         console.log(this.message);
+         this.profileURL = this.sanitizer.bypassSecurityTrustUrl(this.baseURL);
+         // this.profileURL = this.baseURL;
+    });
+    console.log('Retrieval done...this is what we got: ' + this.profileURL);
+    // if (this.profileURL === undefined) {
+    //   console.log('Setting profileURL since it was undefined');
+    //   this.profileURL = this.sanitizer.bypassSecurityTrustUrl(this.baseURL);
+    //   // this.profileURL = 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
+    //   console.log(this.profileURL);
+    // }
+  }
 
 }

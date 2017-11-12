@@ -29,9 +29,9 @@
       </div>
     </nav>
 
-    <div id="spinner" class="spinner">
-        <img src="images/spinner.gif"/>
-    </div>
+    <!-- <div id="spinner" class="spinner">
+        <img/>
+    </div> -->
 
     <!-- Header -->
     <!--<header> -->
@@ -41,12 +41,16 @@
               <div class="col-md-2 grow" >
                   <!--<input type="file" class="img-circle btn-circle" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" />-->
                   <!-- <img class="img-circle btn-circle" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" /> -->
-                  <img id="profilepic" class="img-circle btn-profile" [src]="profileURL" (mouseover)="inputPic()"/>
+                  <object data="http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg'" type="img/jpg">
+                    <img id="profilepic" class="img-circle btn-profile" [src]="profileURL" (mouseover)="inputPic()"/>
+                  </object>
               </div>
               <div *ngIf="picShowInput" class="col-md-2">
                   <input id="selectFile" type="file" (change)="fileSelected=true"/>
                   <br><br>
-                  <input type="button" class="btn btn-sml btn-default" value="submit" (click)="uploadImage()"/>
+                  <input type="button" class="btn btn-sm btn-primary" value="submit" (click)="uploadImage()"/>
+                  <br><br>
+                  <input type="button" class="btn btn-sm btn-warning" value="cancel" (click)="picShowInput=false;"/>
                 </div>
               <div class = "col-md-7">
                 <div class="row">
