@@ -10,14 +10,15 @@ export class LoginService {
   public userDetails;
   public myParams = new URLSearchParams();
   public message = '';
-  public serverURL = localStorage.getItem('serverURL');
+
 
   constructor( @Inject(Http) private http: Http, private router: Router) {
 
   }
 
   getConnection(): Observable<any> {
-    return this.http.get(this.serverURL + 'RecognitionTool/login', {search: this.myParams});
+    console.log('serverURL is ' + localStorage.getItem('serverURL'));
+    return this.http.get(localStorage.getItem('serverURL') + 'login', {search: this.myParams});
   }
 
   fetch(Params): void {
