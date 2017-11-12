@@ -88,7 +88,7 @@ export class MainComponent implements OnInit {
     // this.elem.querySelector('#spinner').setAttribute('style', 'visibility:hidden;'); // need to add spinner element first
   }
 
-  private onSelectionChange(event) {
+  public onSelectionChange(event) {
     localStorage.setItem('creditsTypeId', event.srcElement.value);
     console.log(localStorage.getItem('creditsTypeId'));
   }
