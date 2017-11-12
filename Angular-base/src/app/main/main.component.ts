@@ -28,14 +28,12 @@ export class MainComponent implements OnInit {
   public histGiven;
   public histEarned;
   public picShowInput = false;
+  public serverURL = localStorage.getItem('serverURL');
 
   public addrecog = false;
   public baseURL= 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
   public profileURL;
-  // public profileURL = 'http://localhost:8080/RecognitionTool/retrieveImage/1';
 
-  // public baseURL= 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
-  //public profileURL = this.sanitizer.bypassSecurityTrustUrl(this.baseURL);
 
   public message= '';
   public fileSelected = false;
@@ -88,7 +86,7 @@ export class MainComponent implements OnInit {
     // this.elem.querySelector('#spinner').setAttribute('style', 'visibility:hidden;'); // need to add spinner element first
   }
 
-  private onSelectionChange(event) {
+  public onSelectionChange(event) {
     localStorage.setItem('creditsTypeId', event.srcElement.value);
     console.log(localStorage.getItem('creditsTypeId'));
   }
@@ -104,7 +102,7 @@ export class MainComponent implements OnInit {
                     'nomineeId': localStorage.getItem('nomineeId'),
                     'creditTypeId': localStorage.getItem('creditsTypeId'),
                     'nominee': localStorage.getItem('nominee')};
-    return this.http.post('http://localhost:8080/RecognitionTool/addRecognition', body, {headers: headers} );
+    return this.http.post(this.serverURL + 'RecognitionTool/addRecognition', body, {headers: headers} );
   }
 
   getAddRecognitionResponse(): void {

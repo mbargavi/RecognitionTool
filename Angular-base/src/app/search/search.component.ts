@@ -20,6 +20,7 @@ import { SearchListService } from '../services/search_list.service';
     public selectionEntityType = ''; // this will be a 'Team' or an 'Employee' so we know which type of selectionID we have
 
 
+
     constructor(private sls: SearchListService) {
       // nothing to do here I think, but a SearchComponent
       // will have a SearchListService available to it

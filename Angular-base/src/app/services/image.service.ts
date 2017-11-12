@@ -5,19 +5,20 @@ import { Http } from '@angular/http';
 @Injectable()
 export class ImageService {
   // public reusableField = 5;
+  public serverURL = localStorage.getItem('serverURL');
 
   constructor( @Inject(Http) private http: Http) {
 
   }
 
   uploadImageObservable(formdata: any): Observable<any> {
-      const url = 'http://localhost:8080/RecognitionTool/uploadImage';
-    return this.http.post('http://localhost:8080/RecognitionTool/uploadImage', formdata);
+      const url = (this.serverURL + 'RecognitionTool/uploadImage');
+    return this.http.post(url, formdata);
   }
 
 
   retrieveObservable(): Observable<any> {
-    return this.http.get('http://localhost:8080/RecognitionTool/retrieveImage/' +
+    return this.http.get(this.serverURL + 'RecognitionTool/retrieveImage/' +
     localStorage.getItem('empId'));
   }
 }

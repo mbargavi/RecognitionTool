@@ -10,12 +10,14 @@ export class LoginService {
   public userDetails;
   public myParams = new URLSearchParams();
   public message = '';
+  public serverURL = localStorage.getItem('serverURL');
+
   constructor( @Inject(Http) private http: Http, private router: Router) {
 
   }
 
   getConnection(): Observable<any> {
-    return this.http.get('http://localhost:8080/RecognitionTool/login', {search: this.myParams});
+    return this.http.get(this.serverURL + 'RecognitionTool/login', {search: this.myParams});
   }
 
   fetch(Params): void {
@@ -31,8 +33,9 @@ export class LoginService {
         localStorage.setItem('teamId', this.userDetails.teamId);
         localStorage.setItem('Title', this.userDetails.title.titleName);
         localStorage.setItem('empId', this.userDetails.employeeId);
+        console.log(this.userDetails);
         this.router.navigate(['main']);
-        console.log(this.userDetails); }},
+         }},
         (error) => {
            if (error.status === 400) {
               this.message = 'Those credentials were invalid!';

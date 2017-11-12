@@ -16,6 +16,7 @@ import {LoginService} from '../services/login.service';
     public HistoricalGiven;
     public HistoricalEarned;
     public employeeId = new URLSearchParams();
+    public serverURL = localStorage.getItem('serverURL');
 
     constructor(private http: Http, private loginservice: LoginService) {}
     redeemCredits(e) {
@@ -23,7 +24,7 @@ import {LoginService} from '../services/login.service';
     }
     public ngOnInit() {
       this.employeeId = this.loginservice.userDetails.employeeId;
-      this.http.get('http://localhost:8080/RecognitionTool/HistoricalGiven/' + this.employeeId ).subscribe((resp) => {
+      this.http.get(this.serverURL + 'RecognitionTool/HistoricalGiven/' + this.employeeId ).subscribe((resp) => {
       this.HistoricalGiven = resp.json();
       console.log(this.HistoricalGiven);
       });
