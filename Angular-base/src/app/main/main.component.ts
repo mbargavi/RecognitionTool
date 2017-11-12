@@ -35,8 +35,7 @@ export class MainComponent implements OnInit {
   // public profileURL = 'http://localhost:8080/RecognitionTool/retrieveImage/1';
 
   // public baseURL= 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
-  public baseURL = 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
-  public profileURL = this.sanitizer.bypassSecurityTrustUrl(this.baseURL);
+  //public profileURL = this.sanitizer.bypassSecurityTrustUrl(this.baseURL);
 
   public message= '';
   public fileSelected = false;
