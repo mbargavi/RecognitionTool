@@ -33,7 +33,7 @@ import { HttpParams, HttpClient } from '@angular/common/http';
       if (this.ENVIRONMENT === 'TEST') {
         localStorage.setItem('serverURL', 'http://localhost:8080/RecognitionTool/');
       } else {
-        localStorage.setItem('serverURL', 'http://ec2-54-159-198-200.compute-1.amazonaws.com:8080/RecognitionTool/page/');
+        localStorage.setItem('serverURL', 'http://ec2-54-159-198-200.compute-1.amazonaws.com:8080/RecognitionTool/');
       }
       console.log('SERVER URL WE ARE USING IS : ' + localStorage.getItem('serverURL'));
       const username = e.target.elements[0].value;
