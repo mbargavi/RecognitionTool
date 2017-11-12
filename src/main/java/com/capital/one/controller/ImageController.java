@@ -26,6 +26,9 @@ import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.capital.one.dao.DAOUtilities;
+import com.capital.one.dao.ImageDao;
+
 @CrossOrigin(origins="*")
 @Controller
 public class ImageController implements ServletContextAware {
@@ -33,48 +36,49 @@ public class ImageController implements ServletContextAware {
 	@Autowired
 	static ServletContext context;
 	
+	ImageDao imgDao = DAOUtilities.getImageDao();
+	
 	Logger log = RootLogger.getLogger("ImageController");
 	
 	@RequestMapping(value="/uploadImage", method = RequestMethod.POST)
 	public @ResponseBody String uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("empId") String empId) {
 		
-		String pathImage = uploadFile(file, empId);
+		String imageName = uploadFile(file, empId);
 		
-		if (pathImage != null) {
-			// TODO: CALL SERVICE OR DAO LAYER TO STORE PATH TO IMAGE WITH EMPID IN DATABASE
-			return pathImage;
+		if (imageName != null) {
+			// CALL DAO LAYER TO STORE PATH TO IMAGE WITH EMPID IN DATABASE
+			imgDao.insertImage(Integer.valueOf(empId),  imageName);
+			return (imageName + " has been stored");
 		}else {
 			return "NoImage";
 		}
 		
-		//return "path-to-image-on-server-to-put-in-src-tag-in-html";
 	}
 	
 	
-	@RequestMapping(value="/retrieveImage/{empId}", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
+	@RequestMapping(value="/retrieveImage/{empId}", method = RequestMethod.GET)
 	public @ResponseBody Resource retrieveImage(@PathVariable("empId") int empId) {
 		
-		// TODO: NEED TO CALL SERVICE OR DAO LAYER TO QUERY TABLE AND GET ABSOLUTE PATH TO EMPID PROFILE IMAGE
-		// pathImage = dao.[lookupandreturn];
+		// NEED TO CALL DAO LAYER TO QUERY TABLE AND GET ABSOLUTE PATH TO EMPID PROFILE IMAGE
+
+		String imageName = imgDao.retrieveImageName(empId);
 		
-		// CREATING THE PATH TO RETRIEVE THE PIC
-		String rootPath = context.getRealPath("");
-		String profilepicsPath = null;
-		if (rootPath.endsWith(File.separator)) {
-			profilepicsPath = "WEB-INF" + File.separator + "images" + File.separator + "profilepics";
+		if(imageName != null) {
+			// CREATING THE PATH TO RETRIEVE THE PIC
+			String rootPath = context.getRealPath("");
+			String profilepicsPath = null;
+			if (rootPath.endsWith(File.separator)) {
+				profilepicsPath = "WEB-INF" + File.separator + "images" + File.separator + "profilepics";
+			} else {
+				profilepicsPath = File.separator + "WEB-INF" + File.separator + "images" + File.separator + "profilepics";
+			}
+			log.debug("profilepicsPath = " + profilepicsPath);	
+			log.debug("The profilepicsPath, file separator, and image name are " + profilepicsPath + File.separator + imageName);
+			
+			return new ServletContextResource(context, profilepicsPath + File.separator + imageName);
 		} else {
-			profilepicsPath = File.separator + "WEB-INF" + File.separator + "images" + File.separator + "profilepics";
+			return null;
 		}
-		System.out.println("profilepicsPath = " + profilepicsPath);
-		
-		// CREATING THE FILE NAME FOR ACCESSING THE FILE TO SEND BACK TO CLIENT
-		String name = (empId + "_Profile.png");  //******Defaulting to PNG UNTIL WE GET THIS FROM THE DATABASE
-		
-		File serverPathToFile = new File(profilepicsPath + File.separator + name);
-		log.debug("The serverPathToFile = " + profilepicsPath + File.separator + name);
-		
-		return new ServletContextResource(context, profilepicsPath + File.separator + name);
-		
 	    
 	}
 	
@@ -112,8 +116,8 @@ public class ImageController implements ServletContextAware {
 				stream.write(bytes);
 				stream.close();
 				
-				//RETURN THE SERVER PATH - (example I copied just returned the new file name but I want to save a step and display w/o another call)
-				return ("http://localhost:8080/RecognitionTool/retrieveImage/" + empId);
+				
+				return (name);
 				
 				
 				

@@ -14,7 +14,13 @@ body, h1, h2, h3, h4, h5, h6 {
   position:absolute;
   margin-left:50%;
   margin-top:50%;
-  src: url(images/spinner.gif)
+}
+#spinner{
+  background-image: url(images/spinner.gif)
+}
+
+.dummy-class{
+  background-image: url(images/placeholder.jpg)
 }
 
 .grow img{
