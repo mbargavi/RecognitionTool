@@ -24,8 +24,8 @@ import { HttpParams, HttpClient } from '@angular/common/http';
     public myParams = new URLSearchParams();
     public show = false;
     public message = this.loginservice.message;
-    public ENVIRONMENT = 'TEST'; // CHANGE TO 'PROD' before "npm run build" to build production "dist" folder
-    // public ENVIRONMENT = 'PROD';  // CHANGE TO 'TEST' before testing on 4200 or localhost
+    // public ENVIRONMENT = 'TEST'; // CHANGE TO 'PROD' before "npm run build" to build production "dist" folder
+    public ENVIRONMENT = 'PROD';  // CHANGE TO 'TEST' before testing on 4200 or localhost
 
 
     loginUser(e) {
