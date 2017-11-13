@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,8 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.capital.one.dao.AwardDaoImpl;
 import com.capital.one.datamodelbeans.Award;
 import com.capital.one.datamodelbeans.Credit;
-import com.capital.one.datamodelbeans.EmployeeCredit;
-import com.capital.one.datamodelbeans.TeamCredit;
+import com.capital.one.datamodelbeans.EmployeeCreditName;
+import com.capital.one.datamodelbeans.Redemption;
+import com.capital.one.datamodelbeans.TeamCreditWithName;
 import com.capital.one.service.RedeemService;
 
 @CrossOrigin(origins = "*")
@@ -45,15 +47,21 @@ public class RedemptionController {
 	}
 
 	@RequestMapping(value="/personalCredits", method=RequestMethod.GET)
-	public @ResponseBody List<EmployeeCredit> empCredits(@RequestParam(value="empId", required=true) int empId) {
-		List<EmployeeCredit> empCredits = rs.empCreditList(empId);	
+	public @ResponseBody List<EmployeeCreditName> empCredits(@RequestParam(value="empId", required=true) int empId) {
+		List<EmployeeCreditName> empCredits = rs.empCreditList(empId);	
 		return empCredits;
 	}
 
 	@RequestMapping(value="/teamCredits", method=RequestMethod.GET)
-	public @ResponseBody List<TeamCredit> teamCredits(@RequestParam(value="teamId", required=true) int teamId) {
+	public @ResponseBody List<TeamCreditWithName> teamCredits(@RequestParam(value="teamId", required=true) int teamId) {
 		System.out.println("in teamCredits" + teamId);
-		List<TeamCredit> teamCredits = rs.teamCreditList(teamId);
+		List<TeamCreditWithName> teamCredits = rs.teamCreditList(teamId);
 		return teamCredits;
+	}
+	
+	@RequestMapping(value="/updateRedemptionRequest", method=RequestMethod.POST)
+	public @ResponseBody boolean updateRedemption(@RequestBody Redemption redemption) {
+		System.out.println("in insert redemption" + redemption.getAwardTypeId());
+		return rs.updateEmpRedeem(redemption);
 	}
 }
