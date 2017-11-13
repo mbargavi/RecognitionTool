@@ -112,8 +112,6 @@ export class MainComponent implements OnInit {
         this.router.navigate(['success']); }},
       (error) => {
          this.addRecognitionStatus = true;
-         console.log(this.message);
-        // this.profileURL = this.baseURL;
    });
   }
 
