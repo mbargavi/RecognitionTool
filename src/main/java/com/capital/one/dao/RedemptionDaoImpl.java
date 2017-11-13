@@ -1,31 +1,25 @@
 package com.capital.one.dao;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
 
 import com.capital.one.datamodelbeans.Award;
 import com.capital.one.datamodelbeans.Credit;
-import com.capital.one.datamodelbeans.EmployeeCredit;
+import com.capital.one.datamodelbeans.EmployeeCreditName;
 import com.capital.one.datamodelbeans.Redemption;
-import com.capital.one.datamodelbeans.TeamCredit;
-
+import com.capital.one.datamodelbeans.TeamCreditWithName;
 
 public class RedemptionDaoImpl implements RedemptionDao {
 
 	private JdbcTemplate jdbcTemplate;
-	
+
 	private Logger log = Logger.getLogger("RedemptionDaoImpl");
 
 	public RedemptionDaoImpl(DataSource datasource) {
@@ -34,10 +28,25 @@ public class RedemptionDaoImpl implements RedemptionDao {
 	}
 
 	@Override
-	public void insertRedemptionRequest(int redeemerId, int teamRedemptionId, int creditsUsed, int creditTypeId,
-			int awardId) {
-		// TODO Auto-generated method stub
+	public boolean insertEmpRedemptionRequest(int redeemerId, int creditsUsed, int creditTypeId, int awardId) {
+		String insertRedeemRequest = "INSERT INTO redemption (emp_redeemer_id, credits_used, credit_type_id, award_type_id) VALUES (?, ?, ?, ?)";
+		log.info("Inserting Redemption");
+		int insertRedeem = jdbcTemplate.update(insertRedeemRequest, redeemerId, creditsUsed, creditTypeId, awardId);
+		if (insertRedeem > 0) {
+			return true;
+		}
+		return false;
+	}
 
+	@Override
+	public boolean updateEmpCredit(int empRedeemerId, int creditTypeId, int creditsUsed) {
+		String updateEmpCreditSQL = "UPDATE employee_credit SET credit_earned_balance = credit_earned_balance - ? WHERE emp_id=? AND credit_id=?";
+		log.info("Updating Employee Credit");
+		int updateEmpCredit = jdbcTemplate.update(updateEmpCreditSQL, creditsUsed, empRedeemerId, creditTypeId);
+		if (updateEmpCredit > 0) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -83,17 +92,20 @@ public class RedemptionDaoImpl implements RedemptionDao {
 	}
 
 	@Override
-	public List<EmployeeCredit> getempCredits(int empId) {
-		String sql = "SELECT * FROM employee_credit WHERE emp_id=?";
+	public List<EmployeeCreditName> getempCredits(int empId) {
+		String sql = "SELECT a.emp_id as \"emp_id\", a.credit_id as \"credit_id\", b.credit_name as \"creditName\", a.credit_togive_balance as \"credit_togive_balance\","
+				+ "a.credit_earned_balance as \"credit_earned_balance\" FROM public.employee_credit a JOIN public.credit b ON(a.credit_id = b.credit_id)"
+				+ "WHERE emp_id=?";
 		System.out.println("in DAO implementation");
-		List<EmployeeCredit> empCredits = jdbcTemplate.query(sql, new RowMapper<EmployeeCredit>() {
+		List<EmployeeCreditName> empCredits = jdbcTemplate.query(sql, new RowMapper<EmployeeCreditName>() {
 			@Override
-			public EmployeeCredit mapRow(ResultSet rs, int nRows) throws SQLException {
-				EmployeeCredit employeeCredits = new EmployeeCredit();
+			public EmployeeCreditName mapRow(ResultSet rs, int nRows) throws SQLException {
+				EmployeeCreditName employeeCredits = new EmployeeCreditName();
 				employeeCredits.setEmployee_id(rs.getInt("emp_id"));
 				employeeCredits.setCredit_id(rs.getInt("credit_id"));
 				employeeCredits.setCreditToGiveBalance(rs.getInt("credit_togive_balance"));
 				employeeCredits.setCreditEarnedBalance(rs.getInt("credit_earned_balance"));
+				employeeCredits.setCreditName(rs.getString("creditName"));
 				return employeeCredits;
 			}
 		}, empId);
@@ -101,21 +113,23 @@ public class RedemptionDaoImpl implements RedemptionDao {
 	}
 
 	@Override
-	public List<TeamCredit> getteamCredits(int teamId) {
-		String sql = "SELECT * FROM team_credit WHERE team_id=?";
+	public List<TeamCreditWithName> getteamCredits(int teamId) {
+		String sql = "SELECT a.team_id as \"team_id\", a.credit_id as \"credit_id\", b.credit_name as \"creditName\","
+				+ "a.credit_earned_balance as \"credit_earned_balance\" FROM public.team_credit a JOIN public.credit b ON(a.credit_id = b.credit_id)"
+				+ "WHERE team_id=?";
 		System.out.println("in DAO implementation");
-		List<TeamCredit> teamCredits = jdbcTemplate.query(sql, new RowMapper<TeamCredit>() {
+		List<TeamCreditWithName> teamCredits = jdbcTemplate.query(sql, new RowMapper<TeamCreditWithName>() {
 			@Override
-			public TeamCredit mapRow(ResultSet rs, int nRows) throws SQLException {
-				TeamCredit teamCredits = new TeamCredit();
+			public TeamCreditWithName mapRow(ResultSet rs, int nRows) throws SQLException {
+				TeamCreditWithName teamCredits = new TeamCreditWithName();
 				teamCredits.setTeamId(rs.getInt("team_id"));
 				teamCredits.setCreditId(rs.getInt("credit_id"));
 				teamCredits.setCreditEarnedBalance(rs.getInt("credit_earned_balance"));
+				teamCredits.setCreditName(rs.getString("creditName"));
 				return teamCredits;
 			}
 		}, teamId);
 		return teamCredits;
 	}
-
 
 }

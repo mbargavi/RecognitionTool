@@ -9,8 +9,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.capital.one.datamodelbeans.Award;
 import com.capital.one.datamodelbeans.Credit;
 import com.capital.one.datamodelbeans.EmployeeCredit;
+import com.capital.one.datamodelbeans.EmployeeCreditName;
 import com.capital.one.datamodelbeans.Redemption;
-import com.capital.one.datamodelbeans.TeamCredit;
+import com.capital.one.datamodelbeans.TeamCreditWithName;
 
 public interface RedemptionDao {
 	
@@ -24,7 +25,7 @@ public interface RedemptionDao {
 	 * @param creditTypeId - the type of credit being used
 	 * @param awardId - the id of the chosen award
 	 */
-	void insertRedemptionRequest(int redeemerId, int teamRedemptionId, int creditsUsed, int creditTypeId, int awardId);
+	boolean insertEmpRedemptionRequest(int redeemerId, int creditsUsed, int creditTypeId, int awardId);
 	
 	/***
 	 * This method will return the full Recognition List that can be used for Recognition History.  Once retrieved it can be filtered
@@ -38,8 +39,10 @@ public interface RedemptionDao {
 	
 	List<Award> getAwardsList(int creditId);
 
-	List<EmployeeCredit> getempCredits(int empId);
+	List<EmployeeCreditName> getempCredits(int empId);
 
-	List<TeamCredit> getteamCredits(int teamId);
+	List<TeamCreditWithName> getteamCredits(int teamId);
+
+	boolean updateEmpCredit(int empRedeemerId, int creditTypeId, int creditsUsed);
 
 }
