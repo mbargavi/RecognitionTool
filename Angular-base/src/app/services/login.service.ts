@@ -30,7 +30,7 @@ export class LoginService {
         localStorage.setItem('empId', this.userDetails.employeeId);
         localStorage.setItem('teamId', this.userDetails.teamId);
         this.router.navigate(['main']);
-        console.log(this.userDetails); }},
+        }},
         (error) => {
            if (error.status === 400) {
               this.message = 'Those credentials were invalid!';
