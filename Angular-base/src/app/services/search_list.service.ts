@@ -6,11 +6,12 @@ import { Http } from '@angular/http';
 export class SearchListService {
   // public reusableField = 5;
 
+
   constructor( @Inject(Http) private http: Http) {
 
   }
 
   getSearchListObservable(): Observable<any> {
-    return this.http.get('http://localhost:8080/RecognitionTool/getSearchList');
+    return this.http.get(localStorage.getItem('serverURL') + 'getSearchList');
   }
 }

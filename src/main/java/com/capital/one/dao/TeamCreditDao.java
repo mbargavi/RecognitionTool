@@ -16,6 +16,6 @@ public interface TeamCreditDao {
 	 * @param credTypeId - the type of credit that is being redeemed
 	 * @param credAmount - the amount of credits of said type that are being redeemed.
 	 */
-	void updateTeamCreditsEarnedBalance(int teamId, int credTypeId, int credAmount);
+	void updateTeamCreditsEarnedBalance(int teamId, int credTypeId);
 
 }

@@ -45,18 +45,18 @@ export class RedemptionComponent implements OnInit {
   }
   public ngOnInit() {
 
-    this.http.get('http://localhost:8080/RecognitionTool/creditType').subscribe((resp) => {
+    this.http.get(localStorage.getItem('serverURL') + 'creditType').subscribe((resp) => {
       this.creditList = resp.json();
     });
 
-    this.http.get('http://localhost:8080/RecognitionTool/personalCredits', {params : {empId: this.empId}})
+    this.http.get(localStorage.getItem('serverURL') + 'personalCredits', {params : {empId: this.empId}})
     .subscribe((resp) => {
       this.empCreditsList = resp.json();
       //this.empCreditName();
       //console.log(this.empCreditsList);
     });
 
-    this.http.get('http://localhost:8080/RecognitionTool/teamCredits', {params : {teamId: this.teamId}})
+    this.http.get(localStorage.getItem('serverURL') + 'teamCredits', {params : {teamId: this.teamId}})
     .subscribe((resp) => {
       this.teamCreditsList = resp.json();
     });
@@ -65,7 +65,7 @@ export class RedemptionComponent implements OnInit {
   public creditId() {
     this.selectedCreditId = this.selectedCredit.creditId;
     this.creditEarnedAmount(this.selectedCreditId);
-    this.http.get('http://localhost:8080/RecognitionTool/awardsList', {params :
+    this.http.get(localStorage.getItem('serverURL') + 'awardsList', {params :
     {selectedCreditId: this.selectedCreditId}})
       .subscribe((resp) => {
         this.awards = resp.json();

@@ -18,6 +18,10 @@ import {SearchComponent} from './search/search.component';
 import {appRoutes} from './routes';
 import {LoginService} from './services/login.service';
 import {SearchListService} from './services/search_list.service';
+import {CreditsService} from './services/credits.service';
+import {HistMetricsService} from './services/histmetrics.service';
+import {ImageService} from './services/image.service';
+import {SuccessComponent} from './success/success.component';
 
 
 
@@ -38,11 +42,15 @@ import {SearchListService} from './services/search_list.service';
     MainComponent,
     RedemptionComponent,
     SearchComponent,
+    SuccessComponent,
    ],
   providers: [
     SearchListService,
     LoginService,
     LoginComponent,
+    CreditsService,
+    HistMetricsService,
+    ImageService,
    ],
   bootstrap: [AppComponent]
 })

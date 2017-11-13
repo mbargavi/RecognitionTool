@@ -3,6 +3,7 @@ import {LoginComponent} from './login/login.component';
 import {HistoryComponent} from './history/history.component';
 import {MainComponent} from './main/main.component';
 import {RedemptionComponent} from './redemption/redemption.component';
+import {SuccessComponent} from './success/success.component';
 
 export const appRoutes: Routes = [
     {
@@ -36,6 +37,14 @@ export const appRoutes: Routes = [
   {
     path: 'redeem',
     component: RedemptionComponent
+  },
+  {
+    path: 'history',
+    component: HistoryComponent
+  },
+  {
+    path: 'success',
+    component: SuccessComponent
   }
 
 ];

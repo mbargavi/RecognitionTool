@@ -38,6 +38,7 @@ public class DAOUtilities implements ServletContextAware {
 	private static EmployeeCreditDaoImpl employeeCreditDaoImpl;
 	private static TeamCreditDaoImpl teamCreditDaoImpl;
 	private static RedemptionDaoImpl redemptionDaoImpl;
+	private static ImageDaoImpl imageDaoImpl;
 
 	private static Connection connection;
 	private static Properties dbProps = new Properties();
@@ -66,6 +67,13 @@ public class DAOUtilities implements ServletContextAware {
 			employeeDaoImpl = new EmployeeDaoImpl();
 		}
 		return employeeDaoImpl;
+	}
+	
+	public static synchronized ImageDao getImageDao() {
+		if (imageDaoImpl == null) {
+			imageDaoImpl = new ImageDaoImpl();
+		}
+		return imageDaoImpl;
 	}
 
 	public static synchronized AwardDao getAwardDao() {
@@ -97,12 +105,12 @@ public class DAOUtilities implements ServletContextAware {
 //		return employeeCreditDaoImpl;
 //	}
 
-	public static synchronized TeamCreditDao getTeamCreditDao() {
-		if (teamCreditDaoImpl == null) {
-			teamCreditDaoImpl = new TeamCreditDaoImpl();
-		}
-		return teamCreditDaoImpl;
-	}
+//	public static synchronized TeamCreditDao getTeamCreditDao() {
+//		if (teamCreditDaoImpl == null) {
+//			teamCreditDaoImpl = new TeamCreditDaoImpl();
+//		}
+//		return teamCreditDaoImpl;
+//	}
 
 	/***
 	 * This function is managing connections by returning the same connection for
@@ -165,14 +173,14 @@ public class DAOUtilities implements ServletContextAware {
 			log.trace("getting first connection from data source");
 			connection = DriverManager.getConnection(connectionURL, connectionUsername, connectionPassword);
 			//connection = DriverManager.getConnection("jdbc:postgresql://postgres.c4upqzkkv1a8.us-east-1.rds.amazonaws.com:5432/postgres", "postgres", "postgres");
-			// connection = DriverManager.getConnection(connectionURL, dbProps);
+			//connection = DriverManager.getConnection(connectionURL, dbProps);
 			log.trace("retreived connection from data source");
 		}
 		if (connection.isClosed()) {
 			log.trace("Connection was closed: getting new connection from data source");
 			connection = DriverManager.getConnection(connectionURL, connectionUsername, connectionPassword);
 			//connection = DriverManager.getConnection("jdbc:postgresql://postgres.c4upqzkkv1a8.us-east-1.rds.amazonaws.com:5432/postgres", "postgres", "postgres");
-			// connection = DriverManager.getConnection(connectionURL, dbProps);
+			//connection = DriverManager.getConnection(connectionURL, dbProps);
 			log.trace("retreived connection from data source");
 		}
 		return connection;
@@ -216,42 +224,5 @@ public class DAOUtilities implements ServletContextAware {
 
 	}
 
-	// package com.capital.one.jdbc;
-	//
-	// import java.sql.ResultSet;
-	// import java.sql.SQLException;
-	// import java.util.List;
-	//
-	// import org.springframework.jdbc.core.JdbcTemplate;
-	// import org.springframework.jdbc.core.RowMapper;
-	// import org.springframework.jdbc.datasource.SimpleDriverDataSource;
-	//
-	// public class JDBCDRIVER {
-	//
-	// public static void main(String[] args) {
-	//
-	// SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-	// dataSource.setDriver(new org.postgresql.Driver());
-	// dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres?currentSchema=chinook");
-	// dataSource.setUsername("dvh533");
-	// dataSource.setPassword("");
-	//
-	// JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-	// String sql = "";
-	//
-	// sql = "SELECT * FROM \"Artist\"";
-	// List<Artist> listArtists = jdbcTemplate.query(sql, new RowMapper<Artist>() {
-	// public Artist mapRow(ResultSet rs, int nRows) throws SQLException {
-	// Artist a = new Artist();
-	// a.setArtistId(rs.getInt("artistId"));
-	// a.setName(rs.getString("name"));
-	//
-	// return a;
-	// }
-	// });
-	//
-	// for (Artist a : listArtists) {
-	// System.out.println(a);
-	// }
 
 }
