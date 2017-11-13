@@ -47,14 +47,14 @@ public class RecognitionDaoImpl implements RecognitionDao{
 		} else {
 			increment = 5;
 		}
-		if (nominee == "Employee") {
-
+		if (nominee.equals("Employee")) {
+			log.info("insertRecognitionRecord - for Employee");
 			jdbcTemplate.update(
-					"INSERT INTO recognition(credit_amount, recognition_date, credit_type_id,emp_nominator_id,emp_nominee_id ) "
+				"INSERT INTO recognition(credit_amount, recognition_date, credit_type_id,emp_nominator_id,emp_nominee_id ) "
 							+ "VALUES(?,?,?,?,?)",
 					increment, getCurrentDate(), creditTypeId, nominatorId, nomineeId);
 		} else {
-
+			log.info("insertRecognitionRecord - for Team");
 			jdbcTemplate.update(
 					"INSERT INTO recognition(credit_amount, recognition_date, credit_type_id,emp_nominator_id,team_nominee_id ) "
 							+ "VALUES(?,?,?,?,?)",
