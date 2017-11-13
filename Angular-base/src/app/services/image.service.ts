@@ -12,7 +12,7 @@ export class ImageService {
   }
 
   uploadImageObservable(formdata: any): Observable<any> {
-      const url = (localStorage.getItem('serverURL') + 'RecognitionTool/uploadImage');
+      const url = (localStorage.getItem('serverURL') + 'uploadImage');
     return this.http.post(url, formdata);
   }
 
