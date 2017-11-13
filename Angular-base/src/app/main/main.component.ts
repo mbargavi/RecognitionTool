@@ -109,14 +109,12 @@ export class MainComponent implements OnInit {
     this.addRecognitionObservable().subscribe((resp) => {
       if ((resp.status === 200)) {
         console.log('here in success');
-        this.router.navigate(['success']);
-      }if (resp.status === 503) {
-        console.log('here in failed');
-        this.addRecognitionStatus = true;
-        this.message = 'Failed';
-      }
-    });
+        this.router.navigate(['success']); }},
+      (error) => {
+         this.addRecognitionStatus = true;
+   });
   }
+
 
 
   // if ((resp.status === 200 )) {
