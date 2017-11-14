@@ -204,7 +204,7 @@
                                 <div>
                                   <input type="button" class="btn btn-block btn-primary"  (click)="addRecognition()" value="Give Recognition"/>
                                   <div *ngIf="messageOn" class="text-center" style="color: rgb(117, 231, 117)">Successfull submission!</div>
-                                  <div *ngIf="this.addRecognitionStatus == true" style="color:red;" >Add Recognition Failed</div>
+                                  <div *ngIf="this.addRecognitionStatus == true" style="color:red;" >{{errorMessage}}</div>
                                   </div>
                             </div>
                         </div> <!-- end of sub-container row -->

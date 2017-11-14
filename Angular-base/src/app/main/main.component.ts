@@ -4,7 +4,6 @@ import {LoginService} from '../services/login.service';
 import {CreditsService} from '../services/credits.service';
 import {HistMetricsService} from '../services/histmetrics.service';
 import {ImageService} from '../services/image.service';
-import {ChangeTitleService} from '../services/changeTitle.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -29,6 +28,7 @@ export class MainComponent implements OnInit {
   public histGiven;
   public histEarned;
   public picShowInput = false;
+  public responseStatus;
 
 
   public addrecog = false;
@@ -37,11 +37,9 @@ export class MainComponent implements OnInit {
 
 
   public message= '';
-  public messageOn = false;
   public fileSelected = false;
   public errorMessage;
   public addRecognitionStatus = false;
-  private newTitleId;
 
    constructor(private loginService: LoginService,
                private creditsService: CreditsService,
@@ -49,8 +47,7 @@ export class MainComponent implements OnInit {
                private is: ImageService,
                @Inject(Http) private http: Http,
                private router: Router,
-               private sanitizer: DomSanitizer,
-               private cts: ChangeTitleService) {
+               private sanitizer: DomSanitizer) {
 
                }
 
@@ -97,8 +94,6 @@ export class MainComponent implements OnInit {
 
   addRecognition() {
     this.getAddRecognitionResponse();
-
-
   }
 
   addRecognitionObservable(): Observable<any> {
@@ -114,41 +109,18 @@ export class MainComponent implements OnInit {
   getAddRecognitionResponse(): void {
     this.addRecognitionObservable().subscribe((resp) => {
       if ((resp.status === 200)) {
-          // testing
-          this.messageOn = true;
-          this.ngOnInit(); // calling this refreshes page numbers but more work needed to clear selected values;
-          console.log('here in success');
-          // this.router.navigate(['success']);
-      }},
-      (error) => {
-         this.addRecognitionStatus = true;
-   });
+        console.log('here in success');
+        this.router.navigate(['success']); }},
+      (error)  => {
+        if (error.status === 417) {
+          this.addRecognitionStatus = true;
+          this.errorMessage = 'No credits left, add recognition failed';
+        }else {
+          this.addRecognitionStatus = true;
+          this.errorMessage = 'Server error, add recognition failed';
+        }
+    });
   }
-
-  // updateTitle(): void {
-  //   this.cts.getUpdatedTitleId().subscribe((response) => {
-  //     if (response.status === 200) {
-  //       this.newTitleId = response.json();
-  //       console.log('newTitleId being filled with ' + response.json());
-  //       if (localStorage.getItem('newTitleId') === '0') {
-  //         console.log('Title does not change.  Nothing to do');
-  //       } else if (localStorage.getItem('newTitleId') === '-1') {
-  //         console.log('There was some error trying to update.  Leave Title as is.');
-  //       } else {
-  //         console.log('Title has changed. Update the localStorage, userDetails and this.Title');
-  //         localStorage.setItem('Title', this.newTitleId.titleName);
-  //         localStorage.setItem('titleId', this.newTitleId.titleId);
-  //         this.userDetails.titleId = this.newTitleId.titleId;
-  //         this.userDetails.title.titleId = this.newTitleId.titleId;
-  //         this.userDetails.title.titleName = this.newTitleId.titleName;
-
-  //         this.Title = localStorage.getItem('Title');
-  //         console.log('Just set this.Title to ' + this.Title);
-  //       }
-  //     }
-
-  //   });
-  // }
 
 
 
@@ -186,7 +158,6 @@ export class MainComponent implements OnInit {
       localStorage.setItem('totalEarned', this.metrics[1]);
       this.histGiven = this.metrics[0];
       this.histEarned = this.metrics[1];
-
     });
 
     this.getImage();
