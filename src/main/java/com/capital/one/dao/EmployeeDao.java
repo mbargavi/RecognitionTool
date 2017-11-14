@@ -28,14 +28,15 @@ public interface EmployeeDao {
 	 * @return will be a custom list of Employee and Team information
 	 * in the form ["(Team/Employee)", "(ID)", "(username/name)", "(firstname/null)", "(lastname/null)", "(email)"]
 	 */
-	List<String[]> getEmployeesAndTeams();
+	List<String[]> getEmployeesAndTeams(int empID);
 	
 	/***
-	 * After a recognition has been done, this method should be called to update an Employee's title if needed, and return the current title.
-	 * This method should check Recognition Total, Title Threshold, and Employee Title Id to determine if a change is needed.
-	 * @param empId - this is the only parameter needed to make the determination
-	 * @return
+	 * This function will check the historical credits given and then check the title table to see the highest threshold where historical given
+	 * is still higher, and if that title ID is different than the current title ID then this function will update the title ID on the employee
+	 * @param empId - takes the Employee ID to query
+	 * @return int - the return will be a TitleID if an update was made, or 0 if there was no update; if updated, the caller needs to update the
+	 *               local storage for userDetails and titleid; return is -1 if SQL error
 	 */
-	String updateEmployeeTitle(int empId);
+	int updateEmployeeTitle(int empId);
 
 }

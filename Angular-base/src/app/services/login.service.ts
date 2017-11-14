@@ -28,13 +28,14 @@ export class LoginService {
         this.userDetails = resp.json();
         localStorage.setItem('Fname', this.userDetails.firstName);
         localStorage.setItem('Lname', this.userDetails.lastName);
-        localStorage.setItem('Title', this.userDetails.title.titleName);
+        localStorage.setItem('titleId', this.userDetails.title.titleId);
         localStorage.setItem('user', this.userDetails);
         localStorage.setItem('empId', this.userDetails.employeeId);
         localStorage.setItem('teamId', this.userDetails.teamId);
         localStorage.setItem('Title', this.userDetails.title.titleName);
         localStorage.setItem('empId', this.userDetails.employeeId);
         localStorage.setItem('roleId', this.userDetails.roleId);
+        this.message = '';
         console.log(this.userDetails);
         this.router.navigate(['main']);
          }},

@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 
 //import org.springframework.web.bind.annotation.GetMapping;
 
@@ -25,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.capital.one.datamodelbeans.Employee;
+import com.capital.one.datamodelbeans.Recognition;
+import com.capital.one.datamodelbeans.Title;
 //import com.capital.one.model.User;
 import com.capital.one.service.EmployeeService;
 import com.capital.one.service.LoginService;
@@ -39,10 +42,17 @@ public class EmployeeController {
 	EmployeeService es;
 	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@RequestMapping(value = "/getSearchList", method=RequestMethod.GET)
-	public @ResponseBody List<String[]> getListToSearch(){
-		List<String[]> myList =  es.getSearchList();
+	@RequestMapping(value = "/getSearchList/{empId}", method=RequestMethod.GET)
+	public @ResponseBody List<String[]> getListToSearch(@PathVariable("empId") int empID){
+		List<String[]> myList =  es.getSearchList(empID);
 		return myList;
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/updateTitle/{empId}", method=RequestMethod.GET)
+	public @ResponseBody Title updateEmployeeTitle(@PathVariable("empId") int empID) {
+		Title newTitle = es.updateTitle(empID);
+		return newTitle;
 	}
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value="/login", method=RequestMethod.GET)

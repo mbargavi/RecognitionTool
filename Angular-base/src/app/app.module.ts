@@ -14,6 +14,7 @@ import {HistoryComponent} from './history/history.component';
 import {MainComponent} from './main/main.component';
 import {RedemptionComponent} from './redemption/redemption.component';
 import {SearchComponent} from './search/search.component';
+import {SuccessComponent} from './success/success.component';
 
 import {appRoutes} from './routes';
 import {LoginService} from './services/login.service';
@@ -21,7 +22,7 @@ import {SearchListService} from './services/search_list.service';
 import {CreditsService} from './services/credits.service';
 import {HistMetricsService} from './services/histmetrics.service';
 import {ImageService} from './services/image.service';
-import {SuccessComponent} from './success/success.component';
+import {ChangeTitleService} from './services/changeTitle.service';
 
 
 
@@ -51,6 +52,7 @@ import {SuccessComponent} from './success/success.component';
     CreditsService,
     HistMetricsService,
     ImageService,
+    ChangeTitleService,
    ],
   bootstrap: [AppComponent]
 })

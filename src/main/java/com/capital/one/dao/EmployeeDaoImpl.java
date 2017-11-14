@@ -22,6 +22,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Autowired
 	private Employee employee;
 	
+	
 	Logger log = Logger.getLogger("EmployeeDaoImpl");
 
 	@Override
@@ -59,10 +60,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 					employee.setPassword(password);
 					employee.setRoleId(prs.getInt("roleid"));
 					employee.setTeamId(prs.getInt("teamid"));
-					employee.setTitleId(prs.getInt("titleid"));
+					
 					employee.setTitle(new Title());
-					employee.getTitle().setTitleId(prs.getInt("titleid"));
-					employee.getTitle().setTitleName(this.getEmployeeTitle(prs.getInt("titleid")));
+					
+					employee.getTitle().setTitleId(this.updateEmployeeTitle(prs.getInt("employee_id")));
+					employee.getTitle().setTitleName(this.getEmployeeTitle(employee.getTitle().getTitleId()));
+					employee.setTitleId(employee.getTitle().getTitleId());
 					
 					log.info("Finished getting an authenticated user...returning him");
 					
@@ -112,7 +115,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public List<String[]> getEmployeesAndTeams() {
+	public List<String[]> getEmployeesAndTeams(int empID) {
 		// Need to get a list of employees and teams and the results into a list of String arrays
 		// ["(Team/Employee)", "(ID)", "(username/name)", "(firstname/null)", "(lastname/null)", "(email)"]
 		
@@ -151,8 +154,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				listItem[5]=rs.getString("Email");               // email or team_email
 
 				log.debug(listItem);
+				if(!( empID == rs.getInt("ID") && ("Employee".equals(rs.getString("Type"))) ) ) {
+					combinedList.add(listItem);
+				}
 				
-				combinedList.add(listItem);
 			}
 			
 			return combinedList;
@@ -163,22 +168,23 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public String updateEmployeeTitle(int empId) {
+	public int updateEmployeeTitle(int empId) {
 		
 		// 1) Pull Employee record and get current Title ID
 		// 2) Check Recognition History and get Sum of all Credits the given Employee has recognized others with
 		// 3) Pull All Titles and get Title with Highest Threshold where Employee Credits Given is higher than threshold
 		// 4) For that Title get Title ID and if same as current Title ID, no update but return Title Name
-		// 5) If different Title ID than current Title ID, update Employee with new Title ID and return Title Name
+		// 5) If different Title ID than current Title ID, update Employee with new Title ID and return Title ID
 		
 		// Set up needed variables
         Statement stmt = null;
         ResultSet rs = null;
         Connection conn = null;
         String sql = null;
+        Employee emp = new Employee();
         
         int creditsGivenOverTime;
-        RecognitionDao recDao = DAOUtilities.getRecognitionDao();
+        // RecognitionDao recDao = DAOUtilities.getRecognitionDao();
         int topQualifyingTitleId = 100;  // 100 is the title_id for beginner
         int topQualifyingThreshold = 0;
         String topQualifyingTitle = "Beginner";
@@ -195,23 +201,36 @@ public class EmployeeDaoImpl implements EmployeeDao {
             
             rs.next();
             
-			log.debug("populate employee for checking/updating title");
-			employee.setEmployeeId(empId);
-			employee.setFirstName(rs.getString("firstname"));
-			employee.setLastName(rs.getString("lastname"));
-			employee.setEmail(rs.getString("email"));
-			employee.setUserName(rs.getString("username"));
-			employee.setPassword(rs.getString("password"));
-			employee.setRoleId(rs.getInt("roleid"));
-			employee.setTeamId(rs.getInt("teamid"));
-			employee.setTitleId(rs.getInt("titleid"));
+			log.debug("populate employee for checking/updating title with empId = " + empId);
+			emp.setEmployeeId(empId);
+			emp.setFirstName(rs.getString("firstname"));
+			emp.setLastName(rs.getString("lastname"));
+			emp.setEmail(rs.getString("email"));
+			emp.setUserName(rs.getString("username"));
+			emp.setPassword(rs.getString("password"));
+			emp.setRoleId(rs.getInt("roleid"));
+			emp.setTeamId(rs.getInt("teamid"));
+			emp.setTitleId(rs.getInt("titleid"));
 			
-			log.info("Finished populating the employee...now have current titleid");
+			log.info("Finished populating the employee...now have current titleid: " + rs.getInt("titleid"));
 			
 			// STEP 2
-			log.info("Using streams and lambdas to filter the recognitions to just my guy and then sum the credits he has given");
-			creditsGivenOverTime = recDao.getRecognitionHistory().stream().filter(element -> element.getEmpNominatorId()==empId)
-																		.mapToInt(element -> element.getCreditAmount()).sum();
+//			log.info("Using streams and lambdas to filter the recognitions to just my guy and then sum the credits he has given");
+//			creditsGivenOverTime = recDao.getRecognitionHistory().stream().filter(element -> element.getEmpNominatorId()==empId)
+//																		.mapToInt(element -> element.getCreditAmount()).sum();
+			
+//			log.info("Trying just calling current RecognitionDao method");
+//			creditsGivenOverTime = recDao.getTotalHistoricalGiven(empId);
+			
+			// Was getting NULL pointer trying to use Recognition Dao methods here even with autowired...going to straight query with
+			// connection I already have, because I think the null pointer was the connection.
+			
+			sql = "SELECT SUM(credit_amount) \"sum_given\" FROM recognition WHERE emp_nominator_id=" + empId;
+			
+			rs = null; //reset
+			rs = stmt.executeQuery(sql);
+			rs.next();
+			creditsGivenOverTime = rs.getInt("sum_given");
 			
 			
 			// STEP 3
@@ -239,23 +258,27 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				}
 			}
 			
-			// STEP 4
-			if (topQualifyingTitleId != employee.getTitleId()) {  //Only update the database if the title has changed
-				employee.setTitleId(topQualifyingTitleId);
-	            sql = ("UPDATE employee SET titleid = " + topQualifyingTitleId + ";");
+			// STEP 4 and 5
+			if (topQualifyingTitleId != emp.getTitleId()) {  //Only update the database if the title has changed
+				emp.setTitleId(topQualifyingTitleId);
+	            sql = ("UPDATE employee SET titleid = " + topQualifyingTitleId + " WHERE employee_id= " + empId + ";");
 
 	            stmt.executeUpdate(sql);
-
+	            return topQualifyingTitleId;
+			}else {
+				log.info("Was going to return 0 for no update but decided I will return the real title ID");
+				return emp.getTitleId();
 			}
-			// STEP 5
-            return topQualifyingTitle;
+            
 
         }
         catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return null;
+        log.error("Failed to update with SQL so return -1");
+        return -1;
 	}
+
 
 }

@@ -28,6 +28,8 @@ export class MainComponent implements OnInit {
   public histGiven;
   public histEarned;
   public picShowInput = false;
+  public currTooltip = 'Test Message';
+  public responseStatus;
 
 
   public addrecog = false;
@@ -109,14 +111,18 @@ export class MainComponent implements OnInit {
     this.addRecognitionObservable().subscribe((resp) => {
       if ((resp.status === 200)) {
         console.log('here in success');
-        this.router.navigate(['success']);
-      }if (resp.status === 503) {
-        console.log('here in failed');
-        this.addRecognitionStatus = true;
-        this.message = 'Failed';
-      }
+        this.router.navigate(['success']); }},
+      (error)  => {
+        if (error.status === 417) {
+          this.addRecognitionStatus = true;
+          this.errorMessage = 'No credits left, add recognition failed';
+        }else {
+          this.addRecognitionStatus = true;
+          this.errorMessage = 'Server error, add recognition failed';
+        }
     });
   }
+
 
 
   // if ((resp.status === 200 )) {

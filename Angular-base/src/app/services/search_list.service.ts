@@ -12,6 +12,7 @@ export class SearchListService {
   }
 
   getSearchListObservable(): Observable<any> {
-    return this.http.get(localStorage.getItem('serverURL') + 'getSearchList');
+    return this.http.get(localStorage.getItem('serverURL') + 'getSearchList/' +
+    localStorage.getItem('empId'));
   }
 }
