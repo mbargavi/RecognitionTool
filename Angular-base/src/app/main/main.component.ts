@@ -29,6 +29,7 @@ export class MainComponent implements OnInit {
   public histGiven;
   public histEarned;
   public picShowInput = false;
+  public currTooltip = 'Test Message';
 
 
   public addrecog = false;

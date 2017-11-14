@@ -18,8 +18,8 @@ public class EmployeeService {
 	 * @return - A list of String Arrays in the form: 
 	 * ["(Team/Employee)", "(ID)", "(username/name)", "(firstname/null)", "(lastname/null)", "(email)"]
 	 */
-	public List<String[]> getSearchList() {
-		return empDao.getEmployeesAndTeams();
+	public List<String[]> getSearchList(int empID) {
+		return empDao.getEmployeesAndTeams(empID);
 	}
 	
 	/***

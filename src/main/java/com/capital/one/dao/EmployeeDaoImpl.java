@@ -115,7 +115,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public List<String[]> getEmployeesAndTeams() {
+	public List<String[]> getEmployeesAndTeams(int empID) {
 		// Need to get a list of employees and teams and the results into a list of String arrays
 		// ["(Team/Employee)", "(ID)", "(username/name)", "(firstname/null)", "(lastname/null)", "(email)"]
 		
@@ -154,8 +154,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				listItem[5]=rs.getString("Email");               // email or team_email
 
 				log.debug(listItem);
+				if(!( empID == rs.getInt("ID") && ("Employee".equals(rs.getString("Type"))) ) ) {
+					combinedList.add(listItem);
+				}
 				
-				combinedList.add(listItem);
 			}
 			
 			return combinedList;

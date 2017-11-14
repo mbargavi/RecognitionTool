@@ -42,9 +42,9 @@ public class EmployeeController {
 	EmployeeService es;
 	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@RequestMapping(value = "/getSearchList", method=RequestMethod.GET)
-	public @ResponseBody List<String[]> getListToSearch(){
-		List<String[]> myList =  es.getSearchList();
+	@RequestMapping(value = "/getSearchList/{empId}", method=RequestMethod.GET)
+	public @ResponseBody List<String[]> getListToSearch(@PathVariable("empId") int empID){
+		List<String[]> myList =  es.getSearchList(empID);
 		return myList;
 	}
 	

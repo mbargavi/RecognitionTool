@@ -28,7 +28,7 @@ public interface EmployeeDao {
 	 * @return will be a custom list of Employee and Team information
 	 * in the form ["(Team/Employee)", "(ID)", "(username/name)", "(firstname/null)", "(lastname/null)", "(email)"]
 	 */
-	List<String[]> getEmployeesAndTeams();
+	List<String[]> getEmployeesAndTeams(int empID);
 	
 	/***
 	 * This function will check the historical credits given and then check the title table to see the highest threshold where historical given
