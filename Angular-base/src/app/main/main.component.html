@@ -83,22 +83,22 @@
                               <div class="container">
                                   <div class="row">
                                       <div class="col-md-2 checkbox">
-                                          <input type="checkbox">
+                                          <input id="commBox" type="checkbox">
                                       </div>
                                       <div class="col-md-2 checkbox">
-                                            <input type="checkbox">
+                                            <input id="custBox" type="checkbox">
                                       </div>
                                       <div class="col-md-2 checkbox">
-                                        <input type="checkbox">
+                                        <input id="judgeBox" type="checkbox">
                                       </div>
                                       <div class="col-md-2 checkbox">
-                                            <input type="checkbox">
+                                            <input id="jobBox" type="checkbox">
                                       </div>
                                       <div class="col-md-2 checkbox">
-                                            <input type="checkbox">
+                                            <input id="valueBox" type="checkbox">
                                       </div>
                                       <div class="col-md-2 checkbox">
-                                            <input type="checkbox">
+                                            <input id="teamBox" type="checkbox">
                                       </div>
                                   </div>
                                   <div class="row" style="font-size:10px">
@@ -128,7 +128,7 @@
                             <div class="col-md-12">
                                   <div class="form-group">
                                       <label>Feedback for Nominee</label>
-                                      <textarea class="form-control" style="height:168px" placeholder="Recognition Feedback"></textarea>
+                                      <textarea id="primaryFeedback" class="form-control" style="height:168px" placeholder="Recognition Feedback"></textarea>
                                   </div>
                             </div>
                       </div>
@@ -185,7 +185,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div style="border:1px solid #869dce;"  (change)="onSelectionChange($event)">
+                                <div id="creditRadio" style="border:1px solid #869dce;"  (change)="onSelectionChange($event)">
                                     <div class="radio">
                                         <label style="padding-left:7px;"><input type="radio" value=1 name="recognitionType"> 1 Credit</label>
                                     </div>
