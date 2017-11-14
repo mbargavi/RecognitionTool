@@ -1,18 +1,12 @@
 package com.capital.one.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.spi.RootLogger;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
 
-import com.capital.one.datamodelbeans.Credit;
+import com.capital.one.exceptions.NoCreditsLeftException;
 
 
 public class EmployeeCreditDaoImpl implements EmployeeCreditDao{
@@ -62,7 +56,7 @@ public class EmployeeCreditDaoImpl implements EmployeeCreditDao{
 		}
 		
 		else {
-			throw new Exception("No credits left!");}
+			throw new NoCreditsLeftException("No credits left!");}
 	}
 
 	@Override
