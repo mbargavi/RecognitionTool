@@ -15,6 +15,7 @@ import { SearchListService } from '../services/search_list.service';
 
     public searchValue= '';
     public selected = false;
+
     public yourSelection= '[Your Selection]';
     public selectionId;
     public selectionEntityType = ''; // this will be a 'Team' or an 'Employee' so we know which type of selectionID we have
@@ -36,12 +37,14 @@ import { SearchListService } from '../services/search_list.service';
       localStorage.setItem('nominee', this.selectionEntityType);
       this.searchValue = '';
       this.selected = true;
+      localStorage.setItem('nomineeSelected', 'true');
       document.getElementById('search').removeAttribute('class');
       document.getElementById('selection').setAttribute('class', 'optional-border');
 
     }
 
     ngOnInit() {
+      localStorage.setItem('nomineeSelected', 'false');
       this.fetch();
       // this.fieldFromService = this.fcs.reusableField;
     }

@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 
 @Injectable()
 export class SearchListService {
-  // public reusableField = 5;
+  // public clearSelection = false;
 
 
   constructor( @Inject(Http) private http: Http) {

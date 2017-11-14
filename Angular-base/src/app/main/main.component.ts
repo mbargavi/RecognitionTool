@@ -30,7 +30,7 @@ export class MainComponent implements OnInit {
   public picShowInput = false;
   public currTooltip = 'Test Message';
   public responseStatus;
-
+  public messageOn = false;
 
   public addrecog = false;
   public baseURL= 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
@@ -94,7 +94,26 @@ export class MainComponent implements OnInit {
   }
 
   addRecognition() {
-    this.getAddRecognitionResponse();
+    if ((<HTMLInputElement>document.getElementById('commBox')).checked === true ||
+         ((<HTMLInputElement>document.getElementById('custBox')).checked === true ) ||
+         ((<HTMLInputElement>document.getElementById('judgeBox')).checked === true ) ||
+         ((<HTMLInputElement>document.getElementById('jobBox')).checked === true ) ||
+         ((<HTMLInputElement>document.getElementById('valueBox')).checked === true ) ||
+         ((<HTMLInputElement>document.getElementById('teamBox')).checked === true )) {
+      localStorage.setItem('competencySelected', 'true');
+    } else {
+      localStorage.setItem('competencySelected', 'false');
+    }
+    if ((localStorage.getItem('nomineeSelected') === 'true') &&
+        (!(localStorage.getItem('creditsTypeId') === null)) &&
+        (!((<HTMLInputElement>document.getElementById('primaryFeedback')).value === '')) &&
+        (localStorage.getItem('competencySelected') === 'true')) {
+      this.getAddRecognitionResponse();
+    }else {
+      // They haven't input all the values needed to make a recognition
+      // Could give message to that effect or do nothing.
+    }
+
   }
 
   addRecognitionObservable(): Observable<any> {
@@ -111,7 +130,13 @@ export class MainComponent implements OnInit {
     this.addRecognitionObservable().subscribe((resp) => {
       if ((resp.status === 200)) {
         console.log('here in success');
-        this.router.navigate(['success']); }},
+        this.message = 'Successfull submission!';
+        this.messageOn = true;
+        this.ngOnInit(); // calling this refreshes page numbers but more work needed to clear selected values;
+        this.clearValues();
+        console.log('here in success');
+        // this.router.navigate(['success']);
+       }},
       (error)  => {
         if (error.status === 417) {
           this.addRecognitionStatus = true;
@@ -163,6 +188,26 @@ export class MainComponent implements OnInit {
 
     this.getImage();
 
+  }
+
+  clearValues(): void {
+    // clear the values here
+    (<HTMLInputElement>document.getElementById('commBox')).checked = false;
+    (<HTMLInputElement>document.getElementById('custBox')).checked = false;
+    (<HTMLInputElement>document.getElementById('judgeBox')).checked = false;
+    (<HTMLInputElement>document.getElementById('jobBox')).checked = false;
+    (<HTMLInputElement>document.getElementById('valueBox')).checked = false;
+    (<HTMLInputElement>document.getElementById('teamBox')).checked = false;
+    // localStorage.setItem('clearSelection', 'true');
+    // Still need some logic to clear the search component selection
+    localStorage.setItem('competencySelected', 'false');
+    localStorage.setItem('nomineeSelected', 'false');
+    localStorage.setItem('creditsTypeId', null);
+    // clearing the two radio buttons
+    (<HTMLInputElement>document.getElementById('creditRadio').childNodes[1].childNodes[1].childNodes[0]).checked = false;
+    (<HTMLInputElement>document.getElementById('creditRadio').childNodes[3].childNodes[1].childNodes[0]).checked = false;
+    (<HTMLInputElement>document.getElementById('primaryFeedback')).value = '';
+    localStorage.setItem('competencySelected', 'false');
   }
 
   getImage(): void {
