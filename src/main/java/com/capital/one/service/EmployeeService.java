@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.capital.one.dao.DAOUtilities;
 import com.capital.one.dao.EmployeeDao;
+import com.capital.one.datamodelbeans.Title;
 
 @Service
 public class EmployeeService {
@@ -19,6 +20,26 @@ public class EmployeeService {
 	 */
 	public List<String[]> getSearchList() {
 		return empDao.getEmployeesAndTeams();
+	}
+	
+	/***
+	 * If the call to updateEmployeeTitle returns a new TitleId (>0) then we will also get the new Title name and put both of them
+	 * in a Title object that we send back;
+	 * @param empId - the employerID is passed in so we can look up credits given and determine if need to update title
+	 * @return Title : TitleId = -1 for error, 0 for no update, else a titleID if title was updated.
+	 *                 TitleName = a new Title Name if TitleId(>0) or null if there is no update
+	 */
+	public Title updateTitle(int empId) {
+		
+		String newTitleName = null;
+		Title newTitle = new Title();
+		int newTitleId = empDao.updateEmployeeTitle(empId);
+		if(newTitleId > 0) {
+			newTitleName = empDao.getEmployeeTitle(newTitleId);
+		}
+		newTitle.setTitleName(newTitleName);
+		newTitle.setTitleId(newTitleId);
+		return newTitle;
 	}
 
 }

@@ -203,7 +203,7 @@
                                 </div>
                                 <div>
                                   <input type="button" class="btn btn-block btn-primary"  (click)="addRecognition()" value="Give Recognition"/>
-                                  <div *ngIf="this.addRecognitionStatus == true"> Failed </div>
+                                  <div *ngIf="messageOn" class="text-center" style="color: rgb(117, 231, 117)">{{message}}</div>
                                   </div>
                             </div>
                         </div> <!-- end of sub-container row -->
