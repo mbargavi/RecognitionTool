@@ -19,12 +19,12 @@
     </thead>
     <tbody *ngFor = "let row of combinedList" >
         <tr (click)="makeSelection($event)"
-                            *ngIf="(row[0]=== searchValue) ||
-                                  (row[1]=== searchValue) ||
-                                  (row[2]=== searchValue) ||
-                                  (row[3]=== searchValue) ||
-                                  (row[4]=== searchValue) ||
-                                  (row[5]=== searchValue)">
+                            *ngIf="((row[0] | uppercase)=== (searchValue | uppercase)) ||
+                                  ((row[1] | uppercase)=== (searchValue | uppercase)) ||
+                                  ((row[2] | uppercase)=== (searchValue | uppercase)) ||
+                                  ((row[3] | uppercase)=== (searchValue | uppercase)) ||
+                                  ((row[4] | uppercase)=== (searchValue | uppercase)) ||
+                                  ((row[5] | uppercase)=== (searchValue | uppercase))">
           <td><a href="javascript:void(0)" style="color:aqua">{{row[0]}}</a></td>
           <td><a href="javascript:void(0)" style="color:aqua">{{row[1]}}</a></td>
           <td><a href="javascript:void(0)" style="color:aqua">{{row[2]}}</a></td>
