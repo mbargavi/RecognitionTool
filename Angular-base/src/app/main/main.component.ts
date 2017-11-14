@@ -115,7 +115,6 @@ export class MainComponent implements OnInit {
     this.addRecognitionObservable().subscribe((resp) => {
       if ((resp.status === 200)) {
           // testing
-          this.message = 'Successfull submission!';
           this.messageOn = true;
           this.ngOnInit(); // calling this refreshes page numbers but more work needed to clear selected values;
           console.log('here in success');
