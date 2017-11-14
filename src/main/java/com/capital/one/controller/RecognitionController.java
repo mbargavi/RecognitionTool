@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.capital.one.datamodelbeans.Recognition;
+import com.capital.one.exceptions.NoCreditsLeftException;
 import com.capital.one.service.RecognitionService;
 
 @CrossOrigin(origins="*")
@@ -41,12 +42,15 @@ public class RecognitionController {
 		log.debug("Got To addRecognition method in Recognition Controller");
 		try {
 			recognitionService.addRecognitionService(recognition);
-		} catch (Exception e) {
+		}
+		catch(NoCreditsLeftException e){
+			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);
+		}
+		catch (Exception e) {
 		 	return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(null);
 		}
 		return null;
 		
 	}
 	
-
 }
