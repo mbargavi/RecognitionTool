@@ -1,14 +1,8 @@
 package com.capital.one.dao;
 
 import java.util.List;
-
-import javax.sql.DataSource;
-
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import com.capital.one.datamodelbeans.Award;
 import com.capital.one.datamodelbeans.Credit;
-import com.capital.one.datamodelbeans.EmployeeCredit;
 import com.capital.one.datamodelbeans.EmployeeCreditName;
 import com.capital.one.datamodelbeans.Redemption;
 import com.capital.one.datamodelbeans.TeamCreditWithName;
@@ -44,5 +38,9 @@ public interface RedemptionDao {
 	List<TeamCreditWithName> getteamCredits(int teamId);
 
 	boolean updateEmpCredit(int empRedeemerId, int creditTypeId, int creditsUsed);
+
+	boolean insertTeamRedemptionRequest(int creditsUsed, int teamRedemptionId, int creditTypeId, int awardTypeId);
+
+	boolean updateTeamCredit(int teamRedemptionId, int creditTypeId, int creditsUsed);
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, RadioControlValueAccessor, Validators } from '@angular/forms';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import {LoginService} from '../services/login.service';
 import { Observable } from 'rxjs/Observable';
@@ -20,11 +20,14 @@ export class RedemptionComponent implements OnInit {
   public selectedCredit;
   public selectedCreditId = 0;
   public selectedAward;
-  public empEarnedCredit;
+  public earnedCredit;
   public awards;
   public submitted = false;
   public empId = localStorage.getItem('empId');
   public teamId = localStorage.getItem('teamId');
+  public roleId = localStorage.getItem('roleId');
+  public firstName = localStorage.getItem('Fname');
+  public typeOfCreditsToRedeem = 'Personal';
 
   constructor(private http: Http, private router: Router) {}
   public redeemCredits(e) {
@@ -32,7 +35,9 @@ export class RedemptionComponent implements OnInit {
       empRedeemerId: this.empId,
       creditsUsed: this.selectedAward.creditCost,
       creditTypeId: this.selectedCreditId,
-      awardTypeId: this.selectedAward.awardId
+      awardTypeId: this.selectedAward.awardId,
+      teamRedemptionId: this.teamId,
+      creditTypeToUse: this.typeOfCreditsToRedeem
     };
     this.http.post('http://localhost:8080/RecognitionTool/updateRedemptionRequest', empRedeemObj)
         .subscribe((resp) => {
@@ -70,16 +75,28 @@ export class RedemptionComponent implements OnInit {
       .subscribe((resp) => {
         this.awards = resp.json();
         this.awardsList = this.awards.filter(
-          (awards) => ((awards.creditCost) <= this.empEarnedCredit));
+          (awards) => ((awards.creditCost) <= this.earnedCredit));
         });
     }
 
   public creditEarnedAmount(a: number) {
-    this.empCreditsList.forEach((element) => {
-      if (element.credit_id === a ) {
-        this.empEarnedCredit = element.creditEarnedBalance;
-      }
-    });
+    console.log(this.typeOfCreditsToRedeem);
+    if (this.typeOfCreditsToRedeem === 'Team') {
+      console.log(this.typeOfCreditsToRedeem);
+      this.teamCreditsList.forEach((element) => {
+        if (element.creditId === a ) {
+          this.earnedCredit = element.creditEarnedBalance;
+          console.log('Team' + this.earnedCredit);
+        }
+      });
+    } else {
+      this.empCreditsList.forEach((element) => {
+        if (element.credit_id === a ) {
+          this.earnedCredit = element.creditEarnedBalance;
+          console.log('employee' + this.earnedCredit);
+        }
+      });
+    }
   }
 
   public empCreditName() {

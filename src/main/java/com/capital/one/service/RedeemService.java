@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capital.one.dao.RedemptionDao;
-import com.capital.one.dao.RedemptionDaoImpl;
 import com.capital.one.datamodelbeans.Award;
 import com.capital.one.datamodelbeans.Credit;
-import com.capital.one.datamodelbeans.EmployeeCredit;
 import com.capital.one.datamodelbeans.EmployeeCreditName;
 import com.capital.one.datamodelbeans.Redemption;
 import com.capital.one.datamodelbeans.TeamCreditWithName;
@@ -45,16 +43,30 @@ public class RedeemService {
 		return redeemDao.getteamCredits(teamId);
 	}
 
-	public boolean updateEmpRedeem(Redemption redemption) {
+	public boolean insertEmpRedeem(Redemption redemption) {
 		log.debug("Redeeming " + redemption.getAwardTypeId());
 		int empRedeemerId = redemption.getEmpRedeemerId();
 		int creditTypeId = redemption.getCreditTypeId();
 		int awardTypeId = redemption.getAwardTypeId();
 		int creditsUsed = redemption.getCreditsUsed();
-		int teamRedemptionId = redemption.getTeamRedemptionId();
+//		int teamRedemptionId = redemption.getTeamRedemptionId();
 		
 		if(redeemDao.insertEmpRedemptionRequest(empRedeemerId, creditsUsed, creditTypeId, awardTypeId )) {
 			return redeemDao.updateEmpCredit(empRedeemerId, creditTypeId, creditsUsed);
+		}
+		return false;
+	}
+
+	public boolean insertTeamRedeem(Redemption redemption) {
+		log.debug("Redeeming " + redemption.getAwardTypeId());
+//		int empRedeemerId = redemption.getEmpRedeemerId();
+		int creditTypeId = redemption.getCreditTypeId();
+		int awardTypeId = redemption.getAwardTypeId();
+		int creditsUsed = redemption.getCreditsUsed();
+		int teamRedemptionId = redemption.getTeamRedemptionId();
+		
+		if(redeemDao.insertTeamRedemptionRequest(creditsUsed, teamRedemptionId, creditTypeId, awardTypeId )) {
+			return redeemDao.updateTeamCredit(teamRedemptionId, creditTypeId, creditsUsed);
 		}
 		return false;
 	}

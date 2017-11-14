@@ -34,6 +34,7 @@ export class LoginService {
         localStorage.setItem('teamId', this.userDetails.teamId);
         localStorage.setItem('Title', this.userDetails.title.titleName);
         localStorage.setItem('empId', this.userDetails.employeeId);
+        localStorage.setItem('roleId', this.userDetails.roleId);
         console.log(this.userDetails);
         this.router.navigate(['main']);
          }},
