@@ -114,20 +114,16 @@ export class MainComponent implements OnInit {
   getAddRecognitionResponse(): void {
     this.addRecognitionObservable().subscribe((resp) => {
       if ((resp.status === 200)) {
-
-        console.log('here in success');
-
-        // testing
-        this.message = 'Successfull submission!';
-        this.messageOn = true;
-        this.ngOnInit(); // calling this refreshes page numbers but more work needed to clear selected values;
-        // this.router.navigate(['success']);
-      }if (resp.status === 503) {
-        console.log('here in failed');
-        this.addRecognitionStatus = true;
-        this.message = 'Failed';
-      }
-    });
+          // testing
+          this.message = 'Successfull submission!';
+          this.messageOn = true;
+          this.ngOnInit(); // calling this refreshes page numbers but more work needed to clear selected values;
+          console.log('here in success');
+          // this.router.navigate(['success']);
+      }},
+      (error) => {
+         this.addRecognitionStatus = true;
+   });
   }
 
   // updateTitle(): void {
@@ -154,6 +150,7 @@ export class MainComponent implements OnInit {
 
   //   });
   // }
+
 
 
   // if ((resp.status === 200 )) {
