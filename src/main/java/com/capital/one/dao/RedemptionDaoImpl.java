@@ -30,7 +30,7 @@ public class RedemptionDaoImpl implements RedemptionDao {
 	@Override
 	public boolean insertEmpRedemptionRequest(int redeemerId, int creditsUsed, int creditTypeId, int awardId) {
 		String insertRedeemRequest = "INSERT INTO redemption (emp_redeemer_id, credits_used, credit_type_id, award_type_id) VALUES (?, ?, ?, ?)";
-		log.info("Inserting Redemption");
+		log.info("Inserting Employee Redemption");
 		int insertRedeem = jdbcTemplate.update(insertRedeemRequest, redeemerId, creditsUsed, creditTypeId, awardId);
 		if (insertRedeem > 0) {
 			return true;
@@ -43,6 +43,29 @@ public class RedemptionDaoImpl implements RedemptionDao {
 		String updateEmpCreditSQL = "UPDATE employee_credit SET credit_earned_balance = credit_earned_balance - ? WHERE emp_id=? AND credit_id=?";
 		log.info("Updating Employee Credit");
 		int updateEmpCredit = jdbcTemplate.update(updateEmpCreditSQL, creditsUsed, empRedeemerId, creditTypeId);
+		if (updateEmpCredit > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean insertTeamRedemptionRequest(int creditsUsed, int teamRedemptionId, int creditTypeId, int awardId) {
+		String insertTeamRedeemRequest = "INSERT INTO redemption (credits_used, team_redemption_id, credit_type_id, award_type_id) VALUES (?, ?, ?, ?)";
+		log.info("Inserting Team Redemption");
+		int insertTeamRedeem = jdbcTemplate.update(insertTeamRedeemRequest, creditsUsed, teamRedemptionId, creditTypeId,
+				awardId);
+		if (insertTeamRedeem > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateTeamCredit(int teamRedemptionId, int creditTypeId, int creditsUsed) {
+		String updateEmpCreditSQL = "UPDATE team_credit SET credit_earned_balance = credit_earned_balance - ? WHERE team_id=? AND credit_id=?";
+		log.info("Updating Team Credit available Balance");
+		int updateEmpCredit = jdbcTemplate.update(updateEmpCreditSQL, creditsUsed, teamRedemptionId, creditTypeId);
 		if (updateEmpCredit > 0) {
 			return true;
 		}
