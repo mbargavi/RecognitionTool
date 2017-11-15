@@ -38,5 +38,15 @@ public interface EmployeeDao {
 	 *               local storage for userDetails and titleid; return is -1 if SQL error
 	 */
 	int updateEmployeeTitle(int empId);
+	
+	/***
+	 * This function will return a list of recipients that can be used for emailing the Nominee, Nominator, NomineeManager, NominatorManager
+	 * @param nomineeId
+	 * @param nominatorId
+	 * @return - List of Employees in this order: Nominee, Nominator, NomineeManager, NominatorManager
+	 */
+	List<Employee> getRecipientList(int nomineeId, int nominatorId);
+	
+	int getTeamManagerById(int nomineeId);
 
 }

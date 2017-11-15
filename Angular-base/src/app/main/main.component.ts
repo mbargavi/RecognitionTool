@@ -4,6 +4,8 @@ import {LoginService} from '../services/login.service';
 import {CreditsService} from '../services/credits.service';
 import {HistMetricsService} from '../services/histmetrics.service';
 import {ImageService} from '../services/image.service';
+import {EmailService} from '../services/email.service';
+import {SearchListService} from '../services/search_list.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -19,6 +21,8 @@ import { Router } from '@angular/router';
 export class MainComponent implements OnInit {
 
   public userDetails;
+  public fullList;
+  public recipientInfo;
   public metrics;
   public Fname = localStorage.getItem('Fname');
   public Lname = localStorage.getItem('Lname');
@@ -35,17 +39,21 @@ export class MainComponent implements OnInit {
   public addrecog = false;
   public baseURL= 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
   public profileURL;
+  public recipientCount;
 
 
   public message= '';
   public fileSelected = false;
   public errorMessage;
   public addRecognitionStatus = false;
+  public creditText;
 
    constructor(private loginService: LoginService,
                private creditsService: CreditsService,
                private hms: HistMetricsService,
                private is: ImageService,
+               private es: EmailService,
+               private sls: SearchListService,
                @Inject(Http) private http: Http,
                private router: Router,
                private sanitizer: DomSanitizer) {
@@ -101,6 +109,7 @@ export class MainComponent implements OnInit {
          ((<HTMLInputElement>document.getElementById('valueBox')).checked === true ) ||
          ((<HTMLInputElement>document.getElementById('teamBox')).checked === true )) {
       localStorage.setItem('competencySelected', 'true');
+      this.buildCompetencyString();
     } else {
       localStorage.setItem('competencySelected', 'false');
     }
@@ -133,8 +142,39 @@ export class MainComponent implements OnInit {
         this.message = 'Successfull submission!';
         this.messageOn = true;
         this.ngOnInit(); // calling this refreshes page numbers but more work needed to clear selected values;
-        this.clearValues();
+
         console.log('here in success');
+        this.sls.getSearchListObservable().subscribe((response) => {
+          this.fullList = response.json;
+          console.log(this.fullList);
+        });
+        const emailForm = new FormData();
+        if ((<HTMLInputElement>document.getElementById('copyManager')).checked === true) {
+          this.recipientCount = '4';
+        } else {
+          this.recipientCount = '3';
+        }
+        // if 1 radio button is checked, set creditText to "1 Credit", else set creditText to "5 Capital One Bucks"
+        if ((<HTMLInputElement>document.getElementById('creditRadio').childNodes[1].childNodes[1].childNodes[0]).checked === true) {
+          this.creditText = (<HTMLElement> document.getElementById('creditRadio').childNodes[1].childNodes[1]).innerText;
+        } else {
+          this.creditText = (<HTMLElement> document.getElementById('creditRadio').childNodes[3].childNodes[1]).innerText;
+        }
+        console.log('creditText = ' + this.creditText);
+        emailForm.append('recipientCount', this.recipientCount);
+        emailForm.append('subject', 'Recognition Feedback!');
+        emailForm.append('message', (<HTMLInputElement>document.getElementById('primaryFeedback')).value);
+        emailForm.append('manMessage', (<HTMLInputElement>document.getElementById('addFeedback')).value);
+        emailForm.append('competencies', localStorage.getItem('competencyString'));
+        emailForm.append('nomineeId', localStorage.getItem('nomineeId'));
+        emailForm.append('nominatorId', localStorage.getItem('empId'));
+        emailForm.append('credits', this.creditText);
+        emailForm.append('entityType', localStorage.getItem('nominee'));
+        this.clearValues();
+        console.log(emailForm);
+        this.es.sendEmailObservable(emailForm).subscribe((response) => {
+          console.log(response.json);
+        });
         // this.router.navigate(['success']);
        }},
       (error)  => {
@@ -228,6 +268,40 @@ export class MainComponent implements OnInit {
     //   // this.profileURL = 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
     //   console.log(this.profileURL);
     // }
+  }
+
+  sendEmail(email): void {
+    this.es.sendEmailObservable(email).subscribe((resp) => {
+      console.log(resp.url);
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+  }
+
+  buildCompetencyString(): void {
+    let competencyString = '<br><ul>';
+    if ((<HTMLInputElement>document.getElementById('commBox')).checked === true) {
+      competencyString += '<li><strong>Communication</strong></li>';
+    }
+    if ((<HTMLInputElement>document.getElementById('custBox')).checked === true ) {
+      competencyString += '<li><strong>Customer Focus</strong></li>';
+    }
+    if ((<HTMLInputElement>document.getElementById('judgeBox')).checked === true ) {
+      competencyString += '<li><strong>Judgement</strong></li>';
+    }
+    if ((<HTMLInputElement>document.getElementById('jobBox')).checked === true ) {
+      competencyString += '<li><strong>Job Specific Skills</strong></li>';
+    }
+    if ((<HTMLInputElement>document.getElementById('valueBox')).checked === true ) {
+      competencyString += '<li><strong>Live the Values</strong></li>';
+    }
+    if ((<HTMLInputElement>document.getElementById('teamBox')).checked === true ) {
+      competencyString += '<li><strong>Teamwork</strong></li>';
+    }
+    competencyString += '</ul><br>';
+    localStorage.setItem('competencyString', competencyString);
   }
 
 }

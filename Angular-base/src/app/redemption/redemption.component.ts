@@ -57,8 +57,8 @@ export class RedemptionComponent implements OnInit {
     this.http.get(localStorage.getItem('serverURL') + 'personalCredits', {params : {empId: this.empId}})
     .subscribe((resp) => {
       this.empCreditsList = resp.json();
-      //this.empCreditName();
-      //console.log(this.empCreditsList);
+      // this.empCreditName();
+      // console.log(this.empCreditsList);
     });
 
     this.http.get(localStorage.getItem('serverURL') + 'teamCredits', {params : {teamId: this.teamId}})
