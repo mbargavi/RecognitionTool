@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
+ 
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
   </head>
   <body class="banner">
-
+ 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="border:2px solid rgb(130, 231, 83);">
       <div class="container">
@@ -28,11 +27,11 @@
         </div>
       </div>
     </nav>
-
+ 
     <!-- <div id="spinner" class="spinner">
         <img/>
     </div> -->
-
+ 
     <!-- Header -->
     <!--<header> -->
       <div class="container">
@@ -140,7 +139,7 @@
                             <div class="col-md-2"></div>
                           <div class="col-md-3">
                                 <button type="button" class="btn btn-secondary"  data-toggle="tooltip" data-placement="top" title="{{currTooltip}}" class="btn btn-primary round-button btn-lg">Current<br>To Give<br><h2>{{creditsToGive}}</h2></button>
-                               
+                              
                             </div>
                           <div class="col-md-2"></div>
                       </div>
@@ -159,7 +158,7 @@
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-8">
-                                <button type="button" class="btn btn-primary round-button rb-hover btn-lg" routerLink="/history">Historical<br>Given<br><h2>{{histGiven}}</h2></button>
+                                <button type="button" class="btn btn-primary round-button rb-hover btn-lg" (click)="setHistoricalGiven()">Historical<br>Given<br><h2>{{histGiven}}</h2></button>
                         </div>
                         <div class="col-md-2"></div>
                     </div>
@@ -167,7 +166,7 @@
                     <div class="row">
                         <div class="col-md-2"></div>
                             <div class="col-md-8">
-                                <button type="button" class="btn btn-primary round-button rb-hover btn-lg" routerLink="/history">Historical<br>Earned<br><h2>{{histEarned}}</h2></button>
+                                <button type="button" class="btn btn-primary round-button rb-hover btn-lg" (click)="setHistoricalEarned()">Historical<br>Earned<br><h2>{{histEarned}}</h2></button>
                             </div>
                         <div class="col-md-2"></div>
                     </div>
@@ -215,7 +214,7 @@
                   <br>
                   <br>
                   <br>
-                  
+                 
                   <div class="row">
                       <div class="col-md-3"></div>
                         <div class="col-md-6">
@@ -231,11 +230,11 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!-- <script src="js/bootstrap.min.js"></script> -->
   </body>
-
+ 
     <!-- Show Pic Modal -->
         <div class="modal fade" id="show-pic" role="dialog">
             <div class="modal-dialog">
-            
+           
                 <!-- Modal content-->
                 <div class="modal-content">
                 <div class="modal-header">
@@ -245,11 +244,12 @@
                 <div class="modal-body" id="img-select">
                     <input type="file" >
                 </div>
-     		    <div class="modal-footer">
+                <div class="modal-footer">
                     <input type="button" class="btn btn-block btn-primary" (click)="uploadImage()" value="Save"/>
                 </div>
                 </div>
-                
+               
             </div>
             </div>
 </html>
+ 

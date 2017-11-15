@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -15,23 +15,47 @@ import {LoginService} from '../services/login.service';
     public userDetails;
     public HistoricalGiven;
     public HistoricalEarned;
-    public employeeId = new URLSearchParams();
-
+    public employeeId;
+    public teamId;
+    public historyType;
+    public currentView = '';
 
     constructor(private http: Http, private loginservice: LoginService) {}
     redeemCredits(e) {
       // do something here
     }
     public ngOnInit() {
-      this.employeeId = this.loginservice.userDetails.employeeId;
-      this.http.get(localStorage.getItem('serverURL') + 'HistoricalGiven/' + this.employeeId ).subscribe((resp) => {
-      this.HistoricalGiven = resp.json();
-      console.log(this.HistoricalGiven);
-      });
+    this.currentView = localStorage.getItem('Histview');
+    console.log('!!!! localstorage' + localStorage.getItem('Histview'));
+     this.employeeId = this.loginservice.userDetails.employeeId;
+     this.historicalView();
+     this.teamId = localStorage.getItem('teamId');
 
-      // this.http.get('http://localhost:8080/RecognitionTool/HistoricalEarned').subscribe((resp) => {
-        // Read the result field from the JSON response.
-      //  this.HistoricalGiven = resp.json();
-      //});
     }
+
+    public historicalView() {
+      console.log('this.currentView is' + this.currentView );
+      if (this.currentView === 'HistoricalGiven') {
+        (<HTMLInputElement>document.getElementById('radioGiven')).checked = true;
+      this.http.get(localStorage.getItem('serverURL') + 'HistoricalGiven/' + this.employeeId ).subscribe((resp) => {
+        this.HistoricalGiven = resp.json();
+       console.log(this.HistoricalGiven);
+        });
+    } else {
+      (<HTMLInputElement>document.getElementById('radioEarned')).checked = true;
+      this.teamId = localStorage.getItem('teamId');
+      this.http.get(localStorage.getItem('serverURL') + 'HistoricalEarned'
+       + '?empId=' + this.employeeId + '&teamId=' + this.teamId  ).subscribe((resp) => {
+      this.HistoricalEarned = resp.json();
+      });
+    }
+    }
+
+  public onSelectionChange(event) {
+    this.HistoricalGiven = '';
+    this.HistoricalEarned = '';
+    this.currentView = event.srcElement.value;
+    console.log('!!!' + event.srcElement.value);
+    this.historicalView();
+  }
   }
