@@ -35,4 +35,8 @@ public interface EmployeeCreditDao {
 	 */
 	void updateEmpCreditsEarnedBalance(int empId, int credTypeId);
 
+	public int creditBucksAvailable(int empId);
+	
+	public int capOneBucksAvailable(int empId);
+
 }

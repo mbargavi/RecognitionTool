@@ -27,12 +27,13 @@ public class EmployeeCreditDaoImpl implements EmployeeCreditDao{
 		int creditsToGive = jdbcTemplate.queryForObject(sql,Integer.class);
 		return creditsToGive;
 	}
+	@Override
 	public int creditBucksAvailable(int empId) {
 		String sql = "SELECT credit_togive_balance FROM employee_credit WHERE credit_id=1 AND emp_id="+ empId; ;
 		int availableCredits = jdbcTemplate.queryForObject(sql,Integer.class);
 		return availableCredits;
 	}
-
+	@Override
 	public int capOneBucksAvailable(int empId) {
 		String sql = "SELECT credit_togive_balance FROM employee_credit WHERE credit_id=2 AND emp_id="+ empId; ;
 		int availableCredits = jdbcTemplate.queryForObject(sql,Integer.class);
