@@ -29,6 +29,9 @@ export class MainComponent implements OnInit {
   public histEarned;
   public picShowInput = false;
   public currTooltip = 'Test Message';
+  public creditsByType;
+  public credits;
+  public capOneCredits;
   public responseStatus;
   public messageOn = false;
 
@@ -185,7 +188,16 @@ export class MainComponent implements OnInit {
       this.histGiven = this.metrics[0];
       this.histEarned = this.metrics[1];
     });
-
+    this.creditsService.getCreditsToGiveByType().subscribe((resp) => {
+      this.creditsByType = resp.json();
+      console.log('first' + this.creditsByType[0]);
+      console.log('first' + this.creditsByType[1]);
+      localStorage.setItem('currentCredits', this.creditsByType[0]);
+      localStorage.setItem('currentCap1Credits', this.creditsByType[1]);
+      this.credits = this.creditsByType[0];
+      this.capOneCredits = this.creditsByType[1];
+      this.currTooltip = 'Credit Bucks ' +  this.credits + ', ' + 'CapOne Bucks ' + this.capOneCredits;
+    });
     this.getImage();
 
   }

@@ -38,5 +38,6 @@ public interface EmployeeDao {
 	 *               local storage for userDetails and titleid; return is -1 if SQL error
 	 */
 	int updateEmployeeTitle(int empId);
+	
 
 }
