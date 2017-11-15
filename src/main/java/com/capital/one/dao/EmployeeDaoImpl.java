@@ -166,6 +166,155 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		} 
         return null;
 	}
+	
+	@Override
+	public List<Employee> getRecipientList(int nomineeId, int nominatorId){
+		// 1) Use nomineeId and nominatorId to pull back and populate first two employees
+		// 2) Use teamId on both to look up Employee with that teamId and role of Manager to pull back and populate second two employees.
+		// 3) Add Employees to List in correct order: Nominee, Nominator, NomineeManager, NominatorManager
+		
+		List<Employee> recipList = new ArrayList<Employee>();
+		Employee nominee = this.getEmployee(nomineeId);
+		Employee nominator = this.getEmployee(nominatorId);
+		Employee nomineeManager = this.getManager(nominee.getTeamId());
+		Employee nominatorManager = this.getManager(nominator.getTeamId());
+		
+		recipList.add(nominee);
+		recipList.add(nominator);
+		recipList.add(nomineeManager);
+		recipList.add(nominatorManager);
+		
+		return recipList;
+	}
+	
+	private Employee getEmployee(int empId) {
+		
+		// Initialize variables
+				PreparedStatement preparedStmt = null;
+				Connection conn = null;
+				ResultSet prs;
+				Employee employee = new Employee();
+
+					try {
+						conn = DAOUtilities.getConnection();
+						
+
+						String sql = ("SELECT * FROM employee WHERE employee_id=?;");				// set up the prepared statement
+						preparedStmt = conn.prepareStatement(sql);
+						
+						System.out.println(sql);
+						// add the parameters to replace the question marks
+						preparedStmt.setInt(1, empId);
+
+						prs = preparedStmt.executeQuery();
+						
+						prs.next();
+
+
+						log.debug("populating employee");
+						employee.setEmployeeId(prs.getInt("employee_id"));
+						employee.setFirstName(prs.getString("firstname"));
+						employee.setLastName(prs.getString("lastname"));
+						employee.setEmail(prs.getString("email"));
+						employee.setUserName(prs.getString("username"));
+						employee.setRoleId(prs.getInt("roleid"));
+						employee.setTeamId(prs.getInt("teamid"));
+						
+						log.info("Finished populating employee...returning him");
+						
+						return employee;
+
+					}
+					catch (SQLException sqle) {
+						log.error("SQL Exception thrown");
+							sqle.printStackTrace();
+							return null;
+					}
+	}
+	
+	public int getTeamManagerById(int nomineeId) {
+		// Initialize variables
+		PreparedStatement preparedStmt = null;
+		Connection conn = null;
+		ResultSet prs;
+		int employeeId = 0;
+
+			try {
+				conn = DAOUtilities.getConnection();
+				
+
+				String sql = ("SELECT * FROM employee WHERE teamid=? and roleid=3;");				// set up the prepared statement
+				preparedStmt = conn.prepareStatement(sql);
+				
+				System.out.println(sql);
+				// add the parameters to replace the question marks
+				preparedStmt.setInt(1,nomineeId);
+
+				prs = preparedStmt.executeQuery();
+				
+				prs.next();
+
+
+				log.debug("populating manager");
+				employeeId = prs.getInt("employee_id");
+				
+				
+				log.info("Found manager...returning his ID");
+				
+				return employeeId;
+
+			}
+			catch (SQLException sqle) {
+				log.error("SQL Exception thrown");
+					sqle.printStackTrace();
+					return 0;
+			}
+	}
+	
+	private Employee getManager(int teamId) {
+		
+		// Initialize variables
+				PreparedStatement preparedStmt = null;
+				Connection conn = null;
+				ResultSet prs;
+				Employee employee = new Employee();
+
+					try {
+						conn = DAOUtilities.getConnection();
+						
+
+						String sql = ("SELECT * FROM employee WHERE teamid=? and roleid=3;");				// set up the prepared statement
+						preparedStmt = conn.prepareStatement(sql);
+						
+						System.out.println(sql);
+						// add the parameters to replace the question marks
+						preparedStmt.setInt(1, teamId);
+
+						prs = preparedStmt.executeQuery();
+						
+						prs.next();
+
+
+						log.debug("populating manager");
+						employee.setEmployeeId(prs.getInt("employee_id"));
+						employee.setFirstName(prs.getString("firstname"));
+						employee.setLastName(prs.getString("lastname"));
+						employee.setEmail(prs.getString("email"));
+						employee.setUserName(prs.getString("username"));
+						employee.setRoleId(prs.getInt("roleid"));
+						employee.setTeamId(prs.getInt("teamid"));
+						
+						log.info("Finished populating manager...returning him");
+						
+						return employee;
+
+					}
+					catch (SQLException sqle) {
+						log.error("SQL Exception thrown");
+							sqle.printStackTrace();
+							return null;
+					}
+	}
 
 	@Override
 	public int updateEmployeeTitle(int empId) {

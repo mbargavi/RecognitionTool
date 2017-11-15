@@ -23,6 +23,7 @@ import {CreditsService} from './services/credits.service';
 import {HistMetricsService} from './services/histmetrics.service';
 import {ImageService} from './services/image.service';
 import {ChangeTitleService} from './services/changeTitle.service';
+import {EmailService} from './services/email.service';
 
 
 
@@ -53,6 +54,7 @@ import {ChangeTitleService} from './services/changeTitle.service';
     HistMetricsService,
     ImageService,
     ChangeTitleService,
+    EmailService
    ],
   bootstrap: [AppComponent]
 })
