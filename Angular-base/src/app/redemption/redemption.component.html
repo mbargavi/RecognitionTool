@@ -68,9 +68,9 @@
                 </tbody>   
             </table>  
           <div [style.visibility]="(roleId === '2') ? 'visible' : 'hidden'">
-              <form #f="ngForm">
+              <form #f="ngForm" >
               <h6> Please Let Us know which Credits you want to use <br/><br/>
-              <input type="radio" value="Team" name="typeOfCreditsToRedeem" [(ngModel)]="typeOfCreditsToRedeem"> Team
+              <input type="radio" value="Team" name="typeOfCreditsToRedeem" [(ngModel)]="typeOfCreditsToRedeem" (ngModelChange)="creditId()"> Team
               <input type="radio" value="Personal" name="typeOfCreditsToRedeem" [(ngModel)]="typeOfCreditsToRedeem"> Personal</h6>
             </form>
           </div>
