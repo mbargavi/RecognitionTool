@@ -1,79 +1,110 @@
-    <!DOCTYPE html>
-   <!-- <p>{{HistoricalGiven}}</p> -->
-    <table> 
-      <thead>
-      <th>Recognition_Id</th>
-      <th>Emp_Nominator_Id</th>
-      <th>Emp_Nominee_Id</th>
-      <th>Team_Nominee_Id</th>
-      <th>credit_Amount</th>
-      <th>credit_Type_Id</th>
-      <!--<th>date</th>-->
-    </thead>
-    <tbody>
-      <tr *ngFor="let employee of HistoricalGiven">
-        <td>{{employee.recognitionId}}</td>
-        <td>{{employee.empNominatorId}}</td>
-        <td>{{employee.empNomineeId}}</td>
-        <td>{{employee.teamNomineeId}}</td>
-        <td>{{employee.creditAmount}}</td>
-        <td>{{employee.creditTypeId}}</td>
-        <!--<td>{{employee.date}}</td>-->
+<!DOCTYPE html>
+<html lang="en">
+ 
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+   
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  </head>
+  <body class="intro-header">
 
-        <!-- <td>{{employee.recognitionId}}</td> -->
-      </tr> 
-      </tbody>
-    </table>
-    <!-- <html lang="en">
-    
-      <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Appreciation Tool</title>
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-      </head>
-      <body>
-    <div> {{userDetails.employeeId}}</div> -->
-        <!-- Navigation -->
-        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="border:2px solid rgb(130, 231, 83);">
-          <div class="container">
-            <a class="navbar-brand" href="#">Appreciation is an art!</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="border:2px solid rgb(130, 231, 83);">
+      <div class="container">
+        <a class="navbar-brand" href="#/main">Appreciation is an art!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
                   <a class="nav-link" href="#">Logout</a>
                 </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-     -->
-        <!-- Header -->
-        <!-- <header class="intro-header">
-          <div class="container">
-            <div class="intro-message">
-              <ul class="list-inline intro-social-buttons">
-              
-             <form (submit)="redeemCredits($event)">
-                <label class="" for="textinput">Historical Earned</label> <br/>
-                <select id="selectbasic" required name="creditType" >
-                  
-                  <option *ngFor="let item of creditList" placeholder="Select an Option">{{item.creditName}}</option>
-                </select> <br/> <br/>
-                <label class="" for="textinput">Historical Given</label> <br/>
-                <select id="selectbasic" required name="awardType">
-                  <option *ngFor="let award of awardsList"></option>
-                </select> <br/> <br/>
-                <button class="btn btn-success btn-lg"  id="coolbutton" >Back</button> 
-            </form>
-            </ul>
-            </div>
-          </div>
-        </header>
-      </body>
-    </html> -->
+                <li class="nav-item">
+                <a class="nav-link" href="#/main">GoToMain</a>
+              </li>
+            <li class="nav-item">
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="col-md-6">
+      <div id="creditRadio" style="border:1px solid #869dce;"  (change)="onSelectionChange($event)">
+        
+            <label style="padding-left:7px;"><input id="radioGiven" type="radio" value="HistoricalGiven" name="recognitionType">HistoricalGiven</label>
+       
+        
+            <label style="padding-left:7px;"><input id="radioEarned" type="radio" value="HistoricalEarned" name="recognitionType">HistoricalEarned</label>
+     
+        <div *ngIf="historyType" class="text-center" style="color: rgb(117, 231, 117)">Successfull submission!</div>
+       
+        
+        <!-- <div class="radio disabled">
+            <label><input type="radio" name="optradio" disabled>Option 3</label>
+        </div> -->
+    </div>
+  </div>
+  <table *ngIf="HistoricalGiven">
+  
+  
+  </table>
+      <table *ngIf="HistoricalGiven">
+          <thead>
+          <th>Recognition_Id</th>
+          <th>Emp_Nominator_Id</th>
+          <th>Emp_Nominee_Id</th>
+          <th>Team_Nominee_Id</th>
+          <th>credit_Amount</th>
+          <th>credit_Type_Id</th>
+        
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of HistoricalGiven">
+            <td>{{employee.recognitionId}}</td>
+            <td>{{employee.empNominatorId}}</td>
+            <td>{{employee.empNomineeId}}</td>
+            <td>{{employee.teamNomineeId}}</td>
+            <td>${{employee.creditAmount}}</td>
+            <td>{{employee.creditTypeId}}</td>
+          </tr>
+          </tbody>
+        </table>
+      
+     
+          <table *ngIf="HistoricalEarned">
+          <thead>
+          <th>Recognition_Id</th>
+          <th>Emp_Nominee_Id</th>
+          <th>Team_Nominee_Id</th>
+          <th>credit_Amount</th>
+          <th>credit_Type_Id</th>
+          <th>date</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of HistoricalEarned">
+            <td>{{employee.recognitionId}}</td>
+            <td>{{employee.empNomineeId}}</td>
+            <td>{{employee.teamNomineeId}}</td>
+            <td>${{employee.creditAmount}}</td>
+            <td>{{employee.creditTypeId}}</td>
+            <td>{{employee.date}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+  <!-- <html lang="en">
+    <!-- Header -->
+    <header >
+      <div class="container">
+        <div class="intro-message">
+        </div>
+      
+      </div>
+    </header>
+
+  </body>
+</html>

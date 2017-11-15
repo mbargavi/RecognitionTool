@@ -69,9 +69,9 @@ public class RedemptionController {
 			return rs.insertEmpRedeem(redemption);
 	}
 
-	@RequestMapping(value = "/insertTeamRedemptionRequest", method = RequestMethod.POST)
-	public @ResponseBody boolean insertTeamRedemption(@RequestBody Redemption redemption) {
-		System.out.println("in insert Team redemption" + redemption.getTeamRedemptionId());
-		return rs.insertTeamRedeem(redemption);
-	}
+//	@RequestMapping(value = "/insertTeamRedemptionRequest", method = RequestMethod.POST)
+//	public @ResponseBody boolean insertTeamRedemption(@RequestBody Redemption redemption) {
+//		System.out.println("in insert Team redemption" + redemption.getTeamRedemptionId());
+//		return rs.insertTeamRedeem(redemption);
+//	}
 }

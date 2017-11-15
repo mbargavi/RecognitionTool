@@ -39,7 +39,7 @@ export class RedemptionComponent implements OnInit {
       teamRedemptionId: this.teamId,
       creditTypeToUse: this.typeOfCreditsToRedeem
     };
-    this.http.post('http://localhost:8080/RecognitionTool/updateRedemptionRequest', empRedeemObj)
+    this.http.post(localStorage.getItem('serverURL') + 'updateRedemptionRequest', empRedeemObj)
         .subscribe((resp) => {
           const updateEmpRedemption = resp.json();
           if ((resp.status === 200 && updateEmpRedemption === true)) {

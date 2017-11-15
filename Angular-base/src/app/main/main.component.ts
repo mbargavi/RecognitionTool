@@ -32,7 +32,10 @@ export class MainComponent implements OnInit {
   public histGiven;
   public histEarned;
   public picShowInput = false;
-  public currTooltip = 'Test Message';
+  public currTooltip = '';
+  public creditsByType;
+  public credits;
+  public capOneCredits;
   public responseStatus;
   public messageOn = false;
 
@@ -40,7 +43,6 @@ export class MainComponent implements OnInit {
   public baseURL= 'http://heartlandpreciousmetals.com/wp-content/uploads/2014/06/person-placeholder.jpg';
   public profileURL;
   public recipientCount;
-
 
   public message= '';
   public fileSelected = false;
@@ -128,7 +130,7 @@ export class MainComponent implements OnInit {
   addRecognitionObservable(): Observable<any> {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    const body = {	'empNominatorId': this.loginService.userDetails.employeeId,
+    const body = {  'empNominatorId': this.loginService.userDetails.employeeId,
                     'nomineeId': localStorage.getItem('nomineeId'),
                     'creditTypeId': localStorage.getItem('creditsTypeId'),
                     'nominee': localStorage.getItem('nominee')};
@@ -188,24 +190,6 @@ export class MainComponent implements OnInit {
     });
   }
 
-
-
-  // if ((resp.status === 200 )) {
-  //   this.userDetails = resp.json();
-  //   localStorage.setItem('Fname', this.userDetails.firstName);
-  //   localStorage.setItem('Lname', this.userDetails.lastName);
-  //   localStorage.setItem('Title', this.userDetails.title.titleName);
-  //   localStorage.setItem('user', this.userDetails);
-  //   localStorage.setItem('empId', this.userDetails.employeeId);
-  //   localStorage.setItem('teamId', this.userDetails.teamId);
-  //   localStorage.setItem('Title', this.userDetails.title.titleName);
-  //   localStorage.setItem('empId', this.userDetails.employeeId);
-  //   this.router.navigate(['main']);
-  //   console.log(this.userDetails); }},
-  //   (error) => {
-  //      if (error.status === 400) {
-  //         this.message = 'Those credentials were invalid!';
-  //      }
   getValues(): void {
     this.creditsService.getCreditsTogive().subscribe((resp) => {
         this.creditsToGive = resp.json();
@@ -225,7 +209,16 @@ export class MainComponent implements OnInit {
       this.histGiven = this.metrics[0];
       this.histEarned = this.metrics[1];
     });
-
+    this.creditsService.getCreditsToGiveByType().subscribe((resp) => {
+      this.creditsByType = resp.json();
+      console.log('first' + this.creditsByType[0]);
+      console.log('first' + this.creditsByType[1]);
+      localStorage.setItem('currentCredits', this.creditsByType[0]);
+      localStorage.setItem('currentCap1Credits', this.creditsByType[1]);
+      this.credits = this.creditsByType[0];
+      this.capOneCredits = this.creditsByType[1];
+      this.currTooltip = 'Credit Bucks ' +  this.credits + ', ' + 'CapOne Bucks ' + this.capOneCredits;
+    });
     this.getImage();
 
   }
@@ -269,6 +262,14 @@ export class MainComponent implements OnInit {
     //   console.log(this.profileURL);
     // }
   }
+  setHistoricalGiven() {
+    localStorage.setItem('Histview', 'HistoricalGiven');
+    this.router.navigate (['history']);
+  }
+  setHistoricalEarned() {
+   localStorage.setItem('Histview', 'HistoricalEarned');
+   this.router.navigate (['history']);
+}
 
   sendEmail(email): void {
     this.es.sendEmailObservable(email).subscribe((resp) => {
@@ -305,3 +306,4 @@ export class MainComponent implements OnInit {
   }
 
 }
+
