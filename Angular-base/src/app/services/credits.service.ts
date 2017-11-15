@@ -13,13 +13,17 @@ export class CreditsService {
     constructor( @Inject(Http) private http: Http, private loginService: LoginService) {}
 
     getCreditsTogive():  Observable<any> {
-         return this.http.get(localStorage.getItem('serverURL') + 'creditsToGive/' +
-        this.loginService.userDetails.employeeId);
+    return this.http.get(localStorage.getItem('serverURL') + 'creditsToGive/' +
+    this.loginService.userDetails.employeeId);
    }
-   getCreditsEarned():  Observable<any> {
+    getCreditsEarned():  Observable<any> {
     return this.http.get(localStorage.getItem('serverURL') + 'creditsEarned/' +
-   this.loginService.userDetails.employeeId);
-}
+    this.loginService.userDetails.employeeId);
+   }
+    getCreditsToGiveByType():  Observable<any> {
+    return this.http.get(localStorage.getItem('serverURL') + 'creditsToGiveByType/' +
+    this.loginService.userDetails.employeeId);
+   }
 
 
 }
