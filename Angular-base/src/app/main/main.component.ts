@@ -220,7 +220,7 @@ export class MainComponent implements OnInit {
       localStorage.setItem('currentCap1Credits', this.creditsByType[1]);
       this.credits = this.creditsByType[0];
       this.capOneCredits = this.creditsByType[1];
-      this.currTooltip = 'Credit Bucks ' +  this.credits + ', ' + 'CapOne Bucks ' + this.capOneCredits;
+      this.currTooltip = 'Credits: ' +  this.credits + ', ' + 'CapOne Bucks: ' + this.capOneCredits;
     });
     this.getImage();
 
