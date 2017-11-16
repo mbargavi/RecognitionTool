@@ -28,6 +28,7 @@ export class RedemptionComponent implements OnInit {
   public roleId = localStorage.getItem('roleId');
   public firstName = localStorage.getItem('Fname');
   public typeOfCreditsToRedeem = 'Personal';
+  public messageOn = false;
 
   constructor(private http: Http, private router: Router) {}
   public redeemCredits(e) {
@@ -44,9 +45,10 @@ export class RedemptionComponent implements OnInit {
           const updateEmpRedemption = resp.json();
           if ((resp.status === 200 && updateEmpRedemption === true)) {
             this.ngOnInit();
-            this.router.navigate(['main']);
+           // this.router.navigate(['main']);
         }
     });
+    this.messageOn = true;
   }
   public ngOnInit() {
 
