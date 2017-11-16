@@ -21,6 +21,12 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+                <a routerLink="/redeem" class="nav-link">Spend My Credits</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/history" class="nav-link">Recognition History</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="#">Logout</a>
             </li>
           </ul>
@@ -47,14 +53,14 @@
               <div *ngIf="picShowInput" class="col-md-2">
                   <input id="selectFile" type="file" (change)="fileSelected=true"/>
                   <br><br>
-                  <input type="button" class="btn btn-sm btn-primary" value="submit" (click)="uploadImage()"/>
+                  <input type="button" class="btn btn-sm btn-success" value="submit" (click)="uploadImage()"/>
                   <br><br>
                   <input type="button" class="btn btn-sm btn-warning" value="cancel" (click)="picShowInput=false;"/>
                 </div>
               <div class = "col-md-7">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h1>Welcome {{Title}} {{Fname}} {{Lname}}!</h1>
+                        <h1>Welcome <span class="font-italic" style="color:rgb(130, 231, 83)">{{Title}}</span> {{Fname}} {{Lname}}!</h1>
                     </div>
                 </div>
                 <br>
@@ -203,7 +209,7 @@
                                     </label>
                                 </div>
                                 <div>
-                                  <input type="button" id="recButton" data-toggle="tooltip" data-placement="top" title="{{currTooltip}}" class="btn btn-block btn-primary disabled" (click)="addRecognition()" value="Give Recognition"/>
+                                  <input type="button" id="recButton" data-toggle="tooltip" data-placement="top" title="{{currTooltip}}" class="btn btn-block disabled" (click)="addRecognition()" value="Give Recognition"/>
                                   <div *ngIf="messageOn" class="text-center" style="color: rgb(117, 231, 117)">Successfull submission!</div>
                                   <div *ngIf="this.addRecognitionStatus == true" style="color:red;" >{{errorMessage}}</div>
                                   </div>
