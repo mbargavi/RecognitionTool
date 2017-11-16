@@ -1,8 +1,11 @@
 package com.capital.one.controller;
 
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,7 +66,7 @@ public class RedemptionController {
 	@RequestMapping(value = "/updateRedemptionRequest", method = RequestMethod.POST)
 	public @ResponseBody boolean updateRedemption(@RequestBody Redemption redemption) {
 		System.out.println("in insert redemption" + redemption.getCreditTypeToUse());
-		if (redemption.getCreditTypeToUse() == "Team") {
+		if (StringUtils.equalsIgnoreCase(redemption.getCreditTypeToUse(), "Team")) {
 			return rs.insertTeamRedeem(redemption);
 		} else
 			return rs.insertEmpRedeem(redemption);

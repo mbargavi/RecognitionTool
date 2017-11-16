@@ -44,7 +44,7 @@ public class RedeemService {
 	}
 
 	public boolean insertEmpRedeem(Redemption redemption) {
-		log.debug("Redeeming " + redemption.getAwardTypeId());
+		log.debug("Redeeming Employee: " + redemption.getAwardTypeId());
 		int empRedeemerId = redemption.getEmpRedeemerId();
 		int creditTypeId = redemption.getCreditTypeId();
 		int awardTypeId = redemption.getAwardTypeId();
@@ -58,7 +58,7 @@ public class RedeemService {
 	}
 
 	public boolean insertTeamRedeem(Redemption redemption) {
-		log.debug("Redeeming " + redemption.getAwardTypeId());
+		log.debug("Redeeming Team: " + redemption.getAwardTypeId());
 //		int empRedeemerId = redemption.getEmpRedeemerId();
 		int creditTypeId = redemption.getCreditTypeId();
 		int awardTypeId = redemption.getAwardTypeId();
