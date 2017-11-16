@@ -82,13 +82,13 @@
           </div>
           <form #redeemForm="ngForm" name="redeemCredits" (ngSubmit)="redeemCredits($event)">  
             <label class="" for="textinput">Select Which Credits you want to Redeem today</label> <br/>        
-            <select id="creditId" required name="creditType" class="" [(ngModel)]="selectedCredit" (ngModelChange)="creditId()">
-              <option [disabled]="true" [selected]="true">Select an Option</option>
+            <select id="creditId" required name="creditType" [(ngModel)]="selectedCredit" (ngModelChange)="creditId()">
+              <option [ngValue]="undefined" [disabled]="true" [selected]="true">Select an Option</option>
               <option [ngValue]="item" *ngFor="let item of creditList">{{item.creditName}}</option>
             </select> <br/> <br/>
-            <label class="" for="textinput">What you like to get today</label> <br/>
-            <select id="awardId" name="awardType" class="" required [(ngModel)]="selectedAward">
-              <option [disabled]="true" [selected]="true">Select an Option</option>
+            <label class="" for="textinput">What would you like to get today</label> <br/>
+            <select id="awardId" name="awardType" required [(ngModel)]="selectedAward">
+              <option [ngValue]="undefined" [disabled]="true" [selected]="true">Select an Option</option>
               <option [ngValue]="award" *ngFor="let award of awardsList" >{{award.awardName}} - {{award.creditCost}}</option>
             </select> <br/> <br/>
             <div *ngIf="messageOn" class="text-center" style="color: rgb(117, 231, 117)">Successfull submission!</div>
