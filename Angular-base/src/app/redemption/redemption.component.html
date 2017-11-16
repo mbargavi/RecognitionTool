@@ -9,12 +9,12 @@
     <title>Appreciation Tool</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
   </head>
-  <body>
+  <body class="intro-header">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="border:2px solid rgb(130, 231, 83);">
       <div class="container">
-        <span class="navbar-brand">Appreciation is an art!</span>
+        <span class="navbar-brand" href="#/main">Appreciation is an art!</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -95,7 +95,7 @@
             <button class="btn btn-success"  id="redeemSubmit" type="submit" [disabled]="!redeemForm.form.valid">Submit</button> 
             <a routerLink="/main"><button class="btn btn-secondary" id="redeemCancel">Cancel</button> </a>
         </form>
-      </div>
+	  </div>
     </header>
   </body>
 </html>
