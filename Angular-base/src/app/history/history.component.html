@@ -51,25 +51,19 @@
   </div>
   <table *ngIf="HistoricalGiven"  [style.width.%]="70" align="center">
           <thead>
-          <th>Recognition Id</th>
-          <th>EmpNominator Id</th>
-          <th>EmpNominee Id</th>
-          <th>TeamNominee Id</th>
+          <th>Nominee</th>
+          <th>Nominee Type</th>
           <th>Credit Amount</th>
           <th>Credit Type</th>
+          <th>Recognition Date</th>
         </thead>
         <tbody>
-          <tr *ngFor="let employee of HistoricalGiven">
-            <td>{{employee.recognitionId}}</td>
-            <td>{{employee.empNominatorId}}</td>
-            <td>{{employee.empNomineeId}}</td>
-            <td>{{employee.teamNomineeId}}</td>
-            <td>{{employee.creditAmount}}</td>
-            <td>
-                  <span *ngIf="employee.creditTypeId === 1"> Credit </span>
-                  <span *ngIf="employee.creditTypeId === 2"> CapOne Bucks </span>
-                </td>
-                
+          <tr *ngFor="let recognition of HistoricalGiven">
+            <td>{{recognition[0]}}</td>
+            <td>{{recognition[1]}}</td>
+            <td>{{recognition[2]}}</td>
+            <td>{{recognition[3]}}</td>
+            <td>{{recognition[4]}}</td>               
           </tr>
           </tbody>
         </table>
@@ -77,23 +71,19 @@
      
           <table *ngIf="HistoricalEarned" [style.width.%]="70" align="center">
           <thead>
-          <th>Recognition Id</th>
-          <th>EmpNominee Id</th>
-          <th>TeamNominee Id</th>
+          <th>Nominator</th>
+          <th>Nominee Type</th>
           <th>Credit Amount</th>
           <th>Credit Type</th>
+          <th>Recognition Date</th>
         </thead>
         <tbody>
-          <tr *ngFor="let employee of HistoricalEarned">
-            <td>{{employee.recognitionId}}</td>
-            <td>{{employee.empNomineeId}}</td>
-            <td>{{employee.teamNomineeId}}</td>
-            <td>{{employee.creditAmount}}</td>
-            <td>
-                  <span *ngIf="employee.creditTypeId === 1"> Credit </span>
-                  <span *ngIf="employee.creditTypeId === 2"> CapOne Bucks </span>
-                </td>
-                
+          <tr *ngFor="let recognition of HistoricalEarned">
+            <td>{{recognition[0]}}</td>
+            <td>{{recognition[1]}}</td>
+            <td>{{recognition[2]}}</td>
+            <td>{{recognition[3]}}</td>
+            <td>{{recognition[4]}}</td>             
           </tr>
           </tbody>
         </table>

@@ -13,6 +13,9 @@
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
   }
+  #redeemSubmit{
+    background-color:rgb(130, 231, 83)
+  }
   
   .intro-header {
     /* padding-top: 50px; */

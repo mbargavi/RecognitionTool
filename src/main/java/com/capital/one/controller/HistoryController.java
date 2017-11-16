@@ -21,16 +21,16 @@ public class HistoryController {
 	HistoryService hs;
 
 	@RequestMapping(value = "/HistoricalGiven/{empId}", method = RequestMethod.GET)
-	public @ResponseBody List<Recognition> getRecognitionsgivenhistory(@PathVariable("empId") int empID) {
-		List<Recognition> myrecog = hs.getRecognitionsGiven(empID);
+	public @ResponseBody List<String[]> getRecognitionsgivenhistory(@PathVariable("empId") int empID) {
+		List<String[]> myrecog = hs.getRecognitionsGiven(empID);
 		return myrecog;
 
 	}
 
 	@RequestMapping(value = "/HistoricalEarned", method = RequestMethod.GET)
-	public @ResponseBody List<Recognition> getRecognitionsEarnedhistory(int empId, int teamId) {
+	public @ResponseBody List<String[]> getRecognitionsEarnedhistory(int empId, int teamId) {
 		System.out.println("In History controller" + empId + teamId);
-		List<Recognition> myrecog = hs.getRecognitionsEarned(empId, teamId);
+		List<String[]> myrecog = hs.getRecognitionsEarned(empId, teamId);
 		return myrecog;
 	}
 

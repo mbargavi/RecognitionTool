@@ -122,6 +122,7 @@ public class RecognitionDaoImpl implements RecognitionDao{
 	creditEarned.setTeamNomineeId(rs.getInt("team_nominee_id"));
 	creditEarned.setCreditAmount(rs.getInt("credit_amount"));
 	creditEarned.setCreditTypeId(rs.getInt("credit_type_id"));
+	creditEarned.setDate(rs.getDate("recognition_date").toLocalDate());
 	
 
 	return creditEarned;
