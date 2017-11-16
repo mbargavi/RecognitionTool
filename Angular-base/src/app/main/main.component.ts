@@ -49,6 +49,7 @@ export class MainComponent implements OnInit {
   public errorMessage;
   public addRecognitionStatus = false;
   public creditText;
+  private recButtonClasses;
 
    constructor(private loginService: LoginService,
                private creditsService: CreditsService,
@@ -64,7 +65,21 @@ export class MainComponent implements OnInit {
 
   public ngOnInit() {
     this.getValues();
+    this.recButtonClasses = document.getElementById('recButton').classList;
 
+  }
+
+  public change() {
+    this.checkRecognitionReadiness();
+    if (localStorage.getItem('recReadiness') === 'true') {
+      if (this.recButtonClasses.contains('disabled')) {
+        this.recButtonClasses.remove('disabled');
+      }
+    } else {
+      if (!(this.recButtonClasses.contains('disabled'))) {
+        this.recButtonClasses.add('disabled');
+      }
+    }
   }
 
   inputPic() {
@@ -101,24 +116,12 @@ export class MainComponent implements OnInit {
   public onSelectionChange(event) {
     localStorage.setItem('creditsTypeId', event.srcElement.value);
     console.log(localStorage.getItem('creditsTypeId'));
+    this.change();
   }
 
   addRecognition() {
-    if ((<HTMLInputElement>document.getElementById('commBox')).checked === true ||
-         ((<HTMLInputElement>document.getElementById('custBox')).checked === true ) ||
-         ((<HTMLInputElement>document.getElementById('judgeBox')).checked === true ) ||
-         ((<HTMLInputElement>document.getElementById('jobBox')).checked === true ) ||
-         ((<HTMLInputElement>document.getElementById('valueBox')).checked === true ) ||
-         ((<HTMLInputElement>document.getElementById('teamBox')).checked === true )) {
-      localStorage.setItem('competencySelected', 'true');
-      this.buildCompetencyString();
-    } else {
-      localStorage.setItem('competencySelected', 'false');
-    }
-    if ((localStorage.getItem('nomineeSelected') === 'true') &&
-        (!(localStorage.getItem('creditsTypeId') === null)) &&
-        (!((<HTMLInputElement>document.getElementById('primaryFeedback')).value === '')) &&
-        (localStorage.getItem('competencySelected') === 'true')) {
+    this.checkRecognitionReadiness();
+    if (localStorage.getItem('recReadiness') === 'true') {
       this.getAddRecognitionResponse();
     }else {
       // They haven't input all the values needed to make a recognition
@@ -304,6 +307,28 @@ export class MainComponent implements OnInit {
     competencyString += '</ul><br>';
     localStorage.setItem('competencyString', competencyString);
   }
+
+  checkRecognitionReadiness() {
+        if ((<HTMLInputElement>document.getElementById('commBox')).checked === true ||
+        ((<HTMLInputElement>document.getElementById('custBox')).checked === true ) ||
+        ((<HTMLInputElement>document.getElementById('judgeBox')).checked === true ) ||
+        ((<HTMLInputElement>document.getElementById('jobBox')).checked === true ) ||
+        ((<HTMLInputElement>document.getElementById('valueBox')).checked === true ) ||
+        ((<HTMLInputElement>document.getElementById('teamBox')).checked === true )) {
+          localStorage.setItem('competencySelected', 'true');
+          this.buildCompetencyString();
+        } else {
+        localStorage.setItem('competencySelected', 'false');
+        }
+        if ((localStorage.getItem('nomineeSelected') === 'true') &&
+          (!(localStorage.getItem('creditsTypeId') === null)) &&
+          (!((<HTMLInputElement>document.getElementById('primaryFeedback')).value === '')) &&
+          (localStorage.getItem('competencySelected') === 'true')) {
+            localStorage.setItem('recReadiness', 'true');
+        } else {
+          localStorage.setItem('recReadiness', 'false');
+        }
+      }
 
 }
 

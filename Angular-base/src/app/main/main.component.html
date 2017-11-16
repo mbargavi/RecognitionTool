@@ -74,7 +74,7 @@
                   <div class="container sub-container left-top">
                       <div class="row">
                           <div class="col-md-12">
-                                <app-search></app-search>
+                                <app-search (change)="change()"></app-search>
                           </div>
                       </div>
                       <div class="row">
@@ -82,22 +82,22 @@
                               <div class="container">
                                   <div class="row">
                                       <div class="col-md-2 checkbox">
-                                          <input id="commBox" type="checkbox">
+                                          <input id="commBox" type="checkbox" (change)="change()">
                                       </div>
                                       <div class="col-md-2 checkbox">
-                                            <input id="custBox" type="checkbox">
+                                            <input id="custBox" type="checkbox" (change)="change()">
                                       </div>
                                       <div class="col-md-2 checkbox">
-                                        <input id="judgeBox" type="checkbox">
+                                        <input id="judgeBox" type="checkbox" (change)="change()">
                                       </div>
                                       <div class="col-md-2 checkbox">
-                                            <input id="jobBox" type="checkbox">
+                                            <input id="jobBox" type="checkbox" (change)="change()">
                                       </div>
                                       <div class="col-md-2 checkbox">
-                                            <input id="valueBox" type="checkbox">
+                                            <input id="valueBox" type="checkbox" (change)="change()">
                                       </div>
                                       <div class="col-md-2 checkbox">
-                                            <input id="teamBox" type="checkbox">
+                                            <input id="teamBox" type="checkbox" (change)="change()">
                                       </div>
                                   </div>
                                   <div class="row" style="font-size:10px">
@@ -127,7 +127,7 @@
                             <div class="col-md-12">
                                   <div class="form-group">
                                       <label>Feedback for Nominee</label>
-                                      <textarea id="primaryFeedback" class="form-control" style="height:168px" placeholder="Recognition Feedback"></textarea>
+                                      <textarea id="primaryFeedback" (change)="change()" (keyup)="change()" class="form-control" style="height:168px" placeholder="Recognition Feedback"></textarea>
                                   </div>
                             </div>
                       </div>
@@ -202,7 +202,7 @@
                                     </label>
                                 </div>
                                 <div>
-                                  <input type="button" class="btn btn-block btn-primary" (click)="addRecognition()" value="Give Recognition"/>
+                                  <input type="button" id="recButton" class="btn btn-block btn-primary disabled" (click)="addRecognition()" value="Give Recognition"/>
                                   <div *ngIf="messageOn" class="text-center" style="color: rgb(117, 231, 117)">Successfull submission!</div>
                                   <div *ngIf="this.addRecognitionStatus == true" style="color:red;" >{{errorMessage}}</div>
                                   </div>
