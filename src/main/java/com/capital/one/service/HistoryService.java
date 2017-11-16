@@ -23,24 +23,79 @@ public class HistoryService {
 //	RecognitionDao recDao = DAOUtilities.getRecognitionDao();
 	EmployeeDao empDao = DAOUtilities.getEmployeeDao();
 	
-	public List<Recognition> getRecognitionsGiven(int empId) {
+	public List<String[]> getRecognitionsGiven(int empId) {
 		List<Recognition> givenList = new ArrayList<Recognition>();
 		givenList = recDao.getHistoricalGiven(empId).stream()
 				.filter(element -> element.getEmpNominatorId()==empId)
 				.collect(Collectors.toList());
 		
-		return givenList;
+		List<String[]> recStringList = new ArrayList<>();
+		
+		for (Recognition item: givenList) {
+			String[] recStringArray = new String[5];
+			String tempName;
+			String recType;
+			if (item.getEmpNomineeId() == 0) {
+				tempName = empDao.getTeam(item.getTeamNomineeId()).getTeamName();
+				recType = "Team";
+			}
+			else {
+				tempName = empDao.getEmployee(item.getEmpNomineeId()).getFirstName() + " " + empDao.getEmployee(item.getEmpNomineeId()).getLastName();
+				recType = "Employee";
+			}
+			recStringArray[0] = tempName;
+			recStringArray[1] = recType;
+			recStringArray[2] = String.valueOf(item.getCreditAmount());
+			
+			if (item.getCreditTypeId() == 1) {
+				recStringArray[3] = "Credits";
+			}
+			else {
+				recStringArray[3] = "Cap One Bucks";
+			}
+			recStringArray[4] = String.valueOf(item.getDate());
+			
+			recStringList.add(recStringArray);
+		}
+		
+		return recStringList;
 	}
 
-	public List<Recognition> getRecognitionsEarned(int empId, int teamId) {
+	public List<String[]> getRecognitionsEarned(int empId, int teamId) {
 		System.out.println("recognition earned!!!! serviice" + empId + teamId);
 		List<Recognition> earnedList = new ArrayList<Recognition>();
 		
 		earnedList = recDao.getHistoricalEarned(empId, teamId).stream()
 				.filter(element -> (element.getEmpNomineeId()==empId || element.getTeamNomineeId()==teamId))
 				.collect(Collectors.toList());
+			
+		List<String[]> recStringList = new ArrayList<>();
 		
-		return earnedList;
+		for (Recognition item: earnedList) {
+			String[] recStringArray = new String[5];
+			String recType;
+			if (item.getEmpNomineeId() == 0) {
+				recType = "Team";
+			}
+			else {
+				recType = "Employee";
+			}
+			recStringArray[0] = empDao.getEmployee(item.getEmpNominatorId()).getFirstName() + " " + empDao.getEmployee(item.getEmpNominatorId()).getLastName();
+			recStringArray[1] = recType;
+			recStringArray[2] = String.valueOf(item.getCreditAmount());
+			
+			if (item.getCreditTypeId() == 1) {
+				recStringArray[3] = "Credits";
+			}
+			else {
+				recStringArray[3] = "Cap One Bucks";
+			}
+			recStringArray[4] = String.valueOf(item.getDate());
+			
+			recStringList.add(recStringArray);
+		}
+		
+		return recStringList;
 	}
 
 	

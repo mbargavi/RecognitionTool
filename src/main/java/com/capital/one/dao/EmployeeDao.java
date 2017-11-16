@@ -3,6 +3,7 @@ package com.capital.one.dao;
 import java.util.List;
 
 import com.capital.one.datamodelbeans.Employee;
+import com.capital.one.datamodelbeans.Team;
 
 public interface EmployeeDao {
 	
@@ -48,6 +49,10 @@ public interface EmployeeDao {
 	List<Employee> getRecipientList(int nomineeId, int nominatorId);
 	
 	int getTeamManagerById(int nomineeId);
+	
+	public Employee getEmployee(int empId);
+	
+	public Team getTeam(int teamId);
 
 
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.capital.one.datamodelbeans.Employee;
+import com.capital.one.datamodelbeans.Team;
 import com.capital.one.datamodelbeans.Title;
 
 
@@ -187,7 +188,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return recipList;
 	}
 	
-	private Employee getEmployee(int empId) {
+	public Employee getEmployee(int empId) {
 		
 		// Initialize variables
 				PreparedStatement preparedStmt = null;
@@ -223,6 +224,48 @@ public class EmployeeDaoImpl implements EmployeeDao {
 						log.info("Finished populating employee...returning him");
 						
 						return employee;
+
+					}
+					catch (SQLException sqle) {
+						log.error("SQL Exception thrown");
+							sqle.printStackTrace();
+							return null;
+					}
+	}
+	
+public Team getTeam(int teamId) {
+		
+		// Initialize variables
+				PreparedStatement preparedStmt = null;
+				Connection conn = null;
+				ResultSet prs;
+				Team team = new Team();
+
+					try {
+						conn = DAOUtilities.getConnection();
+						
+
+						String sql = ("SELECT * FROM team WHERE team_id=?;");				// set up the prepared statement
+						preparedStmt = conn.prepareStatement(sql);
+						
+						System.out.println(sql);
+						// add the parameters to replace the question marks
+						preparedStmt.setInt(1, teamId);
+
+						prs = preparedStmt.executeQuery();
+						
+						prs.next();
+
+
+						log.debug("populating employee");
+						team.setTeamId(prs.getInt("team_id"));
+						team.setTeamName(prs.getString("team_name"));
+						team.setTeamEmail(prs.getString("team_email"));
+
+						
+						log.info("Finished populating team..returning it");
+						
+						return team;
 
 					}
 					catch (SQLException sqle) {

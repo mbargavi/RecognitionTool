@@ -47,6 +47,7 @@ import {LoginService} from '../services/login.service';
       this.http.get(localStorage.getItem('serverURL') + 'HistoricalEarned'
        + '?empId=' + this.employeeId + '&teamId=' + this.teamId  ).subscribe((resp) => {
       this.HistoricalEarned = resp.json();
+      console.log(this.HistoricalEarned);
       });
     }
     }

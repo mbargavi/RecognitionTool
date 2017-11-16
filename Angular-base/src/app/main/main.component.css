@@ -12,6 +12,9 @@ body, h1, h2, h3, h4, h5, h6 {
 #recButton{
   background-color:rgb(205, 241, 44)
 }
+#spendButton{
+  background-color:rgb(130, 231, 83)
+}
 
 .top{
   margin-top:0%;
