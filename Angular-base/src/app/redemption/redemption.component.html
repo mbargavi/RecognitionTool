@@ -91,6 +91,7 @@
               <option [disabled]="true" [selected]="true">Select an Option</option>
               <option [ngValue]="award" *ngFor="let award of awardsList" >{{award.awardName}} - {{award.creditCost}}</option>
             </select> <br/> <br/>
+            <div *ngIf="messageOn" class="text-center" style="color: rgb(117, 231, 117)">Successfull submission!</div>
             <button class="btn btn-success"  id="redeemSubmit" type="submit" [disabled]="!redeemForm.form.valid">Submit</button> 
             <a routerLink="/main"><button class="btn btn-secondary" id="redeemCancel">Cancel</button> </a>
         </form>
