@@ -91,9 +91,11 @@
             <label class="" for="textinput">What would you like to get today</label> <br/>
             <select id="awardId" name="awardType" required [(ngModel)]="selectedAward">
               <option [ngValue]="undefined" [disabled]="true" [selected]="true">Select an Option</option>
+              <!-- <div *ngIf="awardsList"> -->
               <option [ngValue]="award" *ngFor="let award of awardsList" >{{award.awardName}} - {{award.creditCost}}</option>
+             <!-- </div> -->
             </select> <br/> <br/>
-            <div *ngIf="messageOn" class="text-center" style="color: rgb(117, 231, 117)">Successfull submission!</div>
+            <div *ngIf="messageOn" class="text-center" style="color: rgb(117, 231, 117)">Successfully submitted Redemption, your gift is on the way!!</div> <br/>
             <button class="btn btn-success"  id="redeemSubmit" type="submit" [disabled]="!redeemForm.form.valid">Submit</button> 
             <a routerLink="/main"><button class="btn btn-secondary" id="redeemCancel">Cancel</button> </a>
         </form>
