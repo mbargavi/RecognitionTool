@@ -176,6 +176,9 @@ export class MainComponent implements OnInit {
         emailForm.append('credits', this.creditText);
         emailForm.append('entityType', localStorage.getItem('nominee'));
         this.clearValues();
+        if (!(this.recButtonClasses.contains('disabled'))) {
+          this.recButtonClasses.add('disabled');
+        }
         console.log(emailForm);
         this.es.sendEmailObservable(emailForm).subscribe((response) => {
           console.log(response.json);
