@@ -18,12 +18,13 @@
   }
   
   .intro-header {
-    padding-top: 50px;
-    padding-bottom: 50px;
+    /* padding-top: 50px; */
+    /* padding-bottom: 50px; */
     text-align: center;
     color: #f8f8f8;
     background: url(images/intro-bg.jpg) no-repeat center center;
     background-size: cover;
+    padding-bottom:400px;
   }
   
   .intro-message {
