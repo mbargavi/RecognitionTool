@@ -44,11 +44,15 @@ export class RedemptionComponent implements OnInit {
         .subscribe((resp) => {
           const updateEmpRedemption = resp.json();
           if ((resp.status === 200 && updateEmpRedemption === true)) {
-            this.ngOnInit();
-           // this.router.navigate(['main']);
+            // this.ngOnInit();
+            // this.creditId();
+            // this.messageOn = true;
+            // (<HTMLInputElement>document.getElementById('creditId')).value = undefined;
+            // (<HTMLInputElement>document.getElementById('awardId')).value = undefined;
+            // this.awardsList = null;
+            this.router.navigate(['main']);
         }
     });
-    this.messageOn = true;
   }
   public ngOnInit() {
 
@@ -82,20 +86,16 @@ export class RedemptionComponent implements OnInit {
     }
 
   public creditEarnedAmount(a: number) {
-    console.log(this.typeOfCreditsToRedeem);
     if (this.typeOfCreditsToRedeem === 'Team') {
-      console.log(this.typeOfCreditsToRedeem);
       this.teamCreditsList.forEach((element) => {
         if (element.creditId === a ) {
           this.earnedCredit = element.creditEarnedBalance;
-          console.log('Team' + this.earnedCredit);
         }
       });
     } else {
       this.empCreditsList.forEach((element) => {
         if (element.credit_id === a ) {
           this.earnedCredit = element.creditEarnedBalance;
-          console.log('employee' + this.earnedCredit);
         }
       });
     }
