@@ -33,7 +33,7 @@
       </div>
     </nav>
     <div class="col-md-6">
-      <div id="creditRadio" style="border:1px solid #869dce;"  (change)="onSelectionChange($event)">
+      <div id="creditRadio" (change)="onSelectionChange($event)">
         
             <label style="padding-left:7px;"><input id="radioGiven" type="radio" value="HistoricalGiven" name="recognitionType">HistoricalGiven</label>
        
@@ -48,19 +48,14 @@
         </div> -->
     </div>
   </div>
-  <table *ngIf="HistoricalGiven">
-  
-  
-  </table>
-      <table *ngIf="HistoricalGiven">
+  <table *ngIf="HistoricalGiven"  [style.width.%]="70" align="center">
           <thead>
-          <th>Recognition_Id</th>
-          <th>Emp_Nominator_Id</th>
-          <th>Emp_Nominee_Id</th>
-          <th>Team_Nominee_Id</th>
-          <th>credit_Amount</th>
-          <th>credit_Type_Id</th>
-        
+          <th>Recognition Id</th>
+          <th>EmpNominator Id</th>
+          <th>EmpNominee Id</th>
+          <th>TeamNominee Id</th>
+          <th>Credit Amount</th>
+          <th>Credit Type</th>
         </thead>
         <tbody>
           <tr *ngFor="let employee of HistoricalGiven">
@@ -68,36 +63,41 @@
             <td>{{employee.empNominatorId}}</td>
             <td>{{employee.empNomineeId}}</td>
             <td>{{employee.teamNomineeId}}</td>
-            <td>${{employee.creditAmount}}</td>
-            <td>{{employee.creditTypeId}}</td>
+            <td>{{employee.creditAmount}}</td>
+            <td>
+                  <span *ngIf="employee.creditTypeId === 1"> Credit </span>
+                  <span *ngIf="employee.creditTypeId === 2"> CapOne Bucks </span>
+                </td>
+                
           </tr>
           </tbody>
         </table>
       
      
-          <table *ngIf="HistoricalEarned">
+          <table *ngIf="HistoricalEarned" [style.width.%]="70" align="center">
           <thead>
-          <th>Recognition_Id</th>
-          <th>Emp_Nominee_Id</th>
-          <th>Team_Nominee_Id</th>
-          <th>credit_Amount</th>
-          <th>credit_Type_Id</th>
-          <th>date</th>
+          <th>ecognition Id</th>
+          <th>EmpNominee Id</th>
+          <th>TeamNominee Id</th>
+          <th>Credit Amount</th>
+          <th>Credit Type</th>
         </thead>
         <tbody>
           <tr *ngFor="let employee of HistoricalEarned">
             <td>{{employee.recognitionId}}</td>
             <td>{{employee.empNomineeId}}</td>
             <td>{{employee.teamNomineeId}}</td>
-            <td>${{employee.creditAmount}}</td>
-            <td>{{employee.creditTypeId}}</td>
-            <td>{{employee.date}}</td>
+            <td>{{employee.creditAmount}}</td>
+            <td>
+                  <span *ngIf="employee.creditTypeId === 1"> Credit </span>
+                  <span *ngIf="employee.creditTypeId === 2"> CapOne Bucks </span>
+                </td>
+                
           </tr>
           </tbody>
         </table>
-
   <!-- <html lang="en">
-    <!-- Header -->
+    <!-Header-->
     <header >
       <div class="container">
         <div class="intro-message">
