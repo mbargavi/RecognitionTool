@@ -38,8 +38,8 @@
           <ul class="list-inline intro-social-buttons">
           
             <form #loginForm="ngForm" (submit)="loginUser($event)">
-          <input type="text" id="UserId" name="UserId" class="btn btn-secondary btn-lg" placeholder="Username" required [(ngModel)]="Username" >
-          <input type="password" id="Password" name="Password" class="btn btn-secondary btn-lg" placeholder="Password" required [(ngModel)]="Password">
+          <input type="text" id="UserId" name="UserId" class="btn btn-secondary btn-lg" placeholder="Username" required [(ngModel)]="username" >
+          <input type="password" id="Password" name="Password" class="btn btn-secondary btn-lg" placeholder="Password" required [(ngModel)]="password">
           <button class="btn btn-secondary btn-lg"  id="coolbutton" [disabled]="!loginForm.form.valid"  >Sign in</button> 
           </form>
         </ul>

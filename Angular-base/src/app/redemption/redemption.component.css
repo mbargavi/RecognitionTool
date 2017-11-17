@@ -16,6 +16,14 @@
   #redeemSubmit{
     background-color:rgb(130, 231, 83)
   }
+
+  .giftpic {
+    width:200px;
+    height:200px;
+    border-radius: 20px;
+    box-sizing: content-box;
+    border: 1px solid black;
+   }
   
   .intro-header {
     /* padding-top: 50px; */

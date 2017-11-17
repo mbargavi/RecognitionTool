@@ -14,8 +14,21 @@ table, th , td  {
   border: 1px solid grey;
   border-collapse: collapse;
   padding: 5px;
- 
 
+}
+
+tbody {
+  display:block;
+  height:650px;
+  overflow:auto;
+}
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+th{
+  background-color:rgb(26, 71, 3);
 }
 
 body, h1, h2, h3, h4, h5, h6 {
@@ -111,7 +124,7 @@ body, h1, h2, h3, h4, h5, h6 {
   padding: 100px 0;
   color: #f8f8f8;
   background: url(images/banner-bg.jpg) no-repeat center center;
-  background-size: cover;
+  background-size: 100% 100%;
 }
 
 .banner h2 {
