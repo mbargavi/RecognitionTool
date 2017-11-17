@@ -46,17 +46,23 @@ export class RedemptionComponent implements OnInit {
         .subscribe((resp) => {
           const updateEmpRedemption = resp.json();
           if ((resp.status === 200 && updateEmpRedemption === true)) {
-            // this.ngOnInit();
-            // this.creditId();
-            // this.messageOn = true;
+             this.ngOnInit();
+             this.creditId();
+             //localStorage.setItem('messageOn', 'true');
+             //console.log('just set localStorage messageOn = ' + localStorage.getItem('messageOn'));
+             this.messageOn = true;
             // (<HTMLInputElement>document.getElementById('creditId')).value = undefined;
             // (<HTMLInputElement>document.getElementById('awardId')).value = undefined;
             // this.awardsList = null;
-            this.router.navigate(['main']);
+            //this.router.navigate(['main']);
         }
     });
   }
   public ngOnInit() {
+
+    // this.messageOn = localStorage.getItem('messageOn');
+    // console.log('ngOnInit setting value of messageOn = ' + this.messageOn);
+
     if (localStorage.getItem('env') === 'test') {
       this.giftURL = 'assets/images/genericgift.jpg';
     }else {
