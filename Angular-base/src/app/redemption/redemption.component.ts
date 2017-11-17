@@ -29,7 +29,7 @@ export class RedemptionComponent implements OnInit {
   public firstName = localStorage.getItem('Fname');
   public typeOfCreditsToRedeem = 'Personal';
   public messageOn = false;
-  public giftURL = 'assets/images/genericgift.jpg';
+  public giftURL = '';
   // public giftURL = 'assets/images/cup.jpg';
 
   constructor(private http: Http, private router: Router) {}
@@ -57,6 +57,12 @@ export class RedemptionComponent implements OnInit {
     });
   }
   public ngOnInit() {
+    if (localStorage.getItem('env') === 'test') {
+      this.giftURL = 'assets/images/genericgift.jpg';
+    }else {
+      this.giftURL = '././assets/images/genericgift.jpg';
+    }
+
 
     this.http.get(localStorage.getItem('serverURL') + 'creditType').subscribe((resp) => {
       this.creditList = resp.json();
@@ -78,7 +84,11 @@ export class RedemptionComponent implements OnInit {
   public getGift(event) {
 
     if (this.selectedAward === undefined) {
-      this.giftURL = 'assets/images/' + event.srcElement.id + '.jpg';
+      if (localStorage.getItem('env') === 'test') {
+        this.giftURL = 'assets/images/' + event.srcElement.id + '.jpg';
+      }else {
+        this.giftURL = '././assets/images/' + event.srcElement.id + '.jpg';
+      }
     }
   }
 
@@ -86,22 +96,42 @@ export class RedemptionComponent implements OnInit {
 
     if (this.selectedAward === undefined) {
       if (event.srcElement.id === '1') {
-        this.giftURL = 'assets/images/giftcard.png';
+        if (localStorage.getItem('env') === 'test') {
+          this.giftURL = 'assets/images/giftcard.png';
+        }else {
+          this.giftURL = '././assets/images/giftcard.png';
+        }
       }else {
-        this.giftURL = 'assets/images/genericgift.jpg';
+        if (localStorage.getItem('env') === 'test') {
+          this.giftURL = 'assets/images/genericgift.jpg';
+        }else {
+          this.giftURL = '././assets/images/genericgift.jpg';
+        }
       }
     }
   }
 
   public setGift(event) {
+    if (localStorage.getItem('env') === 'test') {
       this.giftURL = 'assets/images/' + event.srcElement.id + '.jpg';
+    }else {
+      this.giftURL = '././assets/images/' + event.srcElement.id + '.jpg';
+    }
   }
 
   public setCard(event) {
       if (event.srcElement.id === '1') {
-        this.giftURL = 'assets/images/giftcard.png';
+        if (localStorage.getItem('env') === 'test') {
+          this.giftURL = 'assets/images/giftcard.png';
+        }else {
+          this.giftURL = '././assets/images/giftcard.png';
+        }
       }else {
-        this.giftURL = 'assets/images/genericgift.jpg';
+        if (localStorage.getItem('env') === 'test') {
+          this.giftURL = 'assets/images/genericgift.jpg';
+        }else {
+          this.giftURL = '././assets/images/genericgift.jpg';
+        }
         this.selectedAward = undefined;
       }
   }

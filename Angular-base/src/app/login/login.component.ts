@@ -32,8 +32,10 @@ import { HttpParams, HttpClient } from '@angular/common/http';
       e.preventDefault();
       localStorage.clear();
       if (this.ENVIRONMENT === 'TEST') {
+        localStorage.setItem('env', 'test');
         localStorage.setItem('serverURL', 'http://localhost:8080/RecognitionTool/');
       } else {
+        localStorage.setItem('env', 'prod');
         localStorage.setItem('serverURL', 'http://ec2-54-159-198-200.compute-1.amazonaws.com:8080/RecognitionTool/');
       }
       console.log('SERVER URL WE ARE USING IS : ' + localStorage.getItem('serverURL'));
