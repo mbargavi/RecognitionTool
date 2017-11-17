@@ -13,6 +13,11 @@
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
   }
+
+  th{
+    background-color:rgb(26, 71, 3) !important;
+  }
+
   #redeemSubmit{
     background-color:rgb(130, 231, 83)
   }
@@ -193,6 +198,27 @@
   }
   #loadnine{
     background-image: url(images/9.jpg)
+  }
+  #loadten{
+    background-image: url(images/10.jpg)
+  }
+  #loadeleven{
+    background-image: url(images/11.jpg)
+  }
+  #loadtwelve{
+    background-image: url(images/12.jpg)
+  }
+  #loadthirteen{
+    background-image: url(images/13.jpg)
+  }
+  #loadfourteen{
+    background-image: url(images/14.jpg)
+  }
+  #loadfifteen{
+    background-image: url(images/15.jpg)
+  }
+  #loadsixteen{
+    background-image: url(images/16.jpg)
   }
   #loadgeneric{
     background-image: url(images/genericgift.jpg)
