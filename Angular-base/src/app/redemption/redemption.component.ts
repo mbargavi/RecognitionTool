@@ -34,6 +34,7 @@ export class RedemptionComponent implements OnInit {
 
   constructor(private http: Http, private router: Router) {}
   public redeemCredits(e) {
+    (<HTMLFormElement>document.getElementById('reedeemForm')).form.valid = false;
     const empRedeemObj = {
       empRedeemerId: this.empId,
       creditsUsed: this.selectedAward.creditCost,
@@ -146,7 +147,7 @@ export class RedemptionComponent implements OnInit {
         this.awardsList = this.awards.filter(
           (awards) => ((awards.creditCost) <= this.earnedCredit));
         });
-    }
+  }
 
   public creditEarnedAmount(a: number) {
     if (this.typeOfCreditsToRedeem === 'Team') {
