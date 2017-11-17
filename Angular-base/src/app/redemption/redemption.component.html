@@ -35,14 +35,15 @@
     </nav>
 
     <!-- Header -->
-    <header class="intro-header">
+    <header>
       <div class="row">
-        <div class="col-md-12 text-center">
-          <br>
-          <br>
-          <h1>Hello, {{firstName}}!</h1>
-        </div>
+          <div class="col-md-12 text-center">
+            <br>
+            <br>
+            <h1>Hello, {{firstName}}!</h1>
+          </div>
       </div>
+    </header>
       <div class="container" [hidden]="submitted">
               <div *ngIf="roleId === '2'">
               <h5>Your Team Balance to use:</h5>
@@ -75,31 +76,46 @@
                   </tr>
                 </tbody>   
             </table> <br/> 
-            <div *ngIf="roleId === '2'">
-              <form #f="ngForm" >
-              <h6> Please Let Us know which Credits you want to use <br/><br/>
-              <span class="radioDispaly"><input type="radio" value="Team" name="typeOfCreditsToRedeem" [(ngModel)]="typeOfCreditsToRedeem" (ngModelChange)="creditId()"> Team </span>
-              <span><input type="radio" value="Personal" name="typeOfCreditsToRedeem" [(ngModel)]="typeOfCreditsToRedeem"> Personal</span></h6>
-            </form> <br/>
+
           </div>
-          <form #redeemForm="ngForm" name="redeemCredits" (ngSubmit)="redeemCredits($event)">  
-            <label class="" for="textinput">Select Which Credits you want to Redeem today</label> <br/>        
-            <select id="creditId" required name="creditType" [(ngModel)]="selectedCredit" (ngModelChange)="creditId()">
-              <option [ngValue]="undefined" [disabled]="true" [selected]="true">Select an Option</option>
-              <option [ngValue]="item" *ngFor="let item of creditList">{{item.creditName}}</option>
-            </select> <br/> <br/>
-            <label class="" for="textinput">What would you like to get today</label> <br/>
-            <select id="awardId" name="awardType" required [(ngModel)]="selectedAward">
-              <option [ngValue]="undefined" [disabled]="true" [selected]="true">Select an Option</option>
-              <!-- <div *ngIf="awardsList"> -->
-              <option [ngValue]="award" *ngFor="let award of awardsList" >{{award.awardName}} - {{award.creditCost}}</option>
-             <!-- </div> -->
-            </select> <br/> <br/>
-            <div *ngIf="messageOn" class="text-center" style="color: rgb(117, 231, 117)">Successfully submitted Redemption, your gift is on the way!!</div> <br/>
-            <button class="btn btn-success"  id="redeemSubmit" type="submit" [disabled]="!redeemForm.form.valid">Submit</button> 
-            <a routerLink="/main"><button class="btn btn-secondary" id="redeemCancel">Cancel</button> </a>
-        </form>
-	  </div>
-    </header>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                  <div *ngIf="roleId === '2'">
+                      <form #f="ngForm" >
+                      <h6> Choose team or personal: <br/><br/>
+                      <span class="radioDispaly"><input type="radio" value="Team" name="typeOfCreditsToRedeem" [(ngModel)]="typeOfCreditsToRedeem" (ngModelChange)="creditId()"> Team </span>
+                      <span><input type="radio" value="Personal" name="typeOfCreditsToRedeem" [(ngModel)]="typeOfCreditsToRedeem"> Personal</span></h6>
+                    </form> <br/>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                    <form #redeemForm="ngForm" name="redeemCredits" (ngSubmit)="redeemCredits($event)">  
+                      <label class="" for="textinput">Select Which Credits you want to Redeem today</label> <br/>        
+                      <select size="3" id="creditId" required name="creditType" [(ngModel)]="selectedCredit" (ngModelChange)="creditId()">
+                        <option [ngValue]="undefined" [disabled]="true" [selected]="true">Select an Option</option>
+                        <option id="{{item.creditId}}" [ngValue]="item" *ngFor="let item of creditList" (click)="setCard($event)" (mouseover)="getCard($event)">{{item.creditName}}</option>
+                      </select> <br/> <br/>
+                      <label class="" for="textinput">What would you like to get today</label> <br/>
+                      <select size="3" id="awardId" name="awardType" required [(ngModel)]="selectedAward">
+                        <option [ngValue]="undefined" [disabled]="true" [selected]="true">Select an Option</option>
+                        <!-- <div *ngIf="awardsList"> -->
+                        <option id="{{award.awardId}}" [ngValue]="award" *ngFor="let award of awardsList" (click)="setGift($event)" (mouseover)="getGift($event)">{{award.awardName}} - {{award.creditCost}}</option>
+                      <!-- </div> -->
+                      </select> <br/> <br/>
+                      <div *ngIf="messageOn" class="text-center" style="color: rgb(117, 231, 117)">Successfully submitted Redemption, your gift is on the way!!</div> <br/>
+                      <button class="btn btn-success"  id="redeemSubmit" type="submit" [disabled]="!redeemForm.form.valid">Submit</button> 
+                      <a routerLink="/main"><button class="btn btn-secondary" id="redeemCancel">Cancel</button> </a>
+                  </form>
+            </div> <!--end middle md-4-->
+            <div class="col-md-4">
+              <div>
+                <!--<img src="http://via.placeholder.com/250/000000"/>-->
+                <img d="giftpic" class="giftpic" [src]="giftURL"/>
+              </div>
+            </div><!--end last md-4 -->
+            </div> <!--end row-->
+        </div> <!--end container-->
+
   </body>
 </html>

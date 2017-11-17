@@ -323,9 +323,23 @@ export class MainComponent implements OnInit {
         } else {
         localStorage.setItem('competencySelected', 'false');
         }
+        if ((<HTMLInputElement>document.getElementById('creditRadio').childNodes[1].childNodes[1].childNodes[0]).checked === true) {
+          if (this.credits > 0) {
+            localStorage.setItem('hasRightCredits', 'true');
+          } else {
+            localStorage.setItem('hasRightCredits', 'false');
+          }
+        } else if ((<HTMLInputElement>document.getElementById('creditRadio').childNodes[3].childNodes[1].childNodes[0]).checked === true) {
+          if (this.capOneCredits > 4) {
+            localStorage.setItem('hasRightCredits', 'true');
+          } else {
+            localStorage.setItem('hasRightCredits', 'false');
+          }
+        }
         if ((localStorage.getItem('nomineeSelected') === 'true') &&
           (!(localStorage.getItem('creditsTypeId') === null)) &&
           (!((<HTMLInputElement>document.getElementById('primaryFeedback')).value === '')) &&
+          (localStorage.getItem('hasRightCredits') === 'true') &&
           (localStorage.getItem('competencySelected') === 'true')) {
             localStorage.setItem('recReadiness', 'true');
         } else {

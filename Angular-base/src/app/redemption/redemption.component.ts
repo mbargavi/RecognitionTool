@@ -29,6 +29,8 @@ export class RedemptionComponent implements OnInit {
   public firstName = localStorage.getItem('Fname');
   public typeOfCreditsToRedeem = 'Personal';
   public messageOn = false;
+  public giftURL = 'assets/images/genericgift.jpg';
+  // public giftURL = 'assets/images/cup.jpg';
 
   constructor(private http: Http, private router: Router) {}
   public redeemCredits(e) {
@@ -71,6 +73,37 @@ export class RedemptionComponent implements OnInit {
     .subscribe((resp) => {
       this.teamCreditsList = resp.json();
     });
+  }
+
+  public getGift(event) {
+
+    if (this.selectedAward === undefined) {
+      this.giftURL = 'assets/images/' + event.srcElement.id + '.jpg';
+    }
+  }
+
+  public getCard(event) {
+
+    if (this.selectedAward === undefined) {
+      if (event.srcElement.id === '1') {
+        this.giftURL = 'assets/images/giftcard.png';
+      }else {
+        this.giftURL = 'assets/images/genericgift.jpg';
+      }
+    }
+  }
+
+  public setGift(event) {
+      this.giftURL = 'assets/images/' + event.srcElement.id + '.jpg';
+  }
+
+  public setCard(event) {
+      if (event.srcElement.id === '1') {
+        this.giftURL = 'assets/images/giftcard.png';
+      }else {
+        this.giftURL = 'assets/images/genericgift.jpg';
+        this.selectedAward = undefined;
+      }
   }
 
   public creditId() {
