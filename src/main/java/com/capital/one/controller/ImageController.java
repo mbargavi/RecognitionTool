@@ -35,6 +35,11 @@ public class ImageController implements ServletContextAware {
 	
 	Logger log = RootLogger.getLogger("ImageController");
 	
+//	@RequestMapping(value="/assets/images/{image}", method = RequestMethod.GET)
+//	public String displayImage(@PathVariable("image") String image) {
+//		return "RecognitionTool/assets/images/" + image;
+//	}
+	
 	@RequestMapping(value="/uploadImage", method = RequestMethod.POST)
 	public @ResponseBody String uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("empId") String empId) {
 		

@@ -167,3 +167,36 @@
     padding-right: 50px;
   }
   
+  #loadone{
+    background-image: url(images/1.jpg)
+  }
+  #loadtwo{
+    background-image: url(images/2.jpg)
+  }
+  #loadthree{
+    background-image: url(images/3.jpg)
+  }
+  #loadfour{
+    background-image: url(images/4.jpg)
+  }
+  #loadfive{
+    background-image: url(images/5.jpg)
+  }
+  #loadsix{
+    background-image: url(images/6.jpg)
+  }
+  #loadseven{
+    background-image: url(images/7.jpg)
+  }
+  #loadeight{
+    background-image: url(images/8.jpg)
+  }
+  #loadnine{
+    background-image: url(images/9.jpg)
+  }
+  #loadgeneric{
+    background-image: url(images/genericgift.jpg)
+  }
+  #loadcard{
+    background-image: url(images/giftcard.png)
+  }
