@@ -37,10 +37,10 @@
           <hr class="intro-divider">
           <ul class="list-inline intro-social-buttons">
           
-            <form (submit)="loginUser($event)">
-          <input type="text" id="UserId" name="UserId" class="btn btn-secondary btn-lg" placeholder="Username" required autofocus >
-          <input type="password" id="Password" name="Password" class="btn btn-secondary btn-lg" placeholder="Password" required>
-          <button class="btn btn-secondary btn-lg"  id="coolbutton" >Sign in</button> 
+            <form #loginForm="ngForm" (submit)="loginUser($event)">
+          <input type="text" id="UserId" name="UserId" class="btn btn-secondary btn-lg" placeholder="Username" required [(ngModel)]="Username" >
+          <input type="password" id="Password" name="Password" class="btn btn-secondary btn-lg" placeholder="Password" required [(ngModel)]="Password">
+          <button class="btn btn-secondary btn-lg"  id="coolbutton" [disabled]="!loginForm.form.valid"  >Sign in</button> 
           </form>
         </ul>
         <div *ngIf=true style="color:red;">{{loginservice.message}}</div>
