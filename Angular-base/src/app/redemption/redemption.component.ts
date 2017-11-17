@@ -34,6 +34,7 @@ export class RedemptionComponent implements OnInit {
 
   constructor(private http: Http, private router: Router) {}
   public redeemCredits(e) {
+    (<HTMLFormElement>document.getElementById('reedeemForm')).form.valid = false;
     const empRedeemObj = {
       empRedeemerId: this.empId,
       creditsUsed: this.selectedAward.creditCost,
@@ -48,9 +49,11 @@ export class RedemptionComponent implements OnInit {
           if ((resp.status === 200 && updateEmpRedemption === true)) {
              this.ngOnInit();
              this.creditId();
-             //localStorage.setItem('messageOn', 'true');
-             //console.log('just set localStorage messageOn = ' + localStorage.getItem('messageOn'));
+             //  localStorage.setItem('messageOn', 'true');
+             //  console.log('just set localStorage messageOn = ' + localStorage.getItem('messageOn'));
              this.messageOn = true;
+             console.log('after a redemption setting the messageOn to true');
+             e.srcElement.reset();
             // (<HTMLInputElement>document.getElementById('creditId')).value = undefined;
             // (<HTMLInputElement>document.getElementById('awardId')).value = undefined;
             // this.awardsList = null;
@@ -123,6 +126,7 @@ export class RedemptionComponent implements OnInit {
     }else {
       this.giftURL = '././assets/images/' + event.srcElement.id + '.jpg';
     }
+    this.change();
   }
 
   public setCard(event) {
@@ -140,6 +144,7 @@ export class RedemptionComponent implements OnInit {
         }
         this.selectedAward = undefined;
       }
+      this.change();
   }
 
   public creditId() {
@@ -152,7 +157,7 @@ export class RedemptionComponent implements OnInit {
         this.awardsList = this.awards.filter(
           (awards) => ((awards.creditCost) <= this.earnedCredit));
         });
-    }
+  }
 
   public creditEarnedAmount(a: number) {
     if (this.typeOfCreditsToRedeem === 'Team') {
@@ -178,5 +183,9 @@ export class RedemptionComponent implements OnInit {
       }
     });
     });
+  }
+
+  public change() {
+    this.messageOn = false;
   }
 }
