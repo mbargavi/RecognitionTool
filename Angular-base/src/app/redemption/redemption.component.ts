@@ -48,22 +48,12 @@ export class RedemptionComponent implements OnInit {
           if ((resp.status === 200 && updateEmpRedemption === true)) {
              this.ngOnInit();
              this.creditId();
-             //  localStorage.setItem('messageOn', 'true');
-             //  console.log('just set localStorage messageOn = ' + localStorage.getItem('messageOn'));
              this.messageOn = true;
-             console.log('after a redemption setting the messageOn to true');
              e.srcElement.reset();
-            // (<HTMLInputElement>document.getElementById('creditId')).value = undefined;
-            // (<HTMLInputElement>document.getElementById('awardId')).value = undefined;
-            // this.awardsList = null;
-            //this.router.navigate(['main']);
         }
     });
   }
   public ngOnInit() {
-
-    // this.messageOn = localStorage.getItem('messageOn');
-    // console.log('ngOnInit setting value of messageOn = ' + this.messageOn);
 
     if (localStorage.getItem('env') === 'test') {
       this.giftURL = 'assets/images/genericgift.jpg';
@@ -183,7 +173,6 @@ export class RedemptionComponent implements OnInit {
     });
     });
   }
-
   public change() {
     this.messageOn = false;
   }

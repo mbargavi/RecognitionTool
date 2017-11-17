@@ -84,18 +84,18 @@
                   <div *ngIf="roleId === '2'">
                       <form #f="ngForm" >
                       <h6> Choose team or personal: <br/><br/>
-                      <span class="radioDispaly"><input type="radio" value="Team" name="typeOfCreditsToRedeem" [(ngModel)]="typeOfCreditsToRedeem" (ngModelChange)="creditId()"> Team </span>
-                      <span><input type="radio" value="Personal" name="typeOfCreditsToRedeem" (change)="change()" [(ngModel)]="typeOfCreditsToRedeem"> Personal</span></h6>
+                      <span class="radioDispaly"><input type="radio" (change)="change()" value="Team" name="typeOfCreditsToRedeem" [(ngModel)]="typeOfCreditsToRedeem" (ngModelChange)="creditId()"> Team </span>
+                      <span><input type="radio" value="Personal" (change)="change()" name="typeOfCreditsToRedeem" [(ngModel)]="typeOfCreditsToRedeem"> Personal</span></h6>
                     </form> <br/>
                   </div>
               </div>
               <div class="col-md-4">
-                    <form #redeemForm="ngForm" id="redeemForm" name="redeemCredits" (ngSubmit)="redeemCredits($event)">  
+                    <form #redeemForm="ngForm" name="redeemCredits" (ngSubmit)="redeemCredits($event)">  
                       <label class="" for="textinput">Select Which Credits you want to Redeem today</label> <br/>        
                       <select size="3" id="creditId" required name="creditType" [(ngModel)]="selectedCredit" (ngModelChange)="creditId()">
                         <option [ngValue]="undefined" [disabled]="true" [selected]="true">Select an Option</option>
                         <option id="{{item.creditId}}" [ngValue]="item" *ngFor="let item of creditList" (click)="setCard($event)" (mouseover)="getCard($event)">{{item.creditName}}</option>
-                      </select> <br/> 
+                      </select> <br/>
                       <label class="" for="textinput">What would you like to get today</label> <br/>
                       <select size="3" id="awardId" name="awardType" required [(ngModel)]="selectedAward">
                         <option [ngValue]="undefined" [disabled]="true" [selected]="true">Select an Option</option>
